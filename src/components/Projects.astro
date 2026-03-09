@@ -1,0 +1,209 @@
+---
+const projects = [
+  {
+    number: '01',
+    title: 'dotfiles-bspwm',
+    description:
+      'Configuración completa de entorno de escritorio en Linux usando bspwm como window manager. Incluye temas, atajos de teclado, scripts de automatización y una experiencia de terminal optimizada para productividad.',
+    tags: ['Shell', 'bspwm', 'Linux', 'Bash', 'Ricing'],
+    github: 'https://github.com/edgar-ramxs/dotfiles-bspwm',
+    featured: true,
+  },
+  {
+    number: '02',
+    title: 'shell-configs',
+    description:
+      'Colección de configuraciones de shell personalizadas: aliases, funciones, prompts y scripts utilitarios para agilizar el flujo de trabajo en terminal. Compatible con zsh y bash.',
+    tags: ['Zsh', 'Bash', 'Shell', 'Terminal', 'Productividad'],
+    github: 'https://github.com/edgar-ramxs/shell-configs',
+    featured: false,
+  },
+];
+---
+
+<section class="section" id="proyectos">
+  <div class="container">
+    <p class="section-label">Trabajo selecto</p>
+    <h2 class="section-title">Proyectos</h2>
+
+    <div class="projects-list">
+      {projects.map(project => (
+        <article class={`project-card ${project.featured ? 'featured' : ''}`}>
+          <div class="project-number">{project.number}</div>
+
+          <div class="project-content">
+            <h3 class="project-title">{project.title}</h3>
+            <p class="project-desc">{project.description}</p>
+            <div class="project-tags">
+              {project.tags.map(tag => (
+                <span class="tag">{tag}</span>
+              ))}
+            </div>
+          </div>
+
+          <div class="project-links">
+            <a href={project.github} target="_blank" rel="noopener" class="project-link">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
+              </svg>
+              Ver en GitHub
+            </a>
+            <a href={project.github} target="_blank" rel="noopener" class="project-arrow" aria-label="Abrir proyecto">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M7 17L17 7M17 7H7M17 7v10"/>
+              </svg>
+            </a>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <p class="projects-note">
+      Más proyectos de análisis de datos próximamente. <a href="https://github.com/edgar-ramxs" target="_blank" rel="noopener">Ver GitHub →</a>
+    </p>
+  </div>
+</section>
+
+<style>
+.projects-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border-top: 1px solid var(--border);
+}
+
+.project-card {
+  display: grid;
+  grid-template-columns: 60px 1fr auto;
+  gap: 2rem;
+  align-items: start;
+  padding: 2.5rem 0;
+  border-bottom: 1px solid var(--border);
+  transition: background 0.2s;
+  position: relative;
+}
+
+.project-card:hover {
+  background: var(--surface);
+  margin: 0 -2rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+.project-number {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  padding-top: 0.3rem;
+  letter-spacing: 0.1em;
+}
+
+.project-title {
+  font-family: var(--serif);
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: var(--text);
+  margin-bottom: 0.6rem;
+  transition: color 0.2s;
+}
+
+.project-card:hover .project-title {
+  color: var(--accent);
+}
+
+.project-desc {
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  line-height: 1.8;
+  margin-bottom: 1rem;
+  max-width: 580px;
+}
+
+.project-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.tag {
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: var(--accent-soft);
+  color: var(--accent);
+  padding: 0.2rem 0.6rem;
+  border-radius: 2px;
+  border: 1px solid transparent;
+}
+
+.project-links {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 1rem;
+  padding-top: 0.2rem;
+}
+
+.project-link {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  transition: color 0.2s;
+  white-space: nowrap;
+}
+
+.project-link:hover { color: var(--accent); }
+
+.project-arrow {
+  color: var(--text-muted);
+  transition: all 0.2s;
+}
+
+.project-arrow:hover {
+  color: var(--accent);
+  transform: translate(2px, -2px);
+}
+
+.projects-note {
+  margin-top: 2.5rem;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.projects-note a {
+  color: var(--accent);
+}
+
+.projects-note a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .project-card {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .project-card:hover {
+    margin: 0;
+    padding-left: 0;
+    padding-right: 0;
+    padding: 2rem 0;
+    background: transparent;
+  }
+
+  .project-number { display: none; }
+
+  .project-links {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+</style>
