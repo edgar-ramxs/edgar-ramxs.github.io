@@ -1,77 +1,85 @@
-# Edgar Ramos — Portafolio
+# Edgar Ramos — Portfolio
 
-Portafolio personal construido con [Astro](https://astro.build). Diseño minimalista editorial.
+[ES] Portfolio personal construido con [Astro](https://astro.build). Diseño minimalista editorial.
 
-## 🚀 Inicio rápido
+[EN] Personal portfolio built with [Astro](https://astro.build). Minimal editorial design.
 
-```bash
-# Instalar dependencias
-npm install
+---
 
-# Servidor de desarrollo (http://localhost:4321)
-npm run dev
+## ✅ Requisitos / Requirements
 
-# Build para producción
-npm run build
+- Node.js 18+ (recomendado)
+- pnpm, npm o yarn
 
-# Preview del build
-npm run preview
-```
+---
 
-## 📁 Estructura
+## 🚀 Instalación / Installation
+
+1) Instala dependencias:
+- `pnpm install` (recomendado) o `npm install`
+
+2) Desarrollo local:
+- `pnpm dev` o `npm run dev`
+
+3) Build producción:
+- `pnpm build` o `npm run build`
+
+4) Preview:
+- `pnpm preview` o `npm run preview`
+
+---
+
+## 📦 Paquetes / Packages
+
+- Astro
+- @astrojs/partytown
+- Prettier + plugins (Astro, Tailwind)
+
+---
+
+## 📁 Estructura / Structure
 
 ```
 src/
 ├── components/
-│   ├── Navbar.astro       ← Navegación fija
-│   ├── Hero.astro         ← Sección principal
-│   ├── About.astro        ← Sobre mí
-│   ├── Experience.astro   ← Historial de trabajo
-│   ├── Projects.astro     ← Proyectos ⬅ editar aquí
-│   ├── Skills.astro       ← Stack técnico
-│   ├── Contact.astro      ← Contacto
-│   └── Footer.astro
+│   ├── _global/            ← Head, scripts, verificaciones
+│   ├── _measurement/       ← Analytics / Pixels
+│   └── portfolio/          ← Secciones del portfolio
+├── data/
+│   └── cv/                 ← Datos (skills, works, projects, etc.)
 ├── layouts/
-│   └── Layout.astro       ← Layout base + SEO
+│   └── PortfolioLayout.astro
 ├── pages/
-│   └── index.astro        ← Página principal
+│   └── index.astro
+├── scripts/
 └── styles/
-    └── global.css         ← Variables y estilos globales
+public/
 ```
 
-## ✏️ Personalización rápida
+---
 
-### Agregar un proyecto
-Edita `src/components/Projects.astro` y agrega un objeto al array `projects`:
+## 🛠️ Cambios comunes / Common updates
 
-```js
-{
-  number: '03',
-  title: 'Nombre del proyecto',
-  description: 'Descripción del proyecto.',
-  tags: ['Python', 'SQL'],
-  github: 'https://github.com/edgar-ramxs/tu-repo',
-  featured: false,
-},
-```
+- **Contenido del CV**: `src/data/cv/*.json`
+- **Secciones del portfolio**: `src/components/portfolio/*`
+- **SEO/Head**: `src/components/_global/HeadBase.astro`
+- **Analytics**: `src/components/_measurement/*`
+- **Estilos**: `src/styles/portfolio.css`
 
-### Cambiar experiencia laboral
-Edita el array `jobs` en `src/components/Experience.astro`.
+---
 
-### Cambiar colores
-Edita las variables CSS en `src/styles/global.css`:
+## 🌐 Deploy
 
-```css
-:root {
-  --accent: #c84b2f;   /* color principal */
-  --bg: #f5f2ee;       /* fondo */
-}
-```
+GitHub Pages ya está configurado en `.github/workflows/deploy.yml`.
 
-## 🌐 Deploy en GitHub Pages
+Para cambiar la URL del sitio:
+- actualiza `site` en `astro.config.mjs`.
 
-1. En `astro.config.mjs`, actualiza `site` con tu URL real
-2. Habilita GitHub Pages en tu repositorio (Settings → Pages)
-3. Corre `npm run build` y sube el contenido de `/dist`
+---
 
-O usa [Netlify](https://netlify.com) / [Vercel](https://vercel.com) con deploy automático.
+## 📚 Documentación / Docs
+
+- `docs/PROJECTS-GUIDE.md` — guía de proyectos
+- `CHANGELOG.md` — historial de cambios
+- `CONTRIBUTING.md` — estándar de cambios
+- `SECURITY.md` — contacto privado de seguridad
