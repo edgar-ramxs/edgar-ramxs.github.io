@@ -1,0 +1,6 @@
+# llms.txt — Basic
+
+User-agent: *
+Allow: /
+
+Sitemap: https://edgar-ramxs.github.io/sitemap.xml
