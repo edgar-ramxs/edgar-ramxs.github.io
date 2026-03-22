@@ -1,0 +1,138 @@
+---
+import cv from "@cv";
+const { skills } = cv;
+
+// Agrupar habilidades técnicas por keywords para mantener la estructura de 4 columnas
+const technicalGroups = [
+  {
+    category: "Frontend / Web",
+    items: skills.Technicals.filter((s) => s.keywords.includes("Frontend")).map((s) => s.name),
+  },
+  {
+    category: "Backend / Logic",
+    items: skills.Technicals.filter((s) => s.keywords.includes("Backend")).map((s) => s.name),
+  },
+  {
+    category: "Frameworks / Tools",
+    items: skills.Technicals.filter(
+      (s) => s.keywords.includes("CSS Framework") || s.keywords.includes("Static Generation")
+    ).map((s) => s.name),
+  },
+  {
+    category: "Soft Skills",
+    items: skills.Softs,
+  },
+];
+---
+
+<section class="section" id="skills">
+  <div class="container">
+    <p class="section-label">Capacidades</p>
+    <h2 class="section-title">Stack técnico</h2>
+
+    <div class="skills-grid">
+      {
+        technicalGroups.map((group) => (
+          <div class="skill-group">
+            <h3 class="skill-category">{group.category}</h3>
+            <ul class="skill-list">
+              {group.items.map((item) => (
+                <li class="skill-item">
+                  <span class="skill-dot" />
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .skill-group {
+    padding: 2.5rem 2rem;
+    border-right: 1px solid var(--border);
+    transition: background 0.2s;
+  }
+
+  .skill-group:last-child {
+    border-right: none;
+  }
+
+  .skill-group:hover {
+    background: var(--surface);
+  }
+
+  .skill-category {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+  }
+
+  .skill-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .skill-item {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.92rem;
+    color: var(--text);
+  }
+
+  .skill-dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--accent);
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 900px) {
+    .skills-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .skill-group:nth-child(2) {
+      border-right: none;
+    }
+
+    .skill-group:nth-child(1),
+    .skill-group:nth-child(2) {
+      border-bottom: 1px solid var(--border);
+    }
+  }
+
+  @media (max-width: 500px) {
+    .skills-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .skill-group {
+      border-right: none;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .skill-group:last-child {
+      border-bottom: none;
+    }
+  }
+</style>

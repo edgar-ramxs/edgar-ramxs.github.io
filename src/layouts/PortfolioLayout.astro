@@ -1,0 +1,50 @@
+---
+import '@styles/portfolio.css';
+
+import Head from '@components/_global/HeadBase.astro';
+import Scripts from '@components/_global/Scripts.astro';
+import TagmanagerNoscript from '@components/_measurement/GoogleTagmanagerNoscript.astro';
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Mi Sitio",
+  "url": "https://misitio.cl",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://misitio.cl/buscar?q={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+};
+
+---
+<!doctype html>
+<html lang="es">
+  <head>
+    <Head
+      title="Portfolio"
+      description="Descripción optimizada para SEO de máximo 160 caracteres que describe claramente el contenido."
+      siteName="Mi Sitio"
+      canonical="https://misitio.cl"
+      image="https://misitio.cl/og-image.png"
+      imageAlt="Vista principal de Mi Sitio"
+      locale="es_CL"
+      twitterHandle="@misitio"
+      keywords={["keyword1", "keyword2", "keyword3"]}
+      themeColor="#0f172a"
+
+      gtmId="GTM-XXXXXXX"
+      metaPixelId="XXXXXXXXXXXXXXX"
+
+      googleVerification="XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+      yandexVerification="XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+
+      schema={schema}
+    />
+  </head>
+  <body>
+    <TagmanagerNoscript idTagManager="GTM-XXXXXXX"/>
+    <slot />
+    <Scripts/>
+  </body>
+</html>

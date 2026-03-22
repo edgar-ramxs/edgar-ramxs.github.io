@@ -1,0 +1,12 @@
+---
+export interface Props {
+  umamiWebsiteId: string;
+  umamiSrc?: string;
+}
+
+const { umamiWebsiteId, umamiSrc = "https://cloud.umami.is/script.js" } = Astro.props;
+---
+
+<!-- Umami Analytics -->
+<script async defer data-website-id={umamiWebsiteId} src={umamiSrc}></script>
+<!-- End Umami Analytics -->

@@ -1,0 +1,17 @@
+---
+import Layout from '@layouts/PortfolioLayout.astro';
+import Navbar from '@components/portfolio/Navbar.astro';
+import Experience from '@components/portfolio/Experience.astro';
+import Footer from '@components/portfolio/Footer.astro';
+
+const AboutSection = (await import('@components/portfolio/About.astro')).default;
+---
+
+<Layout>
+	<Navbar />
+	<main id="master">
+		<AboutSection />
+		<Experience />
+	</main>
+	<Footer />
+</Layout>

@@ -1,0 +1,37 @@
+[
+  {
+    "name": "Advika Innovate",
+    "position": "Frontend Developer",
+    "url": "https://advikainnovate.com/",
+    "startDate": "2025-07-01",
+    "endDate": null,
+    "summary": "Contributing to a centralized ecommerce platform to manage multiple ecommerce stores from a single interface, including order and inventory management.",
+    "location": "IN",
+    "location_type": "Remote",
+    "responsibilities": [
+      "Developing and maintaining the frontend of a centralized ecommerce platform.",
+      "Implementing features for order management, inventory control, and other ecommerce functionalities.",
+      "Collaborating with the team to create a scalable and user-friendly platform."
+    ],
+    "skills": ["CSS3", "Git", "GitHub", "MUI", "React", "React Hook Form", "React Query", "TypeScript", "Zod"]
+  },
+  {
+    "name": "PixelSaffron",
+    "position": "Full-Stack Developer",
+    "url": "https://pixelsaffron.in/",
+    "startDate": "2024-10-03",
+    "endDate": "2025-06-30",
+    "summary": "Led front-end development for a full-stack eCommerce platform built for a Mumbai-based clothing brand. Implemented core features like order management, secure payment integration, and responsive UI for seamless user experience.",
+    "location": "IN",
+    "location_type": "Remote",
+    "responsibilities": [
+      "Built and maintained both front-end and back-end components of a production-ready eCommerce web app using modern web technologies.",
+      "Focused on building scalable, responsive, and maintainable front-end features, ensuring high performance and usability.",
+      "Integrated payment gateways and developed order management features to support real-time order processing.",
+      "Collaborated with clients and team members to align technical solutions with business needs.",
+      "Ensured clean, modular code and implemented best practices for performance optimization and maintainability.",
+      "Developed and connected RESTful APIs to handle key business logic and data flow between client and server."
+    ],
+    "skills": ["Bootstrap", "Bruno", "CSS3", "Gin", "Git", "GitHub", "Go", "HTML5", "JavaScript", "Next-Js", "NodeJS", "React", "Redux", "Tailwind", "TypeScript"]
+  }
+]

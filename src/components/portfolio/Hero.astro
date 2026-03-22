@@ -1,0 +1,291 @@
+---
+
+---
+
+<section class="hero" id="inicio">
+  <div class="hero-inner container">
+    <div class="hero-content">
+      <p class="hero-eyebrow fade-up delay-1">
+        <span class="dot"></span> Disponible para proyectos
+      </p>
+      <h1 class="hero-name fade-up delay-2">
+        Edgar<br /><em>Ramos</em>
+      </h1>
+      <p class="hero-role fade-up delay-3">Analista de Datos</p>
+      <p class="hero-desc fade-up delay-4">
+        Transformo datos en decisiones. Trabajo con Python, SQL y herramientas de visualización para
+        encontrar patrones que generan valor real.
+      </p>
+      <div class="hero-cta fade-up delay-5">
+        <a href="#proyectos" class="btn-primary">Ver proyectos</a>
+        <a href="#contacto" class="btn-ghost">Contacto</a>
+      </div>
+    </div>
+
+    <div class="hero-visual fade-up delay-3">
+      <div class="visual-box">
+        <div class="code-snippet">
+          <span class="cs-kw">class</span>
+          <span class="cs-fn">DataAnalyst</span>:<br />
+          &nbsp;&nbsp;<span class="cs-kw">def</span>
+          <span class="cs-fn">__init__</span>(<span class="cs-kw">self</span>):<br />
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="cs-kw">self</span>.name = <span class="cs-str"
+            >"Edgar Ramos"</span
+          ><br />
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="cs-kw">self</span>.role = <span class="cs-str"
+            >"Data Analyst"</span
+          ><br />
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="cs-kw">self</span>.stack = [<span class="cs-str"
+            >"Python"</span
+          >, <span class="cs-str">"SQL"</span>, <span class="cs-str">"Pandas"</span>]<br />
+          <br />
+          &nbsp;&nbsp;<span class="cs-kw">def</span>
+          <span class="cs-fn">get_insights</span>(<span class="cs-kw">self</span>, data):<br />
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="cs-kw">return</span> data.<span class="cs-fn"
+            >transform_to_value</span
+          >()<br />
+          <br />
+          edgar = <span class="cs-fn">DataAnalyst</span>()<br />
+          <span class="cs-comment"># Turning data into decisions</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-scroll">
+    <span>scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 64px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: "";
+    position: absolute;
+    top: -20%;
+    right: -10%;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, var(--accent-soft) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+
+  .hero-eyebrow {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #22c55e;
+    box-shadow: 0 0 8px #22c55e;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.4;
+    }
+  }
+
+  .hero-name {
+    font-family: var(--serif);
+    font-size: clamp(3.5rem, 8vw, 6.5rem);
+    font-weight: 400;
+    line-height: 1;
+    margin-bottom: 0.75rem;
+    color: var(--text);
+  }
+
+  .hero-name em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .hero-role {
+    font-family: var(--mono);
+    font-size: 0.85rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 1.75rem;
+  }
+
+  .hero-desc {
+    font-size: 1.05rem;
+    color: var(--text-muted);
+    max-width: 440px;
+    margin-bottom: 2.5rem;
+    line-height: 1.8;
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    background: var(--accent);
+    color: white;
+    padding: 0.75rem 1.75rem;
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border-radius: 2px;
+    transition: all 0.2s;
+  }
+
+  .btn-primary:hover {
+    background: #a83a22;
+    transform: translateY(-1px);
+  }
+
+  .btn-ghost {
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 0.75rem 1.75rem;
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border-radius: 2px;
+    transition: all 0.2s;
+  }
+
+  .btn-ghost:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  /* Code visual */
+  .visual-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 2rem;
+    position: relative;
+  }
+
+  .visual-box::before {
+    content: "● ● ●";
+    position: absolute;
+    top: 0.75rem;
+    left: 1rem;
+    font-size: 0.6rem;
+    color: var(--border);
+    letter-spacing: 0.2em;
+  }
+
+  .code-snippet {
+    font-family: var(--mono);
+    font-size: 0.82rem;
+    line-height: 2;
+    margin-top: 1rem;
+  }
+
+  .cs-comment {
+    color: var(--text-muted);
+  }
+  .cs-kw {
+    color: var(--accent);
+  }
+  .cs-fn {
+    color: #2563eb;
+  }
+  .cs-str {
+    color: #16a34a;
+  }
+
+  /* Scroll indicator */
+  .hero-scroll {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .hero-scroll span {
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .scroll-line {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, var(--border), transparent);
+    animation: scrollAnim 2s ease-in-out infinite;
+  }
+
+  @keyframes scrollAnim {
+    0% {
+      transform: scaleY(0);
+      transform-origin: top;
+    }
+    50% {
+      transform: scaleY(1);
+      transform-origin: top;
+    }
+    51% {
+      transform: scaleY(1);
+      transform-origin: bottom;
+    }
+    100% {
+      transform: scaleY(0);
+      transform-origin: bottom;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .hero-inner {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+    .hero-visual {
+      order: -1;
+    }
+    .hero-scroll {
+      display: none;
+    }
+  }
+</style>

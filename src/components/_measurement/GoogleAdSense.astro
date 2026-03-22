@@ -1,0 +1,15 @@
+---
+export interface Props {
+  idAdSense: string;
+}
+
+const { idAdSense } = Astro.props;
+---
+
+<!-- Google AdSense -->
+<script
+  is:inline
+  async
+  src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${idAdSense}`}
+  crossorigin="anonymous"></script>
+<!-- End Google AdSense  -->

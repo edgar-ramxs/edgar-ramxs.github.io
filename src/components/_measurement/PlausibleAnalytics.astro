@@ -1,0 +1,11 @@
+---
+export interface Props {
+  plausibleDomain: string;
+}
+
+const { plausibleDomain } = Astro.props;
+---
+
+<!-- Plausible Analytics -->
+<script defer data-domain={plausibleDomain} src="https://plausible.io/js/script.js"></script>
+<!-- End Plausible Analytics -->

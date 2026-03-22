@@ -1,0 +1,44 @@
+---
+import '@styles/portfolio.css';
+import Head from '@components/_global/HeadBase.astro';
+import Scripts from '@components/_global/Scripts.astro';
+import TagmanagerNoscript from '@components/_measurement/GoogleTagmanagerNoscript.astro';
+
+export interface Props {
+  title?: string;
+  description?: string;
+  canonical?: string;
+}
+
+const {
+  title = 'Proyecto',
+  description = 'Vista previa del proyecto',
+  canonical = Astro.url.href,
+} = Astro.props;
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": title,
+  "url": canonical,
+};
+---
+<!doctype html>
+<html lang="es">
+  <head>
+    <Head
+      title={title}
+      description={description}
+      canonical={canonical}
+      siteName="Mi Sitio"
+      locale="es_CL"
+      themeColor="#0f172a"
+      schema={schema}
+    />
+  </head>
+  <body>
+    <TagmanagerNoscript idTagManager="GTM-XXXXXXX" />
+    <slot />
+    <Scripts />
+  </body>
+</html>

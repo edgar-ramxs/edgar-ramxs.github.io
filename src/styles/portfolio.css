@@ -114,3 +114,36 @@ h2.section-title {
   .section { padding: 4rem 0; }
   .container { padding: 0 1.25rem; }
 }
+
+/* Dark theme styles */
+.dark {
+  color-scheme: dark;
+}
+
+select option {
+  background-color: var(--skin-bg);
+  color: var(--skin-base);
+}
+
+/* View transitions */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+::view-transition-old(root) {
+  z-index: 1;
+}
+
+::view-transition-new(root) {
+  z-index: 9999;
+}
+
+.dark::view-transition-old(root) {
+  z-index: 9999;
+}
+
+.dark::view-transition-new(root) {
+  z-index: 1;
+}

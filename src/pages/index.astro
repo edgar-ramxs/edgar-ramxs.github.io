@@ -1,18 +1,40 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Hero from '../components/Hero.astro';
-import About from '../components/About.astro';
-import Experience from '../components/Experience.astro';
-import Projects from '../components/Projects.astro';
-import Skills from '../components/Skills.astro';
-import Contact from '../components/Contact.astro';
+import Layout from '@layouts/ProjectLayout.astro';
 ---
 
-<Layout>
-  <Hero />
-  <About />
-  <Experience />
-  <Projects />
-  <Skills />
-  <Contact />
+<Layout title="Hub" description="Acceso rápido a mis mini-sitios y proyectos">
+    <main id="master" style="padding: 6rem 1.5rem; max-width: 1100px; margin: 0 auto;">
+        <section style="margin-bottom: 3rem;">
+            <h1>Macro Portfolio</h1>
+            <p>Accede a cada mini-sitio con demos y previews de mis proyectos.</p>
+        </section>
+
+        <section style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; margin-bottom: 3rem;">
+            <a href="/portfolio/" style="display: block; padding: 1.5rem; border: 1px solid #1f2937; border-radius: 12px;">
+                <h2>Portfolio</h2>
+                <p>CV, experience and featured projects.</p>
+            </a>
+            <a href="/blog/" style="display: block; padding: 1.5rem; border: 1px solid #1f2937; border-radius: 12px;">
+                <h2>Blog</h2>
+                <p>Notas técnicas, aprendizajes y artículos.</p>
+            </a>
+            <a href="/ecommerce/" style="display: block; padding: 1.5rem; border: 1px solid #1f2937; border-radius: 12px;">
+                <h2>Ecommerce</h2>
+                <p>Previews de tiendas y flujos comerciales.</p>
+            </a>
+            <a href="/dashboards/" style="display: block; padding: 1.5rem; border: 1px solid #1f2937; border-radius: 12px;">
+                <h2>Dashboards</h2>
+                <p>Visualización y analítica de datos.</p>
+            </a>
+        </section>
+
+        <section>
+            <h2>¿Qué encontrarás?</h2>
+            <ul>
+                <li>Proyectos reales con previews funcionales.</li>
+                <li>Rutas separadas para cada dominio.</li>
+                <li>Iteraciones rápidas sin instalar cada app.</li>
+            </ul>
+        </section>
+    </main>
 </Layout>

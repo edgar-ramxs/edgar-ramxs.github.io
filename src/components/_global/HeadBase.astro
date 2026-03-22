@@ -1,0 +1,308 @@
+---
+/**
+ * Head.astro — Componente SEO completo para Astro
+ *
+ * Props:
+ *  - title           Título de la página (requerido)
+ *  - description     Meta descripción
+ *  - canonical       URL canónica (por defecto: URL actual)
+ *  - image           URL imagen Open Graph / Twitter Card
+ *  - imageAlt        Alt de la imagen OG
+ *  - type            og:type (website | article | product)
+ *  - noindex         Bloquear indexación
+ *  - locale          Idioma (ej: es_CL)
+ *  - siteName        Nombre del sitio
+ *  - twitterHandle   @usuario de Twitter/X
+ *  - author          Nombre del autor (para artículos)
+ *  - publishedTime   ISO 8601 (para og:article)
+ *  - modifiedTime    ISO 8601 (para og:article)
+ *  - keywords        Array de keywords
+ *  - themeColor      Color del navegador mobile
+ *
+ *  — Análitica & Tracking —
+ *  - gtmId           Google Tag Manager (GTM-XXXXXX)
+ *  - gaId            Google Analytics 4 (G-XXXXXXXXXX)
+ *  - gadsId          Google Ads Conversion ID (AW-XXXXXXXXXX)
+ *  - pixelId         Meta (Facebook) Pixel ID
+ *  - tiktokPixelId   TikTok Pixel ID
+ *  - pinterestTagId  Pinterest Tag ID
+ *  - linkedinPartnerId LinkedIn Insight Tag partner ID
+ *  - hotjarId        Hotjar Site ID
+ *  - clarityId       Microsoft Clarity project ID
+ *  - snapchatPixelId Snapchat Pixel ID
+ *  - hubspotPortalId HubSpot portal ID
+ *  - segmentWriteKey Segment.io Write Key
+ *  - intercomAppId   Intercom App ID
+ *  - mixpanelToken   Mixpanel project token
+ *  - plausibleDomain Plausible Analytics domain (alternativa GA)
+ *  - umamiWebsiteId  Umami website ID
+ *  - umamiSrc        Umami script URL
+ *
+ *  — Verificaciones —
+ *  - googleVerification   Google Search Console meta verification
+ *  - yandexVerification   Yandex Webmaster verification
+ *  - bingVerification     Bing Webmaster Tools verification
+ *  - facebookVerification Facebook domain verification
+ *  - twitterVerification  Twitter/X site verification
+ *  - linkedinVerification LinkedIn site verification
+ *  - adobeVerification    Adobe site verification
+ *  - shopifyVerification  Shopify site verification
+ *  - whatsappVerification WhatsApp site verification
+ *  - stripeVerification   Stripe site verification
+ *
+ *  — Schema.org —
+ *  - schema          Objeto JSON-LD (se serializa automáticamente)
+ */
+
+export interface Props {
+  // Pages Configs
+  title: string;
+  description?: string;
+  canonical?: string;
+  image?: string;
+  imageAlt?: string;
+  imageWidth?: number;
+  imageHeight?: number;
+  type?: "website" | "article" | "product";
+  noindex?: boolean;
+  locale?: string;
+  siteName?: string;
+  twitterHandle?: string;
+  author?: string;
+  publishedTime?: string;
+  modifiedTime?: string;
+  keywords?: string[];
+  themeColor?: string;
+
+  // Analytics & Tracking
+  adId?: string;
+  gtmId?: string;
+  gaId?: string;
+  gadsId?: string;
+  metaPixelId?: string;
+  tiktokPixelId?: string;
+  pinterestTagId?: string;
+  linkedinPartnerId?: string;
+  hotjarId?: string | number;
+  clarityId?: string;
+  snapchatPixelId?: string;
+  hubspotPortalId?: string | number;
+  segmentWriteKey?: string;
+  intercomAppId?: string;
+  mixpanelToken?: string;
+  plausibleDomain?: string;
+  umamiWebsiteId?: string;
+  umamiSrc?: string;
+
+  // Verifications
+  googleVerification?: string;
+  yandexVerification?: string;
+  bingVerification?: string;
+  facebookVerification?: string;
+  twitterVerification?: string;
+  linkedinVerification?: string;
+  adobeVerification?: string;
+  shopifyVerification?: string;
+  whatsappVerification?: string;
+  stripeVerification?: string;
+
+  // Structured Data
+  schema?: Record<string, unknown> | Record<string, unknown>[];
+}
+
+const {
+  // Pages Configs
+  title,
+  description = "",
+  canonical = Astro.url.href,
+  image,
+  imageAlt = title,
+  imageWidth = 1200,
+  imageHeight = 630,
+  type = "website",
+  noindex = false,
+  locale = "es_CL",
+  siteName = "",
+  twitterHandle,
+  author,
+  publishedTime,
+  modifiedTime,
+  keywords = [],
+  themeColor = "#ffffff",
+
+  // Analytics & Tracking
+  adId,
+  gtmId,
+  gaId,
+  gadsId,
+  metaPixelId,
+  tiktokPixelId,
+  pinterestTagId,
+  linkedinPartnerId,
+  hotjarId,
+  clarityId,
+  snapchatPixelId,
+  hubspotPortalId,
+  segmentWriteKey,
+  intercomAppId,
+  mixpanelToken,
+  plausibleDomain,
+  umamiWebsiteId,
+  umamiSrc = "https://cloud.umami.is/script.js",
+
+  // Verifications
+  googleVerification,
+  yandexVerification,
+  bingVerification,
+  facebookVerification,
+  twitterVerification,
+  linkedinVerification,
+  adobeVerification,
+  shopifyVerification,
+  whatsappVerification,
+  stripeVerification,
+
+  // Structured Data
+  schema,
+} = Astro.props;
+
+const canonicalURL = new URL(canonical, Astro.site ?? Astro.url.origin).href;
+const fullTitle = siteName ? `${title} | ${siteName}` : title;
+
+// Normalizar schema a array para soporte múltiple
+const schemas = schema ? (Array.isArray(schema) ? schema : [schema]) : [];
+
+import GoogleAdSense from "@components/_measurement/GoogleAdSense.astro";
+import GoogleAnalytics from "@components/_measurement/GoogleAnalytics.astro";
+import GoogleTagManager from "@components/_measurement/GoogleTagManager.astro";
+import Linkedin from "@components/_measurement/Linkedin.astro";
+import Meta from "@components/_measurement/Meta.astro";
+import Pinterest from "@components/_measurement/Pinterest.astro";
+import TikTok from "@components/_measurement/TikTok.astro";
+
+import Hotjar from "@components/_measurement/Hotjar.astro";
+import HubspotTracking from "@components/_measurement/HubspotTracking.astro";
+import IntercomWidget from "@components/_measurement/IntercomWidget.astro";
+import MicrosoftClarity from "@components/_measurement/MicrosoftClarity.astro";
+import MixpanelAnalytics from "@components/_measurement/MixpanelAnalytics.astro";
+import PlausibleAnalytics from "@components/_measurement/PlausibleAnalytics.astro";
+import SegmentAnalytics from "@components/_measurement/SegmentAnalytics.astro";
+import Snapchat from "@components/_measurement/Snapchat.astro";
+import UmamiAnalytics from "@components/_measurement/UmamiAnalytics.astro";
+
+import SiteVerification from "@components/_global/SiteVerification.astro";
+---
+
+<!-- CHARSET & VIEWPORT -->
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+<!-- TÍTULO & SEO BÁSICO -->
+<title>{fullTitle}</title>
+{description && <meta name="description" content={description} />}
+{keywords.length > 0 && <meta name="keywords" content={keywords.join(", ")} />}
+{author && <meta name="author" content={author} />}
+<meta
+  name="robots"
+  content={noindex
+    ? "noindex, nofollow"
+    : "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"}
+/>
+<link rel="canonical" href={canonicalURL} />
+
+<!-- OPEN GRAPH -->
+<meta property="og:type" content={type} />
+<meta property="og:url" content={canonicalURL} />
+<meta property="og:title" content={fullTitle} />
+<meta property="og:locale" content={locale} />
+{description && <meta property="og:description" content={description} />}
+{siteName && <meta property="og:site_name" content={siteName} />}
+{
+  image && (
+    <>
+      <meta property="og:image" content={image} />
+      <meta property="og:image:alt" content={imageAlt} />
+      <meta property="og:image:width" content={String(imageWidth)} />
+      <meta property="og:image:height" content={String(imageHeight)} />
+      <meta property="og:image:type" content="image/png" />
+    </>
+  )
+}
+
+<!-- Open Graph — Article -->
+{
+  type === "article" && (
+    <>
+      {author && <meta property="article:author" content={author} />}
+      {publishedTime && <meta property="article:published_time" content={publishedTime} />}
+      {modifiedTime && <meta property="article:modified_time" content={modifiedTime} />}
+    </>
+  )
+}
+
+<!-- TWITTER / X CARD -->
+<meta name="twitter:card" content={image ? "summary_large_image" : "summary"} />
+<meta name="twitter:title" content={fullTitle} />
+{image && <meta name="twitter:image" content={image} />}
+{image && <meta name="twitter:image:alt" content={imageAlt} />}
+{description && <meta name="twitter:description" content={description} />}
+{
+  twitterHandle && (
+    <meta
+      name="twitter:site"
+      content={twitterHandle.startsWith("@") ? twitterHandle : `@${twitterHandle}`}
+    />
+  )
+}
+{
+  twitterHandle && author && (
+    <meta
+      name="twitter:creator"
+      content={twitterHandle.startsWith("@") ? twitterHandle : `@${twitterHandle}`}
+    />
+  )
+}
+
+<!-- PWA & MOBILE -->
+<meta name="theme-color" content={themeColor} />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="default" />
+{siteName && <meta name="apple-mobile-web-app-title" content={siteName} />}
+<!-- <link rel="manifest" href="/manifest.webmanifest" /> -->
+
+<!-- Favicons -->
+<link rel="icon" href="/favicon.ico" sizes="any" />
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+<!-- VERIFICACIONES WEBMASTER -->
+<SiteVerification name="google-site-verification" content={googleVerification} />
+<SiteVerification name="yandex-verification" content={yandexVerification} />
+<SiteVerification name="bing-site-verification" content={bingVerification} />
+<SiteVerification name="facebook-domain-verification" content={facebookVerification} />
+<SiteVerification name="twitter-site-verification" content={twitterVerification} />
+<SiteVerification name="linkedin-site-verification" content={linkedinVerification} />
+<SiteVerification name="adobe-site-verification" content={adobeVerification} />
+<SiteVerification name="shopify-site-verification" content={shopifyVerification} />
+<SiteVerification name="whatsapp-site-verification" content={whatsappVerification} />
+<SiteVerification name="stripe-site-verification" content={stripeVerification} />
+
+<!-- PIXELES Y ANALÍTICAS EN COMPONENTES (_measurement) -->
+{adId && <GoogleAdSense idAdSense={adId} />}
+{gaId && <GoogleAnalytics idAnalytics={gaId} />}
+{gtmId && <GoogleTagManager idTagManager={gtmId} />}
+{metaPixelId && <Meta idMetaPixel={metaPixelId} />}
+{tiktokPixelId && <TikTok idTiktokPixel={tiktokPixelId} />}
+{pinterestTagId && <Pinterest idPinterestTag={pinterestTagId} />}
+{linkedinPartnerId && <Linkedin IdlinkedinPartner={linkedinPartnerId} />}
+{hotjarId && <Hotjar idHotjar={hotjarId} />}
+{clarityId && <MicrosoftClarity idMicrosoftClarity={clarityId} />}
+{snapchatPixelId && <Snapchat idSnapchatPixel={snapchatPixelId} />}
+{hubspotPortalId && <HubspotTracking hubspotPortalId={hubspotPortalId} />}
+{segmentWriteKey && <SegmentAnalytics segmentWriteKey={segmentWriteKey} />}
+{mixpanelToken && <MixpanelAnalytics mixpanelToken={mixpanelToken} />}
+{intercomAppId && <IntercomWidget idIntercomApp={intercomAppId} />}
+{plausibleDomain && <PlausibleAnalytics plausibleDomain={plausibleDomain} />}
+{umamiWebsiteId && <UmamiAnalytics umamiWebsiteId={umamiWebsiteId} umamiSrc={umamiSrc} />}

@@ -1,0 +1,33 @@
+{
+  "degrees": [
+    {
+      "institution": "Indian Institute of Technology (IIT)",
+      "url": "https://www.iitd.ac.in/",
+      "area": "Computer Science and Engineering",
+      "studyType": "Bachelor of Technology",
+      "startDate": "2020-08-15",
+      "endDate": "2024-05-20",
+      "location": "New Delhi, India"
+    }
+  ],
+  "certificates": [
+    {
+      "name": "AWS Certified Solutions Architect – Associate",
+      "date": "2024-12-10",
+      "issuer": "Amazon Web Services (AWS)",
+      "url": "https://aws.amazon.com/verification"
+    },
+    {
+      "name": "Meta Front-End Developer Professional Certificate",
+      "date": "2023-06-15",
+      "issuer": "Meta / Coursera",
+      "url": "https://coursera.org/verify/meta-frontend"
+    },
+    {
+      "name": "Google Cloud Digital Leader",
+      "date": "2023-01-20",
+      "issuer": "Google Cloud",
+      "url": "https://google.com/cloud/certification"
+    }
+  ]
+}
