@@ -18,10 +18,10 @@
 
 ### 3) Dónde editar
 - **Contenido del CV**: `src/data/cv/*.json`
-- **Secciones del portafolio**: `src/components/portafolio/*`
+- **Secciones del portfolio**: `src/components/portfolio/*`
 - **SEO/Head**: `src/components/_global/HeadBase.astro`
 - **Analytics**: `src/components/_measurement/*`
-- **Estilos**: `src/styles/portafolio.css`
+- **Estilos**: `src/styles/portfolio.css`
 
 ### 4) Cambios de proyectos nuevos
 Consulta `docs/PROJECTS-GUIDE.md`.
@@ -42,10 +42,10 @@ Consulta `docs/PROJECTS-GUIDE.md`.
 
 ### 3) Where to edit
 - **CV content**: `src/data/cv/*.json`
-- **Portfolio sections**: `src/components/portafolio/*`
+- **Portfolio sections**: `src/components/portfolio/*`
 - **SEO/Head**: `src/components/_global/HeadBase.astro`
 - **Analytics**: `src/components/_measurement/*`
-- **Styles**: `src/styles/portafolio.css`
+- **Styles**: `src/styles/portfolio.css`
 
 ### 4) New projects
 See `docs/PROJECTS-GUIDE.md`.
