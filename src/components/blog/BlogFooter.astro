@@ -1,0 +1,211 @@
+---
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="blog-footer">
+  <div class="blog-footer-container">
+    <div class="blog-footer-content">
+      <div class="blog-footer-section">
+        <h3 class="blog-footer-title">TechBlog</h3>
+        <p class="blog-footer-description">
+          Explorando el futuro de la tecnología, IA y desarrollo web.
+        </p>
+      </div>
+
+      <div class="blog-footer-section">
+        <h4 class="blog-footer-subtitle">Categorías</h4>
+        <ul class="blog-footer-links">
+          <li><a href="/blog/posts">Inteligencia Artificial</a></li>
+          <li><a href="/blog/posts">Desarrollo Web</a></li>
+          <li><a href="/blog/posts">Tutoriales</a></li>
+          <li><a href="/blog/posts">Noticias Tech</a></li>
+        </ul>
+      </div>
+
+      <div class="blog-footer-section">
+        <h4 class="blog-footer-subtitle">Conecta</h4>
+        <ul class="blog-footer-links">
+          <li><a href="https://github.com/edgar-ramxs" target="_blank" rel="noreferrer">GitHub</a></li>
+          <li><a href="https://linkedin.com/in/edgar-ramxs" target="_blank" rel="noreferrer">LinkedIn</a></li>
+          <li><a href="https://twitter.com/edgar_ramxs" target="_blank" rel="noreferrer">Twitter</a></li>
+          <li><a href="/portfolio/contact">Contacto</a></li>
+        </ul>
+      </div>
+
+      <div class="blog-footer-section">
+        <h4 class="blog-footer-subtitle">Newsletter</h4>
+        <p class="blog-footer-newsletter-text">
+          Recibe las últimas actualizaciones directamente en tu email.
+        </p>
+        <form class="blog-footer-newsletter">
+          <input 
+            type="email" 
+            placeholder="tu@email.com" 
+            class="blog-footer-input"
+            required
+          />
+          <button type="submit" class="blog-footer-button">
+            Suscribirse
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <div class="blog-footer-bottom">
+      <p class="blog-footer-copyright">
+        © {currentYear} Edgar Ramxs. Todos los derechos reservados.
+      </p>
+      <div class="blog-footer-legal">
+        <a href="/blog/privacy">Privacidad</a>
+        <a href="/blog/terms">Términos</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .blog-footer {
+    background: #020617;
+    border-top: 1px solid rgba(59, 130, 246, 0.3);
+    margin-top: 4rem;
+  }
+
+  .blog-footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem 1.5rem;
+  }
+
+  .blog-footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .blog-footer-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0 0 0.5rem 0;
+    color: #f8fafc;
+  }
+
+  .blog-footer-subtitle {
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 0 0 1rem 0;
+    opacity: 0.9;
+    color: #e2e8f0;
+  }
+
+  .blog-footer-description,
+  .blog-footer-newsletter-text {
+    opacity: 0.85;
+    color: #cbd5e1;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  .blog-footer-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .blog-footer-links a {
+    text-decoration: none;
+    opacity: 0.8;
+    color: #e2e8f0;
+    transition: color 0.2s ease;
+  }
+
+  .blog-footer-links a:hover {
+    color: #60a5fa;
+  }
+
+  .blog-footer-newsletter {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+
+  .blog-footer-input {
+    flex: 1;
+    padding: 0.75rem;
+    border: 1px solid rgba(148, 163, 184, 0.2);
+    border-radius: 8px;
+    background: rgba(15, 23, 42, 0.8);
+    color: #f8fafc;
+    font-size: 0.9rem;
+  }
+
+  .blog-footer-input:focus {
+    outline: none;
+    border-color: #3b82f6;
+  }
+
+  .blog-footer-button {
+    padding: 0.75rem 1.5rem;
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s ease;
+  }
+
+  .blog-footer-button:hover {
+    background: linear-gradient(135deg, #2563eb, #7c3aed);
+  }
+
+  .blog-footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(59, 130, 246, 0.2);
+    font-size: 0.9rem;
+    opacity: 0.85;
+    color: #cbd5e1;
+  }
+
+  .blog-footer-legal {
+    display: flex;
+    gap: 1.5rem;
+  }
+
+  .blog-footer-legal a {
+    text-decoration: none;
+    opacity: 0.8;
+    color: #e2e8f0;
+    transition: color 0.2s ease;
+  }
+
+  .blog-footer-legal a:hover {
+    color: #60a5fa;
+  }
+
+  .blog-footer-copyright {
+    margin: 0;
+  }
+
+  @media (max-width: 768px) {
+    .blog-footer-content {
+      grid-template-columns: 1fr;
+    }
+
+    .blog-footer-bottom {
+      flex-direction: column;
+      gap: 1rem;
+      text-align: center;
+    }
+
+    .blog-footer-newsletter {
+      flex-direction: column;
+    }
+  }
+</style>

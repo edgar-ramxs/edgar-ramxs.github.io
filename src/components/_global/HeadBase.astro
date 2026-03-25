@@ -56,7 +56,7 @@
 
 export interface Props {
   // Pages Configs
-  title: string;
+  title?: string;
   description?: string;
   canonical?: string;
   image?: string;
@@ -168,8 +168,6 @@ const {
 
 const canonicalURL = new URL(canonical, Astro.site ?? Astro.url.origin).href;
 const fullTitle = siteName ? `${title} | ${siteName}` : title;
-
-// Normalizar schema a array para soporte múltiple
 const schemas = schema ? (Array.isArray(schema) ? schema : [schema]) : [];
 
 import GoogleAdSense from "@components/_measurement/GoogleAdSense.astro";
@@ -179,7 +177,6 @@ import Linkedin from "@components/_measurement/Linkedin.astro";
 import Meta from "@components/_measurement/Meta.astro";
 import Pinterest from "@components/_measurement/Pinterest.astro";
 import TikTok from "@components/_measurement/TikTok.astro";
-
 import Hotjar from "@components/_measurement/Hotjar.astro";
 import HubspotTracking from "@components/_measurement/HubspotTracking.astro";
 import IntercomWidget from "@components/_measurement/IntercomWidget.astro";
@@ -197,9 +194,11 @@ import SiteVerification from "@components/_global/SiteVerification.astro";
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<title>{fullTitle}</title>
+<link rel="canonical" href={canonicalURL} />
 
 <!-- TÍTULO & SEO BÁSICO -->
-<title>{fullTitle}</title>
+
 {description && <meta name="description" content={description} />}
 {keywords.length > 0 && <meta name="keywords" content={keywords.join(", ")} />}
 {author && <meta name="author" content={author} />}
@@ -209,7 +208,6 @@ import SiteVerification from "@components/_global/SiteVerification.astro";
     ? "noindex, nofollow"
     : "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"}
 />
-<link rel="canonical" href={canonicalURL} />
 
 <!-- OPEN GRAPH -->
 <meta property="og:type" content={type} />
@@ -270,7 +268,6 @@ import SiteVerification from "@components/_global/SiteVerification.astro";
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 {siteName && <meta name="apple-mobile-web-app-title" content={siteName} />}
-<!-- <link rel="manifest" href="/manifest.webmanifest" /> -->
 
 <!-- Favicons -->
 <link rel="icon" href="/favicon.ico" sizes="any" />

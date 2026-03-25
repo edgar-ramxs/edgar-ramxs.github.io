@@ -2,9 +2,15 @@
 import Layout from '@layouts/ProjectLayout.astro';
 ---
 
-<Layout title="Dashboards" description="Demo y previews de dashboards">
+<Layout
+  title="Dashboards"
+  description="Demo y previews de dashboards"
+>
   <main id="master" style="padding: 6rem 1.5rem; max-width: 900px; margin: 0 auto;">
     <h1>Dashboards</h1>
     <p>Sección en construcción. Aquí irán previews de dashboards.</p>
   </main>
+  <script slot="scripts" is:inline src="/src/scripts/theme-init.js"></script>
+  <script slot="scripts" src="/src/scripts/theme-toggle.ts"></script>
+  <script slot="scripts" src="/src/scripts/main.ts"></script>
 </Layout>

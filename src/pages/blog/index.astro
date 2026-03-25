@@ -1,10 +1,480 @@
 ---
 import Layout from '@layouts/ProjectLayout.astro';
+import BlogHeader from '@components/blog/BlogHeader.astro';
+import BlogFooter from '@components/blog/BlogFooter.astro';
+import type { MarkdownInstance } from 'astro';
+
+interface BlogPost {
+  title: string;
+  author: string;
+  date: string;
+  categories: string[];
+  description: string;
+  image: string;
+  readTime: string;
+}
+
+type BlogModule = MarkdownInstance<BlogPost>;
+
+const modules = import.meta.glob('/src/data/blogs/*.md', { eager: true }) as Record<string, BlogModule>;
+const posts = Object.entries(modules).map(([path, post]) => {
+  const slug = path.split("/").pop()?.replace(".md", "") ?? "";
+  return {
+    slug,
+    frontmatter: post.frontmatter,
+  };
+});
 ---
 
-<Layout title="Blog" description="Blog y notas del proyecto">
-  <main id="master" style="padding: 6rem 1.5rem; max-width: 900px; margin: 0 auto;">
-    <h1>Blog</h1>
-    <p>Sección en construcción. Aquí irán posts y notas.</p>
+<Layout
+  title="TechBlog - IA y Desarrollo"
+  description="Explora las últimas tendencias en inteligencia artificial, desarrollo web y tecnología emergente"
+>
+  <BlogHeader />
+  
+  <main id="master" class="blog-layout">
+    <aside class="blog-aside" aria-label="Anuncios izquierda">
+      <div class="ad-slot">Espacio para anuncios</div>
+      <div class="ad-slot">Espacio para anuncios</div>
+    </aside>
+
+    <article class="blog-content">
+      <header class="blog-hero">
+        <div class="blog-hero-content">
+          <p class="blog-kicker">Tecnología & Innovación</p>
+          <h1 class="blog-hero-title">TechBlog</h1>
+          <p class="blog-hero-lead">
+            Explorando el futuro de la inteligencia artificial, desarrollo web y las tecnologías que están transformando nuestro mundo.
+          </p>
+        </div>
+      </header>
+
+      <section class="blog-featured">
+        <h2 class="blog-section-title">Artículo Destacado</h2>
+        <div class="blog-featured-card">
+          <div class="blog-featured-content">
+            <span class="blog-featured-category">{posts[0]?.frontmatter.categories?.[0] ?? 'IA News'}</span>
+            <h3 class="blog-featured-title">
+              <a href={`/blog/posts/${posts[0]?.slug}`}>{posts[0]?.frontmatter.title ?? 'GPT-5: El Salto Cuántico en IA Conversacional'}</a>
+            </h3>
+            <p class="blog-featured-excerpt">
+              {posts[0]?.frontmatter.description ?? 'OpenAI revela GPT-5 con capacidades multimodales avanzadas y razonamiento mejorado que cambian el panorama de la IA.'}
+            </p>
+            <div class="blog-featured-meta">
+              <span>{posts[0]?.frontmatter.readTime ?? '5 min'} lectura</span>
+              <span>•</span>
+              <span>{posts[0]?.frontmatter.date ?? '24 Mar 2026'}</span>
+            </div>
+          </div>
+          <div class="blog-featured-image">
+            <img src={posts[0]?.frontmatter.image ?? '/assets/images/astro-vim.webp'} alt="Destacado" />
+          </div>
+        </div>
+      </section>
+
+      <figure class="blog-figure">
+        <img src="/assets/images/astro-vim.webp" alt="Vista previa de un artículo" />
+        <figcaption>Imagen destacada del artículo.</figcaption>
+      </figure>
+
+      <section class="blog-section">
+        <h3>Contenido con enlaces</h3>
+        <p>
+          Revisa la documentación oficial de Astro en
+          <a href="https://docs.astro.build" target="_blank" rel="noreferrer">docs.astro.build</a>.
+        </p>
+      </section>
+
+      <section class="blog-section">
+        <h3>Cita destacada</h3>
+        <blockquote>
+          “El conocimiento compartido multiplica el impacto de cada proyecto.”
+          <cite>— Edgar Ramxs</cite>
+        </blockquote>
+      </section>
+
+      <section class="blog-section">
+        <h3>Video o demo embebida</h3>
+        <div class="blog-media">
+          <iframe
+            title="Demo de proyecto"
+            src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+            loading="lazy"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+        </div>
+      </section>
+
+      <section class="blog-recent">
+        <h2 class="blog-section-title">Últimos Artículos</h2>
+        <div class="blog-grid">
+          {posts.slice(1, 4).map((post: any) => (
+            <article class="blog-card">
+              <div class="blog-card-image">
+                <img src={post.frontmatter.image ?? '/assets/images/astro-vim.webp'} alt={post.frontmatter.title} />
+              </div>
+              <div class="blog-card-content">
+                <span class="blog-card-category">{post.frontmatter.categories?.[0]}</span>
+                <h3 class="blog-card-title">
+                  <a href={`/blog/posts/${post.slug}`}>{post.frontmatter.title}</a>
+                </h3>
+                <p class="blog-card-excerpt">{post.frontmatter.description}</p>
+                <div class="blog-card-meta">
+                  <span>{post.frontmatter.readTime}</span>
+                  <span>{post.frontmatter.date}</span>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+    </article>
+
+    <aside class="blog-aside" aria-label="Anuncios derecha">
+      <div class="ad-slot">Espacio para anuncios</div>
+      <div class="ad-slot">Espacio para anuncios</div>
+    </aside>
   </main>
+
+  <BlogFooter />
+
+  <style>
+    .blog-layout {
+      padding: 3rem 1.5rem 6rem;
+      max-width: 1300px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: minmax(220px, 1fr) minmax(0, 3.5fr) minmax(220px, 1fr);
+      gap: 4rem;
+      align-items: start;
+      background-color: #020617;
+      color: #f8fafc;
+    }
+
+    .blog-hero {
+      text-align: left;
+      padding: 5rem 3rem;
+      background: radial-gradient(circle at top right, rgba(59, 130, 246, 0.15), transparent), 
+                  radial-gradient(circle at bottom left, rgba(168, 85, 247, 0.1), transparent),
+                  #0f172a;
+      border-radius: 32px;
+      margin-bottom: 3rem;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .blog-hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: linear-gradient(to bottom, #3b82f6, #a855f7);
+    }
+
+    .blog-hero-title {
+      font-size: clamp(3rem, 6vw, 5rem);
+      font-weight: 950;
+      letter-spacing: -0.04em;
+      line-height: 0.9;
+      margin: 0 0 1.5rem 0;
+      background: linear-gradient(to bottom right, #ffffff 30%, #94a3b8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .blog-hero-lead {
+      color: #e2e8f0;
+      opacity: 1;
+    }
+
+    .blog-section-title {
+      font-size: 2rem;
+      font-weight: 900;
+      margin: 0 0 2.5rem 0;
+      color: #f8fafc;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .blog-section-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(59, 130, 246, 0.5), transparent);
+    }
+
+    .blog-featured-card {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 0;
+      background: #0b1220;
+      border-radius: 32px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .blog-featured-card:hover {
+      border-color: rgba(59, 130, 246, 0.5);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.5);
+    }
+
+    .blog-featured-content {
+      padding: 3rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .blog-featured-title a {
+      color: #f8fafc;
+    }
+
+    .blog-featured-excerpt {
+      color: #e2e8f0;
+    }
+
+    .blog-featured-meta {
+      color: #cbd5e1;
+    }
+
+    .blog-card {
+      background: #0b1220;
+      border-radius: 24px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .blog-card:hover {
+      transform: translateY(-10px);
+      border-color: #3b82f6;
+      box-shadow: 0 20px 40px -15px rgba(59, 130, 246, 0.3);
+    }
+
+    .blog-card-image {
+      height: 240px;
+      overflow: hidden;
+    }
+
+    .blog-card-image img {
+      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .blog-card:hover .blog-card-image img {
+      transform: scale(1.1);
+    }
+
+    .blog-card-title a {
+      color: #f8fafc;
+    }
+
+    .blog-card-excerpt {
+      color: #e2e8f0;
+    }
+
+    .blog-card-meta {
+      color: #cbd5e1;
+    }
+
+    .blog-aside {
+      color: #e2e8f0;
+    }
+
+    .ad-slot {
+      border: 1px dashed rgba(148, 163, 184, 0.4);
+      background: rgba(15, 23, 42, 0.8);
+      color: #e2e8f0;
+    }
+
+    .blog-featured-card {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 2rem;
+      background: white;
+      border-radius: 16px;
+      padding: 2rem;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      border: 1px solid rgba(148, 163, 184, 0.1);
+    }
+
+    .blog-featured-category {
+      background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+      color: white;
+      padding: 0.25rem 0.75rem;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .blog-featured-title {
+      margin: 1rem 0 0.5rem 0;
+      font-size: 1.5rem;
+      font-weight: 700;
+      line-height: 1.3;
+    }
+
+    .blog-featured-title a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .blog-featured-title a:hover {
+      color: #3b82f6;
+    }
+
+    .blog-featured-excerpt {
+      line-height: 1.6;
+      opacity: 0.8;
+      margin: 0 0 1rem 0;
+    }
+
+    .blog-featured-meta {
+      display: flex;
+      gap: 0.5rem;
+      font-size: 0.85rem;
+      opacity: 0.7;
+    }
+
+    .blog-featured-image img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 12px;
+    }
+
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .blog-card {
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      border: 1px solid rgba(148, 163, 184, 0.1);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .blog-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 25px -3px rgba(0, 0, 0, 0.1);
+    }
+
+    .blog-card-image img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .blog-card-content {
+      padding: 1.5rem;
+    }
+
+    .blog-card-category {
+      background: rgba(59, 130, 246, 0.1);
+      color: #3b82f6;
+      padding: 0.25rem 0.75rem;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .blog-card-title {
+      margin: 1rem 0 0.5rem 0;
+      font-size: 1.1rem;
+      font-weight: 600;
+      line-height: 1.4;
+    }
+
+    .blog-card-title a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .blog-card-title a:hover {
+      color: #3b82f6;
+    }
+
+    .blog-card-excerpt {
+      line-height: 1.5;
+      opacity: 0.8;
+      margin: 0 0 1rem 0;
+      font-size: 0.9rem;
+    }
+
+    .blog-card-meta {
+      display: flex;
+      gap: 0.5rem;
+      font-size: 0.8rem;
+      opacity: 0.7;
+    }
+
+    .blog-aside {
+      position: sticky;
+      top: 6rem;
+      display: grid;
+      gap: 1rem;
+    }
+
+    .ad-slot {
+      min-height: 140px;
+      border: 1px dashed rgba(148, 163, 184, 0.4);
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      font-size: 0.85rem;
+      opacity: 0.7;
+    }
+
+    @media (max-width: 1024px) {
+      .blog-layout {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .blog-aside {
+        position: static;
+        order: 2;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      }
+
+      .blog-featured-card {
+        grid-template-columns: 1fr;
+      }
+
+      .blog-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .blog-hero {
+        padding: 2rem 1rem;
+      }
+
+      .blog-featured-card {
+        padding: 1.5rem;
+      }
+
+      .blog-card-content {
+        padding: 1rem;
+      }
+    }
+  </style>
+
+  <script slot="scripts" is:inline src="/src/scripts/theme-init.js"></script>
+  <script slot="scripts" src="/src/scripts/theme-toggle.ts"></script>
+  <script slot="scripts" src="/src/scripts/main.ts"></script>
 </Layout>

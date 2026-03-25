@@ -1,50 +1,73 @@
 ---
-import '@styles/portfolio.css';
+import "@styles/portfolio.css";
 
-import Head from '@components/_global/HeadBase.astro';
-import Scripts from '@components/_global/Scripts.astro';
-import TagmanagerNoscript from '@components/_measurement/GoogleTagmanagerNoscript.astro';
+import Navbar from "@components/portfolio/Navbar.astro";
+import Footer from "@components/portfolio/Footer.astro";
+import BaseLayout from "@layouts/BaseLayout.astro";
 
-const schema = {
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  "name": "Mi Sitio",
-  "url": "https://misitio.cl",
-  "potentialAction": {
-    "@type": "SearchAction",
-    "target": "https://misitio.cl/buscar?q={search_term_string}",
-    "query-input": "required name=search_term_string"
-  }
-};
+export interface Props {
+  title?: string;
+  description?: string;
+  canonical?: string;
+  image?: string;
+  imageAlt?: string;
+  type?: "website" | "article" | "product";
+  noindex?: boolean;
+  locale?: string;
+  siteName?: string;
+  keywords?: string[];
+  themeColor?: string;
+  schema?: Record<string, unknown> | Record<string, unknown>[];
+}
 
+const {
+  title = "Portfolio",
+  description = "Descripción optimizada para SEO de máximo 160 caracteres que describe claramente el contenido.",
+  canonical = "https://edgar-ramxs.github.io",
+  image,
+  imageAlt = "Vista principal de Mi Sitio",
+  type = "website",
+  noindex,
+  locale = "es_CL",
+  siteName,
+  keywords = ["keyword1", "keyword2", "keyword3"],
+  themeColor = "#0f172a",
+  schema,
+} = Astro.props;
 ---
-<!doctype html>
-<html lang="es">
-  <head>
-    <Head
-      title="Portfolio"
-      description="Descripción optimizada para SEO de máximo 160 caracteres que describe claramente el contenido."
-      siteName="Mi Sitio"
-      canonical="https://misitio.cl"
-      image="https://misitio.cl/og-image.png"
-      imageAlt="Vista principal de Mi Sitio"
-      locale="es_CL"
-      twitterHandle="@misitio"
-      keywords={["keyword1", "keyword2", "keyword3"]}
-      themeColor="#0f172a"
 
-      gtmId="GTM-XXXXXXX"
-      metaPixelId="XXXXXXXXXXXXXXX"
+<BaseLayout
+  title={title}
+  description={description}
+  canonical={canonical}
+  image={image}
+  imageAlt={imageAlt}
+  type={type}
+  noindex={noindex}
+  locale={locale}
+  siteName={siteName}
+  keywords={keywords}
+  themeColor={themeColor}
+  schema={schema}
+>
+  <!-- Container -->
+  <header slot="navbar">
+    <Navbar />
+  </header>
 
-      googleVerification="XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
-      yandexVerification="XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
-
-      schema={schema}
-    />
-  </head>
-  <body>
-    <TagmanagerNoscript idTagManager="GTM-XXXXXXX"/>
+  <main slot="container">
     <slot />
-    <Scripts/>
-  </body>
-</html>
+  </main>
+
+  <!-- Footer Layout -->
+  <Footer slot="footer" />
+
+  <!-- Scripts Import -->
+  <script slot="scripts" is:inline src="/src/scripts/theme-init.js"></script>
+  <script slot="scripts" src="/src/scripts/theme-toggle.ts"></script>
+  <script slot="scripts" src="/src/scripts/main.ts"></script>
+  <script slot="scripts" src="/src/scripts/search.ts"></script>
+  <script slot="scripts" src="/src/scripts/background-art.ts"></script>
+  <script slot="scripts" src="/src/scripts/route-animations.ts"></script>
+  <!-- End Scripts Import -->
+</BaseLayout>

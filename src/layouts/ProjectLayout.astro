@@ -1,19 +1,33 @@
 ---
 import '@styles/portfolio.css';
-import Head from '@components/_global/HeadBase.astro';
-import Scripts from '@components/_global/Scripts.astro';
-import TagmanagerNoscript from '@components/_measurement/GoogleTagmanagerNoscript.astro';
+import BaseLayout from '@layouts/BaseLayout.astro';
 
 export interface Props {
-  title?: string;
+  title: string;
   description?: string;
   canonical?: string;
+  siteName?: string;
+  locale?: string;
+  themeColor?: string;
+  keywords?: string[];
+  image?: string;
+  imageAlt?: string;
+  type?: "website" | "article" | "product";
+  noindex?: boolean;
 }
 
 const {
-  title = 'Proyecto',
+  title,
   description = 'Vista previa del proyecto',
   canonical = Astro.url.href,
+  siteName = 'Mi Sitio',
+  locale = 'es_CL',
+  themeColor = '#0f172a',
+  keywords,
+  image,
+  imageAlt,
+  type,
+  noindex,
 } = Astro.props;
 
 const schema = {
@@ -23,22 +37,24 @@ const schema = {
   "url": canonical,
 };
 ---
-<!doctype html>
-<html lang="es">
-  <head>
-    <Head
-      title={title}
-      description={description}
-      canonical={canonical}
-      siteName="Mi Sitio"
-      locale="es_CL"
-      themeColor="#0f172a"
-      schema={schema}
-    />
-  </head>
-  <body>
-    <TagmanagerNoscript idTagManager="GTM-XXXXXXX" />
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonical={canonical}
+  siteName={siteName}
+  locale={locale}
+  themeColor={themeColor}
+  keywords={keywords}
+  image={image}
+  imageAlt={imageAlt}
+  type={type}
+  noindex={noindex}
+  schema={schema}
+>
+  <main slot="container">
     <slot />
-    <Scripts />
-  </body>
-</html>
+  </main>
+
+  <slot slot="scripts" name="scripts" />
+</BaseLayout>

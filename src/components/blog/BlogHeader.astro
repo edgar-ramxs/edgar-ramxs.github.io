@@ -1,0 +1,160 @@
+---
+const navItems = [
+  { label: "Inicio", href: "/blog/" },
+  { label: "IA & Tech", href: "/blog/posts" },
+  { label: "Tutoriales", href: "/blog/tutorials" },
+  { label: "Sobre", href: "/blog/about" },
+];
+---
+
+<header class="blog-header">
+  <div class="blog-header-container">
+    <div class="blog-brand">
+      <a href="/blog/" class="blog-logo">
+        <div class="logo-wrapper">
+          <span class="logo-icon">⚡</span>
+          <div class="logo-text-group">
+            <span class="logo-main">NEURAL</span>
+            <span class="logo-sub">BLOG</span>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <nav class="blog-nav" aria-label="Navegación principal">
+      <ul class="blog-nav-list">
+        {navItems.map((item) => (
+          <li>
+            <a href={item.href} class="blog-nav-link">
+              {item.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <button class="blog-menu-toggle" aria-label="Abrir menú">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+</header>
+
+<style>
+  .blog-header {
+    background: rgba(2, 6, 23, 0.8);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(59, 130, 246, 0.3);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+  }
+
+  .logo-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.25rem 0;
+  }
+
+  .logo-icon {
+    font-size: 1.75rem;
+    background: linear-gradient(135deg, #60a5fa, #a855f7);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 0 12px rgba(96, 165, 250, 0.5));
+  }
+
+  .logo-text-group {
+    display: flex;
+    flex-direction: column;
+    line-height: 0.9;
+  }
+
+  .logo-main {
+    font-size: 1.5rem;
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    color: #f8fafc;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+  }
+
+  .logo-sub {
+    font-size: 0.65rem;
+    font-weight: 800;
+    letter-spacing: 0.5em;
+    color: #60a5fa;
+    margin-top: 0.1rem;
+  }
+
+  .blog-nav-link {
+    text-decoration: none;
+    font-weight: 600;
+    color: #94a3b8;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    position: relative;
+    padding: 0.5rem 0;
+  }
+
+  .blog-nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #60a5fa, #a855f7);
+    transition: width 0.3s ease;
+  }
+
+  .blog-nav-link:hover {
+    color: #f8fafc;
+  }
+
+  .blog-nav-link:hover::after {
+    width: 100%;
+  }
+
+  .blog-menu-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 4px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+  }
+
+  .blog-menu-toggle span {
+    width: 20px;
+    height: 2px;
+    background: currentColor;
+    transition: all 0.3s ease;
+  }
+
+  @media (max-width: 768px) {
+    .blog-nav {
+      display: none;
+    }
+
+    .blog-menu-toggle {
+      display: flex;
+    }
+  }
+</style>
+
+<script>
+  const toggle = document.querySelector('.blog-menu-toggle');
+  const nav = document.querySelector('.blog-nav');
+
+  if (toggle && nav) {
+    toggle.addEventListener('click', () => {
+      nav.style.display = nav.style.display === 'block' ? 'none' : 'block';
+    });
+  }
+</script>

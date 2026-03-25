@@ -1,0 +1,83 @@
+---
+import TagmanagerNoscript from "@components/_measurement/GoogleTagmanagerNoscript.astro";
+import Head from "@components/_global/HeadBase.astro";
+
+export interface Props {
+  title: string;
+  description?: string;
+  canonical?: string;
+  image?: string;
+  imageAlt?: string;
+  type?: "website" | "article" | "product";
+  noindex?: boolean;
+  locale?: string;
+  siteName?: string;
+  keywords?: string[];
+  themeColor?: string;
+  schema?: Record<string, unknown> | Record<string, unknown>[];
+}
+
+const {
+  title,
+  description,
+  canonical,
+  image,
+  imageAlt,
+  type,
+  noindex,
+  locale,
+  siteName,
+  keywords,
+  themeColor,
+  schema,
+} = Astro.props;
+
+const adId = import.meta.env.PUBLIC_GOOGLE_ADSENSE_ID;
+const gtmId = import.meta.env.PUBLIC_GTM_ID;
+const gaId = import.meta.env.PUBLIC_GA_ID;
+const googleVerification = import.meta.env.PUBLIC_GOOGLE_VERIFICATION;
+---
+
+<!doctype html>
+<html lang="es">
+  <!-- HEAD -->
+  <head>
+    <Head
+      slot="head"
+      title={title}
+      description={description}
+      canonical={canonical}
+      image={image}
+      imageAlt={imageAlt}
+      type={type}
+      noindex={noindex}
+      locale={locale}
+      siteName={siteName}
+      keywords={keywords}
+      themeColor={themeColor}
+      schema={schema}
+      adId={adId}
+      gtmId={gtmId}
+      gaId={gaId}
+      googleVerification={googleVerification}
+    />
+  </head>
+
+  <!-- BODY -->
+  <body>
+    <!-- TAG MANAGER BOY -->
+    {gtmId && <TagmanagerNoscript idTagManager={gtmId} />}
+
+    <!-- HEADER -->
+    <slot name="navbar" />
+
+    <!-- MAIN - CONTAINER -->
+    <slot name="container"/>
+
+    <!-- FOOTER -->
+    <slot name="footer"/>
+
+    <!-- SCRIPTS -->
+    <slot name="scripts" />
+  </body>
+</html>
