@@ -4,9 +4,9 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"],
+      "@data/*": ["data/*"],
       "@components/*": ["src/components/*"],
       "@measurement/*": ["src/components/_measurement/*"],
-      "@data/*": ["src/data/*"],
       "@images/*": ["src/images/*"],
       "@layouts/*": ["src/layouts/*"],
       "@pages/*": ["src/pages/*"],
