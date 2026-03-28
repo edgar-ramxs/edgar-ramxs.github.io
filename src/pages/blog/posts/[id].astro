@@ -19,7 +19,7 @@ interface BlogPost {
 type BlogModule = MarkdownInstance<BlogPost>;
 
 export async function getStaticPaths() {
-  const modules = import.meta.glob('/src/data/blogs/*.md', { eager: true }) as Record<string, BlogModule>;
+  const modules = import.meta.glob('/data/blogs/*.md', { eager: true }) as Record<string, BlogModule>;
   const posts = Object.entries(modules).map(([path, post]) => {
     const slug = path.split("/").pop()?.replace(".md", "") ?? "";
     return {

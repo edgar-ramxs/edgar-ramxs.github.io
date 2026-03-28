@@ -1,0 +1,66 @@
+---
+interface Props {
+  category: string;
+  categoryVariant?: "primary" | "secondary" | "tertiary";
+  title: string;
+  description: string;
+  imageUrl?: string;
+  imageAlt?: string;
+  cardType?: "image" | "grid" | "stats";
+  statValue?: string;
+}
+
+const {
+  category,
+  categoryVariant = "primary",
+  title,
+  description,
+  imageUrl,
+  imageAlt,
+  cardType = "image",
+  statValue = "84%"
+} = Astro.props;
+---
+
+<div class="hub-card">
+  {cardType === "image" && (
+    <div class={`hub-card-media ${category === "CV & Identity" ? "hub-card--grayscale" : "hub-card--fade"}`}>
+      <img alt={imageAlt || ""} src={imageUrl} />
+    </div>
+  )}
+  {cardType === "grid" && (
+    <div class="hub-card-media">
+      <div class="hub-card-media-grid">
+        <div class="hub-card-media-tile">
+          <div class="hub-card-media-block"></div>
+          <div class="hub-card-media-line hub-card-media-line--short"></div>
+        </div>
+        <div class="hub-card-media-tile">
+          <div class="hub-card-media-block"></div>
+          <div class="hub-card-media-line hub-card-media-line--long"></div>
+        </div>
+      </div>
+    </div>
+  )}
+  {cardType === "stats" && (
+    <div class="hub-card-media">
+      <div class="hub-stats">
+        <div class="hub-ring">
+          <div class="hub-ring-bg"></div>
+          <div class="hub-ring-accent"></div>
+          <div class="glass-card hub-stat-card">
+            <span class="hub-stat-value">{statValue}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  )}
+  <div class="hub-card-body">
+    <div>
+      <span class={`hub-meta hub-meta--${categoryVariant}`}>{category}</span>
+    </div>
+    <h3 class="hub-card-title">{title}</h3>
+    <p class="hub-card-desc">{description}</p>
+    <button class="hub-button"> View Visuals </button>
+  </div>
+</div>

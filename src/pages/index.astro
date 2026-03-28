@@ -1,60 +1,65 @@
 ---
-import Layout from "@layouts/ProjectLayout.astro";
+import BaseLayout from "@layouts/BaseLayout.astro";
+import HubBackground from "@components/hub/HubBackground.astro";
+import HubHero from "@components/hub/HubHero.astro";
+import HubCard from "@components/hub/HubCard.astro";
+import HubFooter from "@components/hub/HubFooter.astro";
+import "../styles/hub.css";
 ---
 
-<Layout
-  title="Hub"
-  description="Acceso rápido a mis mini-sitios y proyectos"
->
-  <main id="master" style="padding: 6rem 1.5rem; max-width: 1100px; margin: 0 auto;">
-    <section style="margin-bottom: 3rem;">
-      <h1>Macro Portfolio</h1>
-      <p>Accede a cada mini-sitio con demos y previews de mis proyectos.</p>
-    </section>
-
-    <section
-      style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; margin-bottom: 3rem;"
-    >
-      <a
-        href="/portfolio/"
-        style="display: block; padding: 1.5rem; border: 1px solid #1f2937; border-radius: 12px;"
-      >
-        <h2>Portfolio</h2>
-        <p>CV, experience and featured projects.</p>
-      </a>
-      <a
-        href="/blog/"
-        style="display: block; padding: 1.5rem; border: 1px solid #1f2937; border-radius: 12px;"
-      >
-        <h2>Blog</h2>
-        <p>Notas técnicas, aprendizajes y artículos.</p>
-      </a>
-      <a
-        href="/ecommerce/"
-        style="display: block; padding: 1.5rem; border: 1px solid #1f2937; border-radius: 12px;"
-      >
-        <h2>Ecommerce</h2>
-        <p>Previews de tiendas y flujos comerciales.</p>
-      </a>
-      <a
-        href="/dashboards/"
-        style="display: block; padding: 1.5rem; border: 1px solid #1f2937; border-radius: 12px;"
-      >
-        <h2>Dashboards</h2>
-        <p>Visualización y analítica de datos.</p>
-      </a>
-    </section>
-
-    <section>
-      <h2>¿Qué encontrarás?</h2>
-      <ul>
-        <li>Proyectos reales con previews funcionales.</li>
-        <li>Rutas separadas para cada dominio.</li>
-        <li>Iteraciones rápidas sin instalar cada app.</li>
-      </ul>
-    </section>
+<BaseLayout title="Portfolio Hub | Digital Gallery">
+  <main slot="container" class="hub-main">
+    <HubBackground />
+    <HubHero />
+    <div class="hub-grid">
+      <HubCard
+        category="CV & Identity"
+        categoryVariant="tertiary"
+        title="The Architect"
+        description="Bridging the gap between brutalist utility and elegant editorial design. Visual storytelling at its core."
+        imageUrl="https://lh3.googleusercontent.com/aida-public/AB6AXuBv02HJvO16JBQLlbkJd8k5NstGd9LYBQIrQ0hVndgC9tXaJlYt4_76TfQgKiNnfCEg20W-x4vBb4VOsrscvgiG913boEkeUGqMSaQJC1oHSbydJhDNbxeQoQ6a1tZinl0MmCtzbnt7ggxsfKVAY7i2ZQA2933UimAHcMjFRX8zzd6OYNUYQ2QZmy2BC2kkKoDSPRECNC39x5ZW8Uv8THBSH1saqN0EcTJg6UCn7razX4SJFg8yH6vkQj6ItkKuPyfbKuXn2udnPEuD"
+        imageAlt="Close-up professional portrait of a creative director in dark attire against a minimalist grey background with soft cinematic lighting"
+        cardType="image"
+      />
+      <HubCard
+        category="Blog & Thoughts"
+        categoryVariant="primary"
+        title="The Kinetic Journal"
+        description="Deep dives into the psychology of dark UI and the future of editorial minimalism in the age of AI."
+        imageUrl="https://lh3.googleusercontent.com/aida-public/AB6AXuBfRoqMAcJ3XDv2k4sB5RzHXHLjpAhEn32OG3VEGTk002hDkb4WVCc5o3O3_W2YQ4BXCmkZ3qfPtkP3q2MZ7BNa6ZALmXCY6vK69PgfPQNyckLL9IcrUl4rhyPrXnhlQv0Z3IoHnxFgmtM5PZDKqOQvISO4Xk0ixUcW09CEiNSd35sejYG9NHvkojjBH9BaUr5bNkEr8Sy5oBzKoh0I8PEivycux-WRb1ZTAKXN5_3J3dketV2tJsLS7GGIltrdtL_phnu38NzLywSO"
+        imageAlt="Overhead view of a minimalist workspace with a dark laptop, coffee cup, and open notebook under soft mood lighting"
+        cardType="image"
+      />
+      <HubCard
+        category="E-commerce"
+        categoryVariant="secondary"
+        title="Boutique Engine"
+        description="High-end retail experiences defined by speed, motion, and a unique editorial aesthetic."
+        cardType="grid"
+      />
+      <HubCard
+        category="Analytics"
+        categoryVariant="tertiary"
+        title="Velocity Dashboard"
+        description="Real-time telemetry visualized through glassmorphic layers and custom SVG kinetic charts."
+        cardType="stats"
+      />
+      <HubCard
+        category="Analytics"
+        categoryVariant="tertiary"
+        title="Velocity Dashboard"
+        description="Real-time telemetry visualized through glassmorphic layers and custom SVG kinetic charts."
+        cardType="stats"
+      />
+      <HubCard
+        category="Analytics"
+        categoryVariant="tertiary"
+        title="Velocity Dashboard"
+        description="Real-time telemetry visualized through glassmorphic layers and custom SVG kinetic charts."
+        cardType="stats"
+      />
+    </div>
   </main>
-  <script slot="scripts" is:inline src="/src/scripts/theme-init.js"></script>
-  <script slot="scripts" src="/src/scripts/theme-toggle.ts"></script>
-  <script slot="scripts" src="/src/scripts/main.ts"></script>
-</Layout>
+
+  <HubFooter slot="footer" />
+</BaseLayout>

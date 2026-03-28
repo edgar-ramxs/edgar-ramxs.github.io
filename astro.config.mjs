@@ -1,8 +1,10 @@
 import { defineConfig } from 'astro/config';
 import partytown from '@astrojs/partytown';
 
+
 export default defineConfig({
   site: 'https://edgar-ramxs.github.io',
+
   integrations: [
     partytown({
       config: {
@@ -11,4 +13,6 @@ export default defineConfig({
       },
     }),
   ],
+
+  vite: {},
 });
