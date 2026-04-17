@@ -1,8 +1,9 @@
-import profile from '@data/cv/profile.json';
-import skills from '@data/cv/skills.json';
-import education from '@data/cv/education.json';
-import works from '@data/cv/works.json';
-import projects from '@data/cv/projects.json';
+import profile from "@data/profile.json";
+import skills from "@data/skills.json";
+import education from "@data/education.json";
+import works from "@data/experiences.json";
+import projects from "@data/projects.json";
+import certifications from "@data/certifications.json";
 
 // --- Interfaces ---
 export interface CV {
@@ -11,6 +12,7 @@ export interface CV {
   education: EducationData;
   works: Array<Work>;
   projects: Array<Project>;
+  certifications: Array<Certification>;
 }
 
 export interface Profile {
@@ -56,10 +58,7 @@ export interface TechnicalSkill {
   keywords: Array<string>;
 }
 
-export interface EducationData {
-  certificates: Array<Certificate>;
-  degrees: Array<Degree>;
-}
+export type EducationData = Array<Degree>;
 
 export interface Certificate {
   name: string;
@@ -79,7 +78,9 @@ export interface Degree {
 }
 
 export interface Work {
+  id: string;
   name: string;
+  icon: string;
   position: string;
   url: string;
   startDate: DateStr;
@@ -92,6 +93,7 @@ export interface Work {
 }
 
 export interface Project {
+  id: string;
   name: string;
   isActive: boolean;
   description: string;
@@ -99,6 +101,17 @@ export interface Project {
   stack: Array<string>;
   url?: string;
   github?: string;
+}
+
+export interface Certification {
+  id: string;
+  name: string;
+  date: DateStr;
+  issuer: string;
+  icon: string;
+  url: string;
+  description: string;
+  skills: Array<string>;
 }
 
 type DateStr = `${string}-${string}-${string}`;
@@ -109,7 +122,15 @@ const cv: CV = {
   skills,
   education: education as unknown as EducationData,
   works: works as unknown as Array<Work>,
-  projects: projects as unknown as Array<Project>
+  projects: projects as unknown as Array<Project>,
+  certifications: certifications as unknown as Array<Certification>,
 };
 
 export default cv;
+
+// --- Named Exports ---
+export const { profile: profileData } = cv;
+export const { skills: skillsData } = cv;
+export const { works: worksData } = cv;
+export const { projects: projectsData } = cv;
+export const { certifications: certificationsData } = cv;

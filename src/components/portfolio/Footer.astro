@@ -2,11 +2,11 @@
 const year = new Date().getFullYear();
 ---
 
-<footer class="footer">
+<footer class="footer" transition:persist>
   <div class="footer-inner container">
     <span class="footer-name">Edgar Ramos</span>
     <span class="footer-copy">© {year} — Analista de Datos</span>
-    <a href="#inicio" class="footer-top">
+    <button class="footer-top" onclick="window.scrollTo({ top: 0, behavior: 'smooth' })">
       Volver arriba
       <svg
         width="14"
@@ -18,7 +18,7 @@ const year = new Date().getFullYear();
       >
         <path d="M12 19V5M5 12l7-7 7 7"></path>
       </svg>
-    </a>
+    </button>
   </div>
 </footer>
 
@@ -56,6 +56,10 @@ const year = new Date().getFullYear();
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--text-muted);
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
     transition: color 0.2s;
   }
 

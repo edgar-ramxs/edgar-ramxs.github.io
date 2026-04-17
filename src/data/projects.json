@@ -1,0 +1,96 @@
+[
+  {
+    "id": "pixelsaffron",
+    "name": "pixelsaffron",
+    "isActive": true,
+    "description": "A landing page for a startup with beautiful design and smooth animations.",
+    "url": "https://pixelsaffron.in",
+    "highlights": [
+      "GSAP animations",
+      "Beautiful design",
+      "Smooth animations"
+    ],
+    "stack": ["GSAP", "Tailwind", "Vue"]
+  },
+  {
+    "id": "particlefx",
+    "name": "ParticleFX",
+    "isActive": true,
+    "description": "A zero-dependency JavaScript library to create interactive particle effects from images using canvas. Easily works with React, Vue, or plain HTML. Customize animations, physics, and user interactions.",
+    "url": "https://particlefx.anmol.pro",
+    "highlights": [
+      "🖼️ Turn Images into Particles",
+      "🌀 Hover & Click Effects",
+      "🎨 Custom Shapes & Filters",
+      "⚙️ Configurable Physics",
+      "📱 Responsive Design",
+      "📸 Export as PNG",
+      "📦 TypeScript Ready",
+      "✨ Works Without Any Framework"
+    ],
+    "stack": ["CanvasAPI", "HTML", "JavaScript", "TypeScript"]
+  },
+  {
+    "id": "social-media-webapp",
+    "name": "Social Media WebApp",
+    "isActive": false,
+    "description": "A modern social media application designed for real-time interaction and user engagement",
+    "highlights": [
+      "📝 CRUD Posts (Create, Read, Update, Delete)",
+      "💬 Real-time Chat (1:1 and group messaging)",
+      "👥 Follow System to connect with others",
+      "❤️ Like and react to posts",
+      "📞 Group Voice/Video Calling"
+    ],
+    "stack": ["Docker", "Go-lang", "Next-Js", "PostgreSQL", "Redux", "Socket.io"]
+  },
+  {
+    "id": "notbasic",
+    "name": "Notbasic",
+    "isActive": true,
+    "description": "An easy-to-use online store where you can browse, shop, and pay securely. It also has a simple admin panel to manage products and track orders smoothly.",
+    "url": "https://notbasic.in/",
+    "highlights": [
+      "🛒 Cart Management",
+      "📦 Order Management",
+      "🚚 Delivery Tracking",
+      "👛 Wallet Integration",
+      "💳 Secure Payment Gateway",
+      "🧾 Invoice & Billing",
+      "🛍️ Product Browsing & Filtering",
+      "📊 Admin Dashboard"
+    ],
+    "stack": ["MongoDB", "Next-Js", "Node", "Redux", "TypeScript"]
+  },
+  {
+    "id": "music-webapp",
+    "name": "Music WebApp",
+    "isActive": true,
+    "description": "A fun and smooth music streaming app where users can discover, play, and enjoy their favorite songs anytime. It features playlists, search, and seamless audio playback for a great listening experience.",
+    "url": "https://music.anmol.pro",
+    "github": "https://github.com/Anmol-TheDev/Music_app",
+    "highlights": [
+      "🔥 Firebase Integration",
+      "🔐 User Authentication",
+      "🎵 Playlist Management",
+      "🔍 Song Search"
+    ],
+    "stack": ["React", "REST-API", "Tailwind"]
+  },
+  {
+    "id": "stone-su-man",
+    "name": "Stone-Su-man",
+    "isActive": true,
+    "description": "An online shop for selling unique hand-painted stone art, where customers can easily browse, order, and enjoy one-of-a-kind creations.",
+    "url": "https://stone-su-man.com/",
+    "highlights": [
+      "🎨 Showcase Hand-Painted Stone Art",
+      "🛒 Easy Product Browsing & Cart",
+      "💳 Secure Online Payments",
+      "📦 Order & Delivery Tracking",
+      "📸 High-Quality Artwork Images",
+      "📱 Mobile-Friendly Design"
+    ],
+    "stack": ["Hostinger", "PNPM", "React", "TypeScript", "Vite", "Tailwind"]
+  }
+]

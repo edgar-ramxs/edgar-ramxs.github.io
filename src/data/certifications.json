@@ -1,0 +1,32 @@
+[
+  {
+    "id": "google-analytics",
+    "name": "Certificación de Google Analytics",
+    "date": "2025-05-01",
+    "issuer": "Google",
+    "icon": "simple-icons:google",
+    "url": "https://aws.amazon.com/verification",
+    "description": "Certificación que valida conocimientos en análisis web y métricas digitales.",
+    "skills": ["Google Analytics", "Data Analysis", "Digital Marketing", "Web Analytics"]
+  },
+  {
+    "id": "ibm-data-science-practitioners",
+    "name": "Data Science Practitioners",
+    "date": "2024-06-01",
+    "issuer": "IBM Skills Academy",
+    "icon": "simple-icons:ibm",
+    "url": "https://coursera.org/verify/meta-frontend",
+    "description": "Programa de certificación en práticas de ciencia de datos.",
+    "skills": ["Python", "Data Science", "Machine Learning", "Data Analysis"]
+  },
+  {
+    "id": "eccouncil-nde",
+    "name": "Network Defense Essentials (NDE)",
+    "date": "2023-10-01",
+    "issuer": "EC-Council",
+    "icon": "simple-icons:linux",
+    "url": "https://google.com/cloud/certification",
+    "description": "Certificación en fundamentos de defensa de redes.",
+    "skills": ["Network Security", "Cybersecurity", "Defensive Security", "Threat Prevention"]
+  }
+]

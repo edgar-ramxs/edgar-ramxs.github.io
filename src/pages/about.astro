@@ -1,0 +1,10 @@
+---
+import Layout from "@layouts/PortfolioLayout.astro";
+import Experience from "@components/portfolio/Experience.astro";
+const AboutSection = (await import("@components/portfolio/About.astro")).default;
+---
+
+<Layout title="Sobre Mí">
+  <AboutSection />
+  <Experience />
+</Layout>

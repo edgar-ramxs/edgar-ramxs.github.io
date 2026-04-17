@@ -1,0 +1,53 @@
+{
+  "name": "Edgar Ramos",
+  "occupation": "Data Analyts",
+  "image": "assets/images/pfp.jpg",
+  "email": "edgar.ramos.av@gmail.com",
+  "description": "Full Stack developer with experience building and deploying production-ready web apps in freelance teams. Delivered two client websites and worked closely with teams to create scalable, maintainable solutions.",
+  "birthPlace": {
+    "country": "Venezuela",
+    "state": "Monagas",
+    "city": "Maturín"
+  },
+  "currentLocation": {
+    "country": "Chile",
+    "state": "Región Metropolitana",
+    "city": "Santiago"
+  },
+  "languages": [
+    {
+      "language": "Spanish",
+      "fluency": "Native speaker"
+    },
+    {
+      "language": "English",
+      "fluency": "Intermediate"
+    }
+  ],
+  "profiles": [
+    {
+      "network": "GitHub",
+      "url": "https://github.com/edgar-ramxs",
+      "icon": "mdi:github",
+      "color": "#929AAB"
+    },
+    {
+      "network": "LinkedIn",
+      "url": "https://linkedin.com/in/edgar-ramxs",
+      "icon": "mdi:linkedin",
+      "color": "#0A66C2"
+    },
+    {
+      "network": "Email",
+      "url": "mailto:edgar.ramos.av@gmail.com",
+      "icon": "ri:mail-fill",
+      "color": "#D44638"
+    },
+    {
+      "network": "GitHub Stars",
+      "url": "https://github.com/edgar-ramxs.github.io",
+      "icon": "ri:star-line",
+      "color": "#FBBC05"
+    }
+  ]
+}

@@ -1,6 +1,10 @@
 ---
-import cv from "@cv";
-const { works } = cv;
+import { worksData, skillsData } from "@cv";
+import { Icon } from "astro-icon/components";
+const { works, skills } = { works: worksData, skills: skillsData };
+
+// Mapeo de iconos para skills
+const skillIcons = Object.fromEntries(skills.Technicals.map((s) => [s.name, s.icon]));
 ---
 
 <section class="section" id="experiencia">
@@ -17,9 +21,15 @@ const { works } = cv;
                 {job.startDate} — {job.endDate || "Presente"}
               </span>
             </div>
-            <div class="timeline-dot" />
+            <div class="timeline-dot-wrapper">
+              <Icon name={job.icon} class="timeline-role-icon" />
+            </div>
             <div class="timeline-right">
-              <h3 class="job-role">{job.position}</h3>
+              <h3 class="job-role">
+                <a href={`/experiences/${job.id}`} class="hover:underline">
+                  {job.position}
+                </a>
+              </h3>
               <p class="job-company">
                 <a href={job.url} target="_blank" rel="noopener noreferrer">
                   {job.name}
@@ -36,7 +46,10 @@ const { works } = cv;
               </ul>
               <div class="job-tags">
                 {job.skills.map((tag) => (
-                  <span class="tag">{tag}</span>
+                  <span class="tag">
+                    {skillIcons[tag] && <Icon name={skillIcons[tag]} class="tag-icon" />}
+                    {tag}
+                  </span>
                 ))}
               </div>
             </div>
@@ -85,16 +98,38 @@ const { works } = cv;
     color: var(--text-muted);
   }
 
-  .timeline-dot {
-    width: 9px;
-    height: 9px;
-    border-radius: 50%;
-    background: var(--accent);
-    border: 2px solid var(--bg);
+  .timeline-dot-wrapper {
+    width: 28px;
+    height: 28px;
+    border-radius: 4px;
+    background: var(--bg);
+    border: 1px solid var(--border);
     position: relative;
-    left: -4px;
-    top: 0.35rem;
+    left: -14px;
+    top: 0.15rem;
     flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    transition: all 0.3s ease;
+  }
+
+  .timeline-item:hover .timeline-dot-wrapper {
+    background: var(--accent);
+    border-color: var(--accent);
+    transform: scale(1.1);
+  }
+
+  .timeline-role-icon {
+    width: 14px;
+    height: 14px;
+    color: var(--accent);
+    transition: color 0.3s ease;
+  }
+
+  .timeline-item:hover .timeline-role-icon {
+    color: white;
   }
 
   .timeline-right {
@@ -133,6 +168,9 @@ const { works } = cv;
   }
 
   .tag {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
     font-family: var(--mono);
     font-size: 0.65rem;
     letter-spacing: 0.08em;
@@ -142,6 +180,11 @@ const { works } = cv;
     padding: 0.25rem 0.65rem;
     border-radius: 2px;
     color: var(--text-muted);
+  }
+
+  .tag-icon {
+    width: 0.85rem;
+    height: 0.85rem;
   }
 
   @media (max-width: 768px) {
@@ -155,8 +198,8 @@ const { works } = cv;
     .timeline-left {
       display: none;
     }
-    .timeline-dot {
-      left: -4px;
+    .timeline-dot-wrapper {
+      left: -14px;
     }
     .period {
       display: block;

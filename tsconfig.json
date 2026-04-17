@@ -1,10 +1,11 @@
 {
   "extends": "astro/tsconfigs/strict",
   "compilerOptions": {
+    "ignoreDeprecations": "6.0",
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"],
-      "@data/*": ["data/*"],
+      "@data/*": ["src/data/*"],
       "@components/*": ["src/components/*"],
       "@measurement/*": ["src/components/_measurement/*"],
       "@images/*": ["src/images/*"],
@@ -13,7 +14,7 @@
       "@scripts/*": ["src/scripts/*"],
       "@styles/*": ["src/styles/*"],
       "@types": ["src/types/types.d.ts"],
-      "@cv": ["src/types/cv.ts"],
+      "@cv": ["src/types/cv.ts"]
     }
   },
   "include": [".astro/types.d.ts", "src/**/*", "src/types/**/*.d.ts", "src/types/**/*.ts"],

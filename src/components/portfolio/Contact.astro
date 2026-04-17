@@ -1,5 +1,7 @@
 ---
-
+import { Icon } from "astro-icon/components";
+import { profileData } from "@cv";
+const profile = profileData;
 ---
 
 <section class="section" id="contacto">
@@ -10,62 +12,25 @@
       <div class="contact-text">
         <h2 class="section-title">¿Tienes un proyecto<br /><em>en mente?</em></h2>
         <p>
-          Estoy abierto a nuevas oportunidades, colaboraciones y proyectos freelance. Si tienes
-          datos que necesitan análisis o un dashboard que construir, escríbeme.
+          {profile.description}
         </p>
 
-        <a href="mailto:edgar@email.com" class="email-link">
-          edgar@email.com
-          <svg
-            width="16"
-            height="16"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.5"
-          >
-            <path d="M7 17L17 7M17 7H7M17 7v10"></path>
-          </svg>
+        <a href={`mailto:${profile.email}`} class="email-link">
+          {profile.email}
+          <Icon name="ph:arrow-up-right" />
         </a>
       </div>
 
       <div class="contact-links">
-        <a
-          href="https://github.com/edgar-ramxs"
-          target="_blank"
-          rel="noopener"
-          class="contact-social"
-        >
-          <span class="social-label">GitHub</span>
-          <svg
-            width="16"
-            height="16"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.5"
-          >
-            <path d="M7 17L17 7M17 7H7M17 7v10"></path>
-          </svg>
-        </a>
-        <a
-          href="https://linkedin.com/in/edgar-ramxs"
-          target="_blank"
-          rel="noopener"
-          class="contact-social"
-        >
-          <span class="social-label">LinkedIn</span>
-          <svg
-            width="16"
-            height="16"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.5"
-          >
-            <path d="M7 17L17 7M17 7H7M17 7v10"></path>
-          </svg>
-        </a>
+        {
+          profile.profiles.map((social) => (
+            <a href={social.url} target="_blank" rel="noopener" class="contact-social">
+              <Icon name={social.icon} class="social-icon" />
+              <span class="social-label">{social.network}</span>
+              <Icon name="ph:arrow-up-right" class="arrow-icon" />
+            </a>
+          ))
+        }
       </div>
     </div>
   </div>
@@ -105,6 +70,11 @@
     transition: gap 0.2s;
   }
 
+  .email-link svg {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+
   .email-link:hover {
     gap: 0.9rem;
   }
@@ -125,7 +95,7 @@
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--text-muted);
-    transition: color 0.2s;
+    transition: all 0.2s ease;
     padding: 0.6rem 1rem;
     border: 1px solid var(--border);
     border-radius: 2px;
@@ -135,6 +105,23 @@
   .contact-social:hover {
     color: var(--accent);
     border-color: var(--accent);
+    transform: translateX(-5px);
+  }
+
+  .social-icon {
+    width: 1.1rem;
+    height: 1.1rem;
+  }
+
+  .arrow-icon {
+    width: 0.9rem;
+    height: 0.9rem;
+    opacity: 0.5;
+    transition: opacity 0.2s;
+  }
+
+  .contact-social:hover .arrow-icon {
+    opacity: 1;
   }
 
   @media (max-width: 768px) {

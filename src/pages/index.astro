@@ -1,65 +1,19 @@
 ---
-import BaseLayout from "@layouts/BaseLayout.astro";
-import HubBackground from "@components/hub/HubBackground.astro";
-import HubHero from "@components/hub/HubHero.astro";
-import HubCard from "@components/hub/HubCard.astro";
-import HubFooter from "@components/hub/HubFooter.astro";
-import "../styles/hub.css";
+import Layout from "@layouts/PortfolioLayout.astro";
+
+import Hero from "@components/portfolio/Hero.astro";
+import About from "@components/portfolio/About.astro";
+import Experience from "@components/portfolio/Experience.astro";
+import Projects from "@components/portfolio/Projects.astro";
+import Skills from "@components/portfolio/Skills.astro";
+import Contact from "@components/portfolio/Contact.astro";
 ---
 
-<BaseLayout title="Portfolio Hub | Digital Gallery">
-  <main slot="container" class="hub-main">
-    <HubBackground />
-    <HubHero />
-    <div class="hub-grid">
-      <HubCard
-        category="CV & Identity"
-        categoryVariant="tertiary"
-        title="The Architect"
-        description="Bridging the gap between brutalist utility and elegant editorial design. Visual storytelling at its core."
-        imageUrl="https://lh3.googleusercontent.com/aida-public/AB6AXuBv02HJvO16JBQLlbkJd8k5NstGd9LYBQIrQ0hVndgC9tXaJlYt4_76TfQgKiNnfCEg20W-x4vBb4VOsrscvgiG913boEkeUGqMSaQJC1oHSbydJhDNbxeQoQ6a1tZinl0MmCtzbnt7ggxsfKVAY7i2ZQA2933UimAHcMjFRX8zzd6OYNUYQ2QZmy2BC2kkKoDSPRECNC39x5ZW8Uv8THBSH1saqN0EcTJg6UCn7razX4SJFg8yH6vkQj6ItkKuPyfbKuXn2udnPEuD"
-        imageAlt="Close-up professional portrait of a creative director in dark attire against a minimalist grey background with soft cinematic lighting"
-        cardType="image"
-      />
-      <HubCard
-        category="Blog & Thoughts"
-        categoryVariant="primary"
-        title="The Kinetic Journal"
-        description="Deep dives into the psychology of dark UI and the future of editorial minimalism in the age of AI."
-        imageUrl="https://lh3.googleusercontent.com/aida-public/AB6AXuBfRoqMAcJ3XDv2k4sB5RzHXHLjpAhEn32OG3VEGTk002hDkb4WVCc5o3O3_W2YQ4BXCmkZ3qfPtkP3q2MZ7BNa6ZALmXCY6vK69PgfPQNyckLL9IcrUl4rhyPrXnhlQv0Z3IoHnxFgmtM5PZDKqOQvISO4Xk0ixUcW09CEiNSd35sejYG9NHvkojjBH9BaUr5bNkEr8Sy5oBzKoh0I8PEivycux-WRb1ZTAKXN5_3J3dketV2tJsLS7GGIltrdtL_phnu38NzLywSO"
-        imageAlt="Overhead view of a minimalist workspace with a dark laptop, coffee cup, and open notebook under soft mood lighting"
-        cardType="image"
-      />
-      <HubCard
-        category="E-commerce"
-        categoryVariant="secondary"
-        title="Boutique Engine"
-        description="High-end retail experiences defined by speed, motion, and a unique editorial aesthetic."
-        cardType="grid"
-      />
-      <HubCard
-        category="Analytics"
-        categoryVariant="tertiary"
-        title="Velocity Dashboard"
-        description="Real-time telemetry visualized through glassmorphic layers and custom SVG kinetic charts."
-        cardType="stats"
-      />
-      <HubCard
-        category="Analytics"
-        categoryVariant="tertiary"
-        title="Velocity Dashboard"
-        description="Real-time telemetry visualized through glassmorphic layers and custom SVG kinetic charts."
-        cardType="stats"
-      />
-      <HubCard
-        category="Analytics"
-        categoryVariant="tertiary"
-        title="Velocity Dashboard"
-        description="Real-time telemetry visualized through glassmorphic layers and custom SVG kinetic charts."
-        cardType="stats"
-      />
-    </div>
-  </main>
-
-  <HubFooter slot="footer" />
-</BaseLayout>
+<Layout>
+  <Hero />
+  <About />
+  <Experience />
+  <Projects />
+  <Skills />
+  <Contact />
+</Layout>

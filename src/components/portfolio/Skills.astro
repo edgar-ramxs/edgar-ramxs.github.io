@@ -1,26 +1,27 @@
 ---
-import cv from "@cv";
-const { skills } = cv;
+import { skillsData } from "@cv";
+import { Icon } from "astro-icon/components";
+const skills = skillsData;
 
 // Agrupar habilidades técnicas por keywords para mantener la estructura de 4 columnas
 const technicalGroups = [
   {
     category: "Frontend / Web",
-    items: skills.Technicals.filter((s) => s.keywords.includes("Frontend")).map((s) => s.name),
+    items: skills.Technicals.filter((s) => s.keywords.includes("Frontend")),
   },
   {
     category: "Backend / Logic",
-    items: skills.Technicals.filter((s) => s.keywords.includes("Backend")).map((s) => s.name),
+    items: skills.Technicals.filter((s) => s.keywords.includes("Backend")),
   },
   {
     category: "Frameworks / Tools",
     items: skills.Technicals.filter(
       (s) => s.keywords.includes("CSS Framework") || s.keywords.includes("Static Generation")
-    ).map((s) => s.name),
+    ),
   },
   {
     category: "Soft Skills",
-    items: skills.Softs,
+    items: skills.Softs.map((s) => ({ name: s, icon: "ph:star-four-fill" })),
   },
 ];
 ---
@@ -38,8 +39,8 @@ const technicalGroups = [
             <ul class="skill-list">
               {group.items.map((item) => (
                 <li class="skill-item">
-                  <span class="skill-dot" />
-                  {item}
+                  <Icon name={item.icon} class="skill-icon" />
+                  {item.name}
                 </li>
               ))}
             </ul>
@@ -98,11 +99,10 @@ const technicalGroups = [
     color: var(--text);
   }
 
-  .skill-dot {
-    width: 4px;
-    height: 4px;
-    border-radius: 50%;
-    background: var(--accent);
+  .skill-icon {
+    width: 1.1rem;
+    height: 1.1rem;
+    color: var(--accent);
     flex-shrink: 0;
   }
 

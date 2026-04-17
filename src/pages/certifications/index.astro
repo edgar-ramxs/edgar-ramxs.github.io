@@ -1,0 +1,223 @@
+---
+import Layout from "@layouts/PortfolioLayout.astro";
+import { certificationsData, skillsData } from "@cv";
+import { Icon } from "astro-icon/components";
+const { certifications, skills } = { certifications: certificationsData, skills: skillsData };
+
+// Mapeo de iconos para skills
+const skillIcons = Object.fromEntries(skills.Technicals.map((s) => [s.name, s.icon]));
+---
+
+<Layout
+  title="Certificaciones"
+  description="Mis certificaciones y credenciales profesionales"
+  keywords={["certificaciones", "aws", "google cloud", "meta", "cursos"]}
+>
+  <section class="section fade-up">
+    <div class="container">
+      <p class="section-label">Logros</p>
+      <h2 class="section-title">Certificaciones Profesionales</h2>
+
+      <div class="certifications-grid">
+        {
+          certifications.map((cert) => (
+            <a href={`/certifications/${cert.id}`} class="cert-item group">
+              <div class="cert-header">
+                <div class="cert-icon-wrapper">
+                  <Icon name={cert.icon} class="cert-icon-img" />
+                </div>
+                <div class="cert-info">
+                  <h3 class="cert-name">{cert.name}</h3>
+                  <p class="cert-issuer">{cert.issuer}</p>
+                </div>
+              </div>
+
+              <div class="cert-body">
+                <div class="cert-meta">
+                  <span class="cert-date">
+                    📅{" "}
+                    {new Date(cert.date).toLocaleDateString("es-ES", {
+                      year: "numeric",
+                      month: "long",
+                    })}
+                  </span>
+                </div>
+                <div class="cert-tags">
+                  {cert.skills.slice(0, 4).map((skill) => (
+                    <span class="skill-tag">
+                      {skillIcons[skill] && <Icon name={skillIcons[skill]} class="tag-icon" />}
+                      {skill}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              <div class="cert-footer">
+                <span class="view-cert">Detalles del Certificado →</span>
+              </div>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .certifications-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 2.5rem;
+    padding-top: 1rem;
+  }
+
+  .cert-item {
+    display: flex;
+    flex-direction: column;
+    padding: 2.5rem;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background: var(--bg);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    text-decoration: none;
+    color: inherit;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cert-item::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 3px;
+    height: 100%;
+    background: var(--accent);
+    transform: scaleY(0);
+    transition: transform 0.3s ease;
+  }
+
+  .cert-item:hover {
+    background: var(--surface);
+    transform: translateY(-4px);
+    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.1);
+  }
+
+  .cert-item:hover::before {
+    transform: scaleY(1);
+  }
+
+  .cert-header {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .cert-icon-wrapper {
+    width: 3.5rem;
+    height: 3.5rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: all 0.3s ease;
+  }
+
+  .cert-item:hover .cert-icon-wrapper {
+    background: var(--bg);
+    border-color: var(--accent);
+    transform: rotate(-5deg) scale(1.1);
+  }
+
+  .cert-icon-img {
+    width: 2rem;
+    height: 2rem;
+    color: var(--text);
+    transition: color 0.3s ease;
+  }
+
+  .cert-item:hover .cert-icon-img {
+    color: var(--accent);
+  }
+
+  .cert-name {
+    font-family: var(--serif);
+    font-size: 1.5rem;
+    font-weight: 400;
+    line-height: 1.25;
+    margin-bottom: 0.5rem;
+    color: var(--text);
+  }
+
+  .cert-issuer {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    font-weight: 500;
+  }
+
+  .cert-body {
+    flex-grow: 1;
+    margin-bottom: 2rem;
+  }
+
+  .cert-meta {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    margin-bottom: 1.5rem;
+    display: block;
+  }
+
+  .cert-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .skill-tag {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    color: var(--text-muted);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 0.2rem 0.6rem;
+    border-radius: 2px;
+  }
+
+  .tag-icon {
+    width: 0.8rem;
+    height: 0.8rem;
+  }
+
+  .cert-footer {
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .view-cert {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    font-weight: 500;
+  }
+
+  @media (max-width: 768px) {
+    .cert-item {
+      padding: 1.75rem;
+    }
+    .certifications-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

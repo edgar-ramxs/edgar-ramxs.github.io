@@ -1,0 +1,565 @@
+{
+  "Softs": [
+    "Comunicación Efectiva",
+    "Trabajo en Equipo",
+    "Resolución de Problemas",
+    "Adaptabilidad",
+    "Liderazgo",
+    "Pensamiento Crítico",
+    "Gestión del Tiempo"
+  ],
+  "Technicals": [
+    {
+      "name": "HTML",
+      "level": "Advanced",
+      "icon": "simple-icons:html5",
+      "keywords": [
+        "Web Development",
+        "Frontend"
+      ]
+    },
+    {
+      "name": "CSS",
+      "level": "Advanced",
+      "icon": "ri:css3-fill",
+      "keywords": [
+        "Web Development",
+        "Frontend",
+        "Responsive Design"
+      ]
+    },
+    {
+      "name": "Tailwind",
+      "level": "Advanced",
+      "icon": "mdi:tailwind",
+      "keywords": [
+        "Web Development",
+        "Frontend",
+        "CSS Framework",
+        "Responsive Design"
+      ]
+    },
+    {
+      "name": "Bootstrap",
+      "level": "Intermediate",
+      "icon": "simple-icons:bootstrap",
+      "keywords": [
+        "Web Development",
+        "Frontend",
+        "CSS Framework",
+        "Responsive Design"
+      ]
+    },
+    {
+      "name": "JavaScript",
+      "level": "Advanced",
+      "icon": "simple-icons:javascript",
+      "keywords": [
+        "Web Development",
+        "Frontend",
+        "Backend",
+        "Fullstack"
+      ]
+    },
+    {
+      "name": "TypeScript",
+      "level": "Advanced",
+      "icon": "simple-icons:typescript",
+      "keywords": [
+        "Web Development",
+        "Frontend",
+        "Backend",
+        "JavaScript Superset"
+      ]
+    },
+    {
+      "name": "Next-Js",
+      "level": "Advanced",
+      "icon": "simple-icons:nextdotjs",
+      "keywords": [
+        "Web Development",
+        "Frontend",
+        "SSR",
+        "Static Generation"
+      ]
+    },
+    {
+      "name": "Astro",
+      "level": "Intermediate",
+      "icon": "simple-icons:astro",
+      "keywords": [
+        "Web Development",
+        "Frontend",
+        "SSR",
+        "Static Generation"
+      ]
+    },
+    {
+      "name": "React",
+      "level": "Advanced",
+      "icon": "simple-icons:react",
+      "keywords": [
+        "Web Development",
+        "Frontend",
+        "Static Generation"
+      ]
+    },
+    {
+      "name": "Go-lang",
+      "level": "Advanced",
+      "icon": "simple-icons:go",
+      "keywords": [
+        "Backend",
+        "Web Development",
+        "Performance"
+      ]
+    },
+    {
+      "name": "Gin",
+      "level": "Advanced",
+      "icon": "simple-icons:gin",
+      "keywords": [
+        "Web Development",
+        "Backend",
+        "API"
+      ]
+    },
+    {
+      "name": "GSAP",
+      "level": "Intermediate",
+      "icon": "simple-icons:greensock",
+      "keywords": [
+        "Animation",
+        "Frontend",
+        "JavaScript"
+      ]
+    },
+    {
+      "name": "Vue",
+      "level": "Intermediate",
+      "icon": "simple-icons:vuedotjs",
+      "keywords": [
+        "Frontend",
+        "JavaScript",
+        "Framework"
+      ]
+    },
+    {
+      "name": "CanvasAPI",
+      "level": "Intermediate",
+      "icon": "simple-icons:html5",
+      "keywords": [
+        "Graphics",
+        "Frontend",
+        "HTML5"
+      ]
+    },
+    {
+      "name": "Redux",
+      "level": "Intermediate",
+      "icon": "simple-icons:redux",
+      "keywords": [
+        "State Management",
+        "Frontend",
+        "JavaScript"
+      ]
+    },
+    {
+      "name": "Socket.io",
+      "level": "Intermediate",
+      "icon": "mdi:access-point-network",
+      "keywords": [
+        "Real-time",
+        "Backend",
+        "WebSocket"
+      ]
+    },
+    {
+      "name": "REST-API",
+      "level": "Intermediate",
+      "icon": "mdi:api",
+      "keywords": [
+        "API",
+        "Backend",
+        "HTTP"
+      ]
+    },
+    {
+      "name": "Hostinger",
+      "level": "Beginner",
+      "icon": "simple-icons:hostinger",
+      "keywords": [
+        "Hosting",
+        "Web",
+        "Deployment"
+      ]
+    },
+    {
+      "name": "Vite",
+      "level": "Intermediate",
+      "icon": "simple-icons:vite",
+      "keywords": [
+        "Build Tool",
+        "Frontend",
+        "Development"
+      ]
+    },
+    {
+      "name": "Node",
+      "level": "Intermediate",
+      "icon": "ri:nodejs-line",
+      "keywords": [
+        "Web Development",
+        "Backend",
+        "JavaScript",
+        "Server"
+      ]
+    },
+    {
+      "name": "PNPM",
+      "level": "Beginner",
+      "icon": "simple-icons:pnpm",
+      "keywords": [
+        "Package Manager",
+        "Web Development",
+        "Frontend",
+        "Backend"
+      ]
+    },
+    {
+      "name": "Java",
+      "level": "Intermediate",
+      "icon": "ri:java-line",
+      "keywords": [
+        "Web Development",
+        "Backend"
+      ]
+    },
+    {
+      "name": "MongoDB",
+      "level": "Beginner",
+      "icon": "simple-icons:mongodb",
+      "keywords": [
+        "Databases",
+        "File",
+        "Data Storage",
+        "Backend"
+      ]
+    },
+    {
+      "name": "PostgreSQL",
+      "level": "Intermediate",
+      "icon": "simple-icons:postgresql",
+      "keywords": [
+        "Backend",
+        "Databases",
+        "SQL",
+        "Relational Database"
+      ]
+    },
+    {
+      "name": "Git",
+      "level": "Advanced",
+      "icon": "mdi:git",
+      "keywords": [
+        "Version Control",
+        "Collaboration",
+        "Source Code"
+      ]
+    },
+    {
+      "name": "GitHub",
+      "level": "Advanced",
+      "icon": "mdi:github",
+      "keywords": [
+        "Version Control",
+        "Collaboration",
+        "Source Code",
+        "Git"
+      ]
+    },
+    {
+      "name": "AWS",
+      "level": "Beginner",
+      "icon": "simple-icons:amazonaws",
+      "keywords": [
+        "Cloud Computing",
+        "Backend",
+        "Infrastructure"
+      ]
+    },
+    {
+      "name": "Docker",
+      "level": "Intermediate",
+      "icon": "mdi:docker",
+      "keywords": [
+        "Virtual Environments",
+        "Backend"
+      ]
+    },
+    {
+      "name": "Shell",
+      "level": "Beginner",
+      "icon": "simple-icons:shell",
+      "keywords": [
+        "Scripting",
+        "Automation"
+      ]
+    },
+    {
+      "name": "Linux",
+      "level": "Intermediate",
+      "icon": "simple-icons:linux",
+      "keywords": [
+        "OS",
+        "Scripting",
+        "Automation"
+      ]
+    },
+    {
+      "name": "Swagger",
+      "level": "Beginner",
+      "icon": "simple-icons:swagger",
+      "keywords": [
+        "API",
+        "Documentation",
+        "Web Development",
+        "Backend"
+      ]
+    },
+    {
+      "name": "Postman",
+      "level": "Intermediate",
+      "icon": "simple-icons:postman",
+      "keywords": [
+        "API",
+        "Testing",
+        "Web Development",
+        "Backend"
+      ]
+    },
+    {
+      "name": "MUI",
+      "level": "Advanced",
+      "icon": "simple-icons:mui",
+      "keywords": [
+        "Frontend",
+        "UI Library"
+      ]
+    },
+    {
+      "name": "React Hook Form",
+      "level": "Advanced",
+      "icon": "simple-icons:reacthookform",
+      "keywords": [
+        "Frontend",
+        "Forms"
+      ]
+    },
+    {
+      "name": "React Query",
+      "level": "Advanced",
+      "icon": "simple-icons:reactquery",
+      "keywords": [
+        "Frontend",
+        "Data Fetching"
+      ]
+    },
+    {
+      "name": "Zod",
+      "level": "Advanced",
+      "icon": "simple-icons:zod",
+      "keywords": [
+        "Validation"
+      ]
+    },
+    {
+      "name": "Bruno",
+      "level": "Intermediate",
+      "icon": "simple-icons:bruno",
+      "keywords": [
+        "API Client"
+      ]
+    },
+    {
+      "name": "Cloud Architecture",
+      "level": "Intermediate",
+      "icon": "simple-icons:awslambda",
+      "keywords": [
+        "AWS",
+        "Cloud",
+        "Architecture"
+      ]
+    },
+    {
+      "name": "Security",
+      "level": "Intermediate",
+      "icon": "mdi:shield-lock",
+      "keywords": [
+        "AWS",
+        "Security",
+        "Cloud"
+      ]
+    },
+    {
+      "name": "High Availability",
+      "level": "Intermediate",
+      "icon": "mdi:server-network",
+      "keywords": [
+        "AWS",
+        "Infrastructure",
+        "Cloud"
+      ]
+    },
+    {
+      "name": "Version Control",
+      "level": "Advanced",
+      "icon": "mdi:git",
+      "keywords": [
+        "Git",
+        "Development",
+        "Collaboration"
+      ]
+    },
+    {
+      "name": "Google Cloud",
+      "level": "Intermediate",
+      "icon": "simple-icons:googlecloud",
+      "keywords": [
+        "Cloud",
+        "Google",
+        "Cloud Computing"
+      ]
+    },
+    {
+      "name": "Digital Transformation",
+      "level": "Beginner",
+      "icon": "mdi:transit-connection-variant",
+      "keywords": [
+        "Cloud",
+        "Business",
+        "Technology"
+      ]
+    },
+    {
+      "name": "Cloud Computing",
+      "level": "Intermediate",
+      "icon": "mdi:cloud",
+      "keywords": [
+        "Cloud",
+        "Computing",
+        "Infrastructure"
+      ]
+    },
+    {
+      "name": "Google Analytics",
+      "level": "Intermediate",
+      "icon": "simple-icons:google",
+      "keywords": [
+        "Analytics",
+        "Web",
+        "Metrics"
+      ]
+    },
+    {
+      "name": "Data Analysis",
+      "level": "Intermediate",
+      "icon": "mdi:chart-box",
+      "keywords": [
+        "Data",
+        "Analytics",
+        "Business Intelligence"
+      ]
+    },
+    {
+      "name": "Digital Marketing",
+      "level": "Beginner",
+      "icon": "mdi:bullhorn",
+      "keywords": [
+        "Marketing",
+        "Digital",
+        "Business"
+      ]
+    },
+    {
+      "name": "Web Analytics",
+      "level": "Intermediate",
+      "icon": "mdi:web",
+      "keywords": [
+        "Web",
+        "Analytics",
+        "Metrics"
+      ]
+    },
+    {
+      "name": "Python",
+      "level": "Intermediate",
+      "icon": "simple-icons:python",
+      "keywords": [
+        "Programming",
+        "Backend",
+        "Data Science"
+      ]
+    },
+    {
+      "name": "Data Science",
+      "level": "Intermediate",
+      "icon": "mdi:brain",
+      "keywords": [
+        "Data",
+        "Science",
+        "Machine Learning"
+      ]
+    },
+    {
+      "name": "Machine Learning",
+      "level": "Intermediate",
+      "icon": "mdi:robot",
+      "keywords": [
+        "AI",
+        "Data Science",
+        "ML"
+      ]
+    },
+    {
+      "name": "Network Security",
+      "level": "Intermediate",
+      "icon": "mdi:firewall",
+      "keywords": [
+        "Security",
+        "Network",
+        "Cybersecurity"
+      ]
+    },
+    {
+      "name": "Cybersecurity",
+      "level": "Intermediate",
+      "icon": "mdi:shield-lock",
+      "keywords": [
+        "Security",
+        "Network",
+        "Protection"
+      ]
+    },
+    {
+      "name": "Defensive Security",
+      "level": "Intermediate",
+      "icon": "mdi:shield-check",
+      "keywords": [
+        "Security",
+        "Defense",
+        "Protection"
+      ]
+    },
+    {
+      "name": "Threat Prevention",
+      "level": "Intermediate",
+      "icon": "mdi:alert-circle",
+      "keywords": [
+        "Security",
+        "Threats",
+        "Prevention"
+      ]
+    }
+  ]
+}

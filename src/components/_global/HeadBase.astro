@@ -188,6 +188,7 @@ import Snapchat from "@components/_measurement/Snapchat.astro";
 import UmamiAnalytics from "@components/_measurement/UmamiAnalytics.astro";
 
 import SiteVerification from "@components/_global/SiteVerification.astro";
+import { ClientRouter } from "astro:transitions";
 ---
 
 <!-- CHARSET & VIEWPORT -->
@@ -270,9 +271,9 @@ import SiteVerification from "@components/_global/SiteVerification.astro";
 {siteName && <meta name="apple-mobile-web-app-title" content={siteName} />}
 
 <!-- Favicons -->
-<link rel="icon" href="/favicon.ico" sizes="any" />
-<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+<link rel="icon" href="/assets/favicon/favicon.ico" sizes="any" />
+<link rel="icon" href="/assets/favicon/favicon.svg" type="image/svg+xml" />
+<link rel="apple-touch-icon" href="/assets/favicon/apple-touch-icon.png" />
 
 <!-- VERIFICACIONES WEBMASTER -->
 <SiteVerification name="google-site-verification" content={googleVerification} />
@@ -303,3 +304,6 @@ import SiteVerification from "@components/_global/SiteVerification.astro";
 {intercomAppId && <IntercomWidget idIntercomApp={intercomAppId} />}
 {plausibleDomain && <PlausibleAnalytics plausibleDomain={plausibleDomain} />}
 {umamiWebsiteId && <UmamiAnalytics umamiWebsiteId={umamiWebsiteId} umamiSrc={umamiSrc} />}
+
+<!-- VIEW TRANSITIONS -->
+<ClientRouter />

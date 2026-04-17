@@ -1,0 +1,169 @@
+---
+import Layout from "@layouts/PortfolioLayout.astro";
+import { projectsData, skillsData } from "@cv";
+import { Icon } from "astro-icon/components";
+const { projects, skills } = { projects: projectsData, skills: skillsData };
+
+// Mapeo de iconos para el stack
+const skillIcons = Object.fromEntries(skills.Technicals.map((s) => [s.name, s.icon]));
+---
+
+<Layout
+  title="Proyectos"
+  description="Mis proyectos y trabajos realizados"
+  keywords={["proyectos", "desarrollo", "web", "javascript", "react"]}
+>
+  <section class="section fade-up">
+    <div class="container">
+      <p class="section-label">Trabajos</p>
+      <h2 class="section-title">Todos los Proyectos</h2>
+
+      <div class="projects-grid">
+        {
+          projects.map((project, i) => (
+            <a href={`/projects/${project.id}`} class="project-item group">
+              <div class="project-header">
+                <span class="project-num">{(i + 1).toString().padStart(2, "0")}</span>
+                <h3 class="project-name">{project.name}</h3>
+                <span class="project-status">{project.isActive ? "Activo" : "Completado"}</span>
+              </div>
+              <p class="project-summary">{project.description}</p>
+              <div class="project-footer">
+                <div class="project-tech">
+                  {project.stack.slice(0, 3).map((tech) => (
+                    <span class="tech-tag">
+                      {skillIcons[tech] && <Icon name={skillIcons[tech]} class="tag-icon" />}
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+                <span class="view-more">Ver detalles →</span>
+              </div>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .projects-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+    border-top: 1px solid var(--border);
+  }
+
+  .project-item {
+    display: block;
+    padding: 2.5rem 0;
+    border-bottom: 1px solid var(--border);
+    transition: all 0.3s ease;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .project-item:hover {
+    padding-left: 1.5rem;
+    background: var(--surface);
+  }
+
+  .project-header {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .project-num {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--text-muted);
+  }
+
+  .project-name {
+    font-family: var(--serif);
+    font-size: 1.75rem;
+    font-weight: 400;
+    margin: 0;
+    flex-grow: 1;
+  }
+
+  .project-item:hover .project-name {
+    color: var(--accent);
+  }
+
+  .project-status {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+    padding: 0.2rem 0.6rem;
+    border-radius: 2px;
+  }
+
+  .project-summary {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    max-width: 700px;
+  }
+
+  .project-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .project-tech {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .tech-tag {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    color: var(--accent);
+    background: var(--accent-soft);
+    padding: 0.2rem 0.6rem;
+    border-radius: 2px;
+  }
+
+  .tag-icon {
+    width: 0.8rem;
+    height: 0.8rem;
+  }
+
+  .view-more {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .project-item:hover .view-more {
+    opacity: 1;
+  }
+
+  @media (max-width: 768px) {
+    .project-header {
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .project-name {
+      font-size: 1.5rem;
+      width: 100%;
+      order: 3;
+    }
+  }
+</style>

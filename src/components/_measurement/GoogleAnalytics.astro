@@ -8,8 +8,8 @@ const { idAnalytics, domain = "https://www.googletagmanager.com" } = Astro.props
 ---
 
 <!-- Google Analytics -->
-<script type="text/partytown" async src={`${domain}/gtag/js?id=${idAnalytics}`}></script>
-<script type="text/partytown" define:vars={{ idAnalytics }}>
+<script async src={`${domain}/gtag/js?id=${idAnalytics}`}></script>
+<script define:vars={{ idAnalytics }}>
   window.dataLayer = window.dataLayer || [];
   function gtag() {
     dataLayer.push(arguments);
