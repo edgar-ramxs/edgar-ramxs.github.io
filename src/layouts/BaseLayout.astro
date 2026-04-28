@@ -81,12 +81,42 @@ const googleVerification = "PUBLIC_GOOGLE_VERIFICATION";
     <slot name="navbar" />
 
     <!-- MAIN - CONTAINER -->
-    <slot name="container"/>
+    <slot name="container" />
 
     <!-- FOOTER -->
-    <slot name="footer"/>
+    <slot name="footer" />
 
     <!-- SCRIPTS -->
     <slot name="scripts" />
+
+    <!-- DataLayer Page Info -->
+    <script is:inline define:vars={{ pathname: Astro.url.pathname }}>
+      (function () {
+        function pushPageView(path) {
+          var pathSegments = path.split("/").filter(Boolean);
+          var moduleName = pathSegments[0] || "home";
+          var subModuleName = pathSegments[1] || null;
+
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({
+            event: "page_view",
+            page: {
+              path: path,
+              module: moduleName,
+              submodule: subModuleName,
+            },
+          });
+        }
+
+        // Initial page view
+        pushPageView(pathname);
+
+        // Listen for Astro view transitions
+        document.addEventListener("astro:page-load", function (e) {
+          var newPath = window.location.pathname;
+          pushPageView(newPath);
+        });
+      })();
+    </script>
   </body>
 </html>

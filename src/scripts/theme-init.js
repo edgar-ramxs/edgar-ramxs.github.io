@@ -1,24 +1,24 @@
 // Theme initialization - runs immediately to prevent flash
 const theme = (() => {
-    if (typeof localStorage !== "undefined" && localStorage.getItem("theme")) {
-        return localStorage.getItem("theme");
-    }
-    if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-        return "dark";
-    }
-    return "light";
+  if (typeof localStorage !== "undefined" && localStorage.getItem("theme")) {
+    return localStorage.getItem("theme");
+  }
+  if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+    return "dark";
+  }
+  return "light";
 })();
 
 if (theme === "light") {
-    document.documentElement.classList.remove("dark");
+  document.documentElement.classList.remove("dark");
 } else {
-    document.documentElement.classList.add("dark");
+  document.documentElement.classList.add("dark");
 }
 
 const dataTheme = (() => {
-    if (typeof localStorage !== "undefined" && localStorage.getItem("data-theme")) {
-        return localStorage.getItem("data-theme");
-    }
-    return "red";
+  if (typeof localStorage !== "undefined" && localStorage.getItem("data-theme")) {
+    return localStorage.getItem("data-theme");
+  }
+  return "red";
 })();
 document.documentElement.setAttribute("data-theme", dataTheme);
