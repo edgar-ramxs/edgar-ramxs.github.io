@@ -1,0 +1,98 @@
+---
+import { getProjectsData, getSkillIcon } from "@cv";
+import ProjectCard from "@components/composite/ProjectCard.astro";
+
+const projectsData = await getProjectsData();
+
+interface Props {
+  id?: string;
+  title?: string;
+  label?: string;
+  showTitle?: boolean;
+  maxItems?: number;
+  showFeatured?: boolean;
+  noteText?: string;
+  noteLink?: string;
+  noteUrl?: string;
+}
+
+const {
+  id = "proyectos",
+  title = "Proyectos",
+  label = "Trabajo selecto",
+  showTitle = true,
+  maxItems,
+  showFeatured = false,
+  noteText,
+  noteLink,
+  noteUrl,
+} = Astro.props;
+
+let projects = maxItems ? projectsData.slice(0, maxItems) : projectsData;
+
+if (!showFeatured) {
+  projects = projects.filter((p) => p.isActive);
+}
+---
+
+<section class="section" id={id}>
+  <div class="container">
+    <p class="section-label">{label}</p>
+    {showTitle && <h2 class="section-title">{title}</h2>}
+
+    <div class="projects-list">
+      {
+        projects.map((project, i) => (
+          <ProjectCard
+            number={(i + 1).toString().padStart(2, "0")}
+            title={project.name}
+            description={project.description}
+            stack={project.stack}
+            stackIcons={Object.fromEntries(project.stack.map((s) => [s, getSkillIcon(s) || ""]))}
+            url={project.url}
+            github={project.github}
+            isActive={project.isActive}
+          />
+        ))
+      }
+    </div>
+
+    {
+      (noteText || noteLink) && (
+        <p class="projects-note">
+          {noteText}
+          {noteLink && noteUrl && (
+            <a href={noteUrl} target="_blank" rel="noopener">
+              {noteLink} →
+            </a>
+          )}
+        </p>
+      )
+    }
+  </div>
+</section>
+
+<style>
+  .projects-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    border-top: 1px solid var(--border);
+  }
+
+  .projects-note {
+    margin-top: 2.5rem;
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    text-align: center;
+  }
+
+  .projects-note a {
+    color: var(--accent);
+  }
+
+  .projects-note a:hover {
+    text-decoration: underline;
+  }
+</style>

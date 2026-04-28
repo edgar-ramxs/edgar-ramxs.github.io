@@ -1,0 +1,84 @@
+---
+import { Icon } from "astro-icon/components";
+
+interface Props {
+  title: string;
+  items: Array<{ name: string; icon?: string }>;
+  columns?: 1 | 2 | 3 | 4;
+}
+
+const { title, items, columns = 4 } = Astro.props;
+---
+
+<div class="skill-group">
+  <h3 class="skill-category">{title}</h3>
+  <ul class="skill-list" style={`--columns: ${columns}`}>
+    {
+      items.map((item) => (
+        <li class="skill-item">
+          {item.icon && <Icon name={item.icon} class="skill-icon" />}
+          {item.name}
+        </li>
+      ))
+    }
+  </ul>
+</div>
+
+<style>
+  .skill-group {
+    padding: 2.5rem 2rem;
+    border-right: 1px solid var(--border);
+    transition: background 0.2s;
+  }
+
+  .skill-group:last-child {
+    border-right: none;
+  }
+
+  .skill-group:hover {
+    background: var(--surface);
+  }
+
+  .skill-category {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+  }
+
+  .skill-list {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(var(--columns), 1fr);
+    gap: 0.75rem;
+  }
+
+  .skill-item {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.92rem;
+    color: var(--text);
+  }
+
+  .skill-icon {
+    width: 1.1rem;
+    height: 1.1rem;
+    color: var(--accent);
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 900px) {
+    .skill-list {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 500px) {
+    .skill-list {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

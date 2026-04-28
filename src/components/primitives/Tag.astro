@@ -1,0 +1,82 @@
+---
+import { Icon } from "astro-icon/components";
+import { getSkillIcon, getSkillById } from "@cv";
+
+interface Props {
+  name: string;
+  icon?: string;
+  size?: "sm" | "md";
+  showIcon?: boolean;
+  variant?: "default" | "accent" | "soft";
+  class?: string;
+}
+
+const {
+  name,
+  icon,
+  size = "md",
+  showIcon = true,
+  variant = "default",
+  class: className = "",
+} = Astro.props;
+
+const skillIcon = icon || getSkillIcon(name);
+---
+
+<span class:list={["tag", `tag-${variant}`, `tag-${size}`, className]}>
+  {showIcon && skillIcon && <Icon name={skillIcon} class="tag-icon" />}
+  {name}
+</span>
+
+<style>
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.08em;
+    text-transform: none;
+    padding: 0.2rem 0.6rem;
+    border-radius: 2px;
+    transition: all 0.2s;
+  }
+
+  .tag-sm {
+    font-size: 0.58rem;
+    padding: 0.15rem 0.5rem;
+  }
+
+  .tag-sm .tag-icon {
+    width: 0.7rem;
+    height: 0.7rem;
+  }
+
+  .tag-md .tag-icon,
+  .tag .tag-icon {
+    width: 0.8rem;
+    height: 0.8rem;
+  }
+
+  .tag-default {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+  }
+
+  .tag-accent {
+    background: var(--accent-soft);
+    color: var(--accent);
+    border: 1px solid transparent;
+  }
+
+  .tag-soft {
+    background: var(--accent-soft);
+    color: var(--accent);
+    border: 1px solid transparent;
+  }
+
+  .tag-icon {
+    flex-shrink: 0;
+  }
+</style>

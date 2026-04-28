@@ -1,0 +1,87 @@
+---
+import { profileData, skillsData, worksData, technicalSkills } from "@cv";
+
+const name = profileData.name;
+const role = profileData.occupation;
+const company = profileData.company;
+const degree = "Ingeniería Civil Informática";
+
+const techSkills = technicalSkills().slice(0, 6);
+const mainSkills = techSkills.map((s) => s.name);
+
+const latestJob = worksData[0];
+const experienceYears = latestJob
+  ? `+${Math.floor((Date.now() - new Date(latestJob.startDate).getTime()) / (1000 * 60 * 60 * 24 * 365))} year(s) turning data into decisions`
+  : "0 years experience";
+---
+
+<div class="code-snippet">
+  <span class="cs-kw">class</span>
+  <span class="cs-fn">ComputerScientist</span>:<br />
+  &nbsp;&nbsp;<span class="cs-kw">def</span>
+  <span class="cs-fn">__init__</span>(<span class="cs-kw">self</span>):<br />
+  &nbsp;&nbsp;&nbsp;&nbsp;<span class="cs-kw">self</span>.degree = <span class="cs-str"
+    >"{degree}"</span
+  ><br />
+  &nbsp;&nbsp;&nbsp;&nbsp;<span class="cs-kw">self</span>.langs &nbsp;= [<span class="cs-str"
+    >"Python"</span
+  >, <span class="cs-str">"C"</span>, <span class="cs-str">"Java"</span>, <span class="cs-str"
+    >"Bash"</span
+  >]<br />
+  <br />
+  &nbsp;&nbsp;<span class="cs-kw">def</span>
+  <span class="cs-fn">debug</span>(<span class="cs-kw">self</span>, error):<br />
+  &nbsp;&nbsp;&nbsp;&nbsp;<span class="cs-kw">return</span>
+  <span class="cs-str">"Root cause found"</span><br />
+  <br />
+  <span class="cs-kw">class</span>
+  <span class="cs-fn">DataAnalyst</span>(<span class="cs-fn">ComputerScientist</span>):<br />
+  &nbsp;&nbsp;<span class="cs-kw">def</span>
+  <span class="cs-fn">__init__</span>(<span class="cs-kw">self</span>):<br />
+  &nbsp;&nbsp;&nbsp;&nbsp;<span class="cs-fn">super</span>().<span class="cs-fn">__init__</span
+  >()<br />
+  &nbsp;&nbsp;&nbsp;&nbsp;<span class="cs-kw">self</span>.name &nbsp;=
+  <span class="cs-str">"{name}"</span><br />
+  &nbsp;&nbsp;&nbsp;&nbsp;<span class="cs-kw">self</span>.role &nbsp;=
+  <span class="cs-str">"{role}"</span><br />
+  &nbsp;&nbsp;&nbsp;&nbsp;<span class="cs-kw">self</span>.company =
+  <span class="cs-str">"{company}"</span><br />
+  &nbsp;&nbsp;&nbsp;&nbsp;<span class="cs-kw">self</span>.stack =
+  {JSON.stringify(mainSkills)}<br />
+  <br />
+  &nbsp;&nbsp;<span class="cs-kw">@property</span><br />
+  &nbsp;&nbsp;<span class="cs-kw">def</span>
+  <span class="cs-fn">experience</span>(<span class="cs-kw">self</span>):<br />
+  &nbsp;&nbsp;&nbsp;&nbsp;<span class="cs-kw">return</span>
+  <span class="cs-str">"{experienceYears}"</span><br />
+  <br />
+  &nbsp;&nbsp;<span class="cs-kw">def</span>
+  <span class="cs-fn">analyze</span>(<span class="cs-kw">self</span>, data):<br />
+  &nbsp;&nbsp;&nbsp;&nbsp;<span class="cs-kw">return</span> data.<span class="cs-fn"
+    >transform_to_value</span
+  >()<br />
+  <br />
+  edgar = <span class="cs-fn">DataAnalyst</span>()<br />
+</div>
+
+<style>
+  .code-snippet {
+    font-family: var(--mono);
+    font-size: 0.82rem;
+    line-height: 2;
+    margin-top: 1rem;
+  }
+
+  .cs-comment {
+    color: var(--text-muted);
+  }
+  .cs-kw {
+    color: var(--accent);
+  }
+  .cs-fn {
+    color: #2563eb;
+  }
+  .cs-str {
+    color: #16a34a;
+  }
+</style>

@@ -1,0 +1,83 @@
+---
+import { skillsData } from "@cv";
+import SkillCategory from "@components/composite/SkillCategory.astro";
+
+interface Props {
+  id?: string;
+  title?: string;
+  label?: string;
+  showTitle?: boolean;
+  columns?: 1 | 2 | 3 | 4;
+}
+
+const {
+  id = "skills",
+  title = "Stack técnico",
+  label = "Capacidades",
+  showTitle = true,
+  columns = 4,
+} = Astro.props;
+
+const technicalSkillsList = skillsData.filter((s) => s.type === "technical");
+const softSkillsList = skillsData.filter((s) => s.type === "soft");
+
+const skillGroups = [
+  {
+    category: "Technical Skills",
+    items: technicalSkillsList.map((s) => ({ name: s.name, icon: s.icon })),
+  },
+  {
+    category: "Soft Skills",
+    items: softSkillsList.map((s) => ({ name: s.name, icon: s.icon })),
+  },
+];
+---
+
+<section class="section" id={id}>
+  <div class="container">
+    <p class="section-label">{label}</p>
+    {showTitle && <h2 class="section-title">{title}</h2>}
+
+    <div class="skills-grid">
+      {
+        skillGroups.map((group) => (
+          <SkillCategory title={group.category} items={group.items} columns={1} />
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .skills-grid > :global(*) {
+    border-right: 1px solid var(--border);
+  }
+
+  .skills-grid > :global(*:last-child) {
+    border-right: none;
+  }
+
+  @media (max-width: 900px) {
+    .skills-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .skills-grid > :global(*) {
+      border-right: none;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .skills-grid > :global(*:last-child) {
+      border-bottom: none;
+    }
+  }
+</style>

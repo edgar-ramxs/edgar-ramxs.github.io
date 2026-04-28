@@ -1,0 +1,210 @@
+---
+import { Icon } from "astro-icon/components";
+import { getSkillIcon, getSkillById } from "@cv";
+
+interface Props {
+  number: string;
+  title: string;
+  description: string;
+  stack: string[];
+  url?: string;
+  github?: string;
+  isActive?: boolean;
+  href?: string;
+}
+
+const { number, title, description, stack, url, github, isActive = false, href } = Astro.props;
+
+const projectUrl =
+  href || (url ? `/projects/${title.toLowerCase().replace(/\s+/g, "-")}` : undefined);
+---
+
+<article class:list={["project-card", { featured: isActive }]}>
+  <div class="project-number">{number}</div>
+
+  <div class="project-content">
+    <h3 class="project-title">
+      {
+        projectUrl ? (
+          <a href={projectUrl} class="hover:underline">
+            {title}
+          </a>
+        ) : (
+          title
+        )
+      }
+    </h3>
+    <p class="project-desc">{description}</p>
+    <div class="project-tags">
+      {
+        stack.map((skillId) => {
+          const icon = getSkillIcon(skillId);
+          const skill = getSkillById(skillId);
+          return (
+            <span class="tag">
+              {icon && <Icon name={icon} class="tag-icon" />}
+              {skill?.name || skillId}
+            </span>
+          );
+        })
+      }
+    </div>
+  </div>
+
+  <div class="project-links">
+    {
+      github && (
+        <a href={github} target="_blank" rel="noopener" class="project-link">
+          <Icon name="mdi:github" width="15" height="15" />
+          GitHub
+        </a>
+      )
+    }
+    {
+      url && (
+        <a
+          href={url}
+          target="_blank"
+          rel="noopener"
+          class="project-arrow"
+          aria-label="Abrir proyecto"
+        >
+          <Icon name="ph:arrow-up-right" width="18" height="18" />
+        </a>
+      )
+    }
+  </div>
+</article>
+
+<style>
+  .project-card {
+    display: grid;
+    grid-template-columns: 60px 1fr auto;
+    gap: 2rem;
+    align-items: start;
+    padding: 2.5rem 0;
+    border-bottom: 1px solid var(--border);
+    transition: background 0.2s;
+    position: relative;
+  }
+
+  .project-card:hover {
+    background: var(--surface);
+    margin: 0 -2rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
+  .project-number {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    padding-top: 0.3rem;
+    letter-spacing: 0.1em;
+  }
+
+  .project-title {
+    font-family: var(--serif);
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: var(--text);
+    margin-bottom: 0.6rem;
+    transition: color 0.2s;
+  }
+
+  .project-card:hover .project-title {
+    color: var(--accent);
+  }
+
+  .project-desc {
+    font-size: 0.92rem;
+    color: var(--text-muted);
+    line-height: 1.8;
+    margin-bottom: 1rem;
+    max-width: 580px;
+  }
+
+  .project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .tag {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background: var(--accent-soft);
+    color: var(--accent);
+    padding: 0.2rem 0.6rem;
+    border-radius: 2px;
+    border: 1px solid transparent;
+  }
+
+  .tag-icon {
+    width: 0.8rem;
+    height: 0.8rem;
+  }
+
+  .project-links {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 1rem;
+    padding-top: 0.2rem;
+  }
+
+  .project-link {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    transition: color 0.2s;
+    white-space: nowrap;
+  }
+
+  .project-link:hover {
+    color: var(--accent);
+  }
+
+  .project-arrow {
+    color: var(--text-muted);
+    transition: all 0.2s;
+  }
+
+  .project-arrow:hover {
+    color: var(--accent);
+    transform: translate(2px, -2px);
+  }
+
+  @media (max-width: 768px) {
+    .project-card {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+    .project-card:hover {
+      margin: 0;
+      padding-left: 0;
+      padding-right: 0;
+      padding: 2rem 0;
+      background: transparent;
+    }
+
+    .project-number {
+      display: none;
+    }
+
+    .project-links {
+      flex-direction: row;
+      align-items: center;
+    }
+  }
+</style>

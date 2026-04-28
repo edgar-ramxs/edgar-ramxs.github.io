@@ -1,0 +1,63 @@
+---
+import { Icon } from "astro-icon/components";
+
+interface Props {
+  number: string;
+  label: string;
+  icon?: string;
+  variant?: "default" | "accent";
+  class?: string;
+}
+
+const { number, label, icon, variant = "default", class: className = "" } = Astro.props;
+---
+
+<div class:list={["stat-card", `stat-${variant}`, className]}>
+  {icon && <Icon name={icon} class="stat-icon" />}
+  <span class="stat-number">{number}</span>
+  <span class="stat-label">{label}</span>
+</div>
+
+<style>
+  .stat-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1.5rem 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .stat-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    color: var(--accent);
+  }
+
+  .stat-accent {
+    background: var(--accent);
+    border-color: var(--accent);
+  }
+
+  .stat-accent .stat-icon,
+  .stat-accent .stat-number,
+  .stat-accent .stat-label {
+    color: white;
+  }
+
+  .stat-number {
+    font-family: var(--serif);
+    font-size: 1.8rem;
+    color: var(--text);
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+</style>

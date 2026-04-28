@@ -1,0 +1,69 @@
+---
+import { certificationsData, getSkillIcon } from "@cv";
+import CertificationCard from "@components/composite/CertificationCard.astro";
+
+interface Props {
+  id?: string;
+  title?: string;
+  label?: string;
+  showTitle?: boolean;
+  maxItems?: number;
+  columns?: 2 | 3 | 4;
+}
+
+const {
+  id = "certificaciones",
+  title = "Certificaciones Profesionales",
+  label = "Logros",
+  showTitle = true,
+  maxItems,
+  columns = 3,
+} = Astro.props;
+
+const certifications = maxItems ? certificationsData.slice(0, maxItems) : certificationsData;
+---
+
+<section class="section" id={id}>
+  <div class="container">
+    <p class="section-label">{label}</p>
+    {showTitle && <h2 class="section-title">{title}</h2>}
+
+    <div class="certifications-grid" style={`--columns: ${columns}`}>
+      {
+        certifications.map((cert) => (
+          <CertificationCard
+            name={cert.name}
+            issuer={cert.issuer}
+            icon={cert.icon}
+            date={cert.date}
+            description={cert.description}
+            skills={cert.skills}
+            skillIcons={Object.fromEntries(cert.skills.map((s) => [s, getSkillIcon(s) || ""]))}
+            href={`/certifications/${cert.id}`}
+          />
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .certifications-grid {
+    display: grid;
+    grid-template-columns: repeat(var(--columns, 3), 1fr);
+    gap: 2.5rem;
+    padding-top: 1rem;
+  }
+
+  @media (max-width: 1024px) {
+    .certifications-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .certifications-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

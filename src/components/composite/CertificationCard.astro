@@ -1,0 +1,225 @@
+---
+import { Icon } from "astro-icon/components";
+import { getSkillById } from "@cv";
+
+interface Props {
+  name: string;
+  issuer: string;
+  icon?: string;
+  skills?: string[];
+  url?: string;
+  href?: string;
+}
+
+const { name, issuer, icon, skills = [], url, href } = Astro.props;
+
+const linkUrl = href || url;
+const CardTag = linkUrl ? "a" : "div";
+const cardProps = linkUrl ? { href: linkUrl } : {};
+---
+
+<CardTag {...cardProps} class="cert-item group">
+  <div class="cert-header">
+    <div class="cert-icon-wrapper">
+      {
+        icon ? (
+          <Icon name={icon} class="cert-icon-img" />
+        ) : (
+          <Icon name="ph:certificate" class="cert-icon-img" />
+        )
+      }
+    </div>
+    <div class="cert-info">
+      <h3 class="cert-name">{name}</h3>
+      <p class="cert-issuer">{issuer}</p>
+    </div>
+  </div>
+
+  <div class="cert-body">
+    {
+      skills.length > 0 && (
+        <div class="cert-tags">
+          {skills.map((skillId) => {
+            const skill = getSkillById(skillId);
+            return (
+              <span class="tag tag-default">
+                {skill?.icon && <Icon name={skill.icon} class="tag-icon" />}
+                {skill?.name || skillId}
+              </span>
+            );
+          })}
+        </div>
+      )
+    }
+  </div>
+
+  {
+    linkUrl && (
+      <div class="cert-footer">
+        <span class="view-cert">Detalles del Certificado →</span>
+      </div>
+    )
+  }
+
+  <style>
+    .cert-item {
+      display: flex;
+      flex-direction: column;
+      min-height: 280px;
+      padding: 2rem;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      background: var(--bg);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      color: inherit;
+      position: relative;
+      overflow: hidden;
+      text-decoration: none;
+    }
+
+    a.cert-item {
+      cursor: pointer;
+    }
+
+    .cert-item::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 3px;
+      height: 100%;
+      background: var(--accent);
+      transform: scaleY(0);
+      transition: transform 0.3s ease;
+    }
+
+    .cert-item:hover {
+      background: var(--surface);
+      transform: translateY(-4px);
+      box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.1);
+    }
+
+    .cert-item:hover::before {
+      transform: scaleY(1);
+    }
+
+    .cert-header {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .cert-icon-wrapper {
+      width: 3.5rem;
+      height: 3.5rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: all 0.3s ease;
+    }
+
+    .cert-item:hover .cert-icon-wrapper {
+      background: var(--bg);
+      border-color: var(--accent);
+      transform: rotate(-5deg) scale(1.1);
+    }
+
+    .cert-icon-img {
+      width: 2rem;
+      height: 2rem;
+      color: var(--text);
+      transition: color 0.3s ease;
+    }
+
+    .cert-item:hover .cert-icon-img {
+      color: var(--accent);
+    }
+
+    .cert-info {
+      flex: 1;
+    }
+
+    .cert-name {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      font-weight: 400;
+      line-height: 1.3;
+      margin-bottom: 0.25rem;
+      color: var(--text);
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .cert-issuer {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    .cert-body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      padding-bottom: 1rem;
+    }
+
+    .cert-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-family: var(--mono);
+      font-size: 0.55rem;
+      color: var(--text-muted);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 0.2rem 0.5rem;
+      border-radius: 2px;
+      text-transform: none;
+      white-space: nowrap;
+    }
+
+    .tag-icon {
+      width: 0.7rem;
+      height: 0.7rem;
+      flex-shrink: 0;
+    }
+
+    .cert-footer {
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      margin-top: auto;
+    }
+
+    .view-cert {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    @media (max-width: 768px) {
+      .cert-item {
+        padding: 1.5rem;
+        min-height: 250px;
+      }
+    }
+  </style>
+</CardTag>

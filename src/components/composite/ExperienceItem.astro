@@ -1,0 +1,227 @@
+---
+import { Icon } from "astro-icon/components";
+import { getSkillById } from "@cv";
+
+interface Props {
+  position: string;
+  company: string;
+  companyUrl?: string;
+  startDate: string;
+  endDate?: string | null;
+  location: string;
+  locationType: string;
+  summary: string;
+  skills: string[];
+  href?: string;
+  showDetails?: boolean;
+}
+
+const {
+  position,
+  company,
+  companyUrl,
+  startDate,
+  endDate,
+  location,
+  locationType,
+  summary,
+  skills,
+  href,
+  showDetails = true,
+} = Astro.props;
+
+const formatDate = (dateStr: string | null) => {
+  if (!dateStr) return "Presente";
+  return new Date(dateStr).toLocaleDateString("es-ES", {
+    year: "numeric",
+    month: "short",
+  });
+};
+
+const period = `${formatDate(startDate)} — ${formatDate(endDate)}`;
+---
+
+<div class="timeline-item">
+  <div class="timeline-left">
+    <span class="period">{period}</span>
+  </div>
+  <div class="timeline-dot-wrapper">
+    <slot name="icon">
+      <Icon name="ph:briefcase" class="timeline-role-icon" />
+    </slot>
+  </div>
+  <div class="timeline-right">
+    <h3 class="job-role">
+      {
+        href ? (
+          <a href={href} class="hover:underline">
+            {position}
+          </a>
+        ) : (
+          position
+        )
+      }
+    </h3>
+    <p class="job-company">
+      {
+        companyUrl ? (
+          <a href={companyUrl} target="_blank" rel="noopener noreferrer">
+            {company}
+          </a>
+        ) : (
+          company
+        )
+      }
+      <span class="location">· {location} ({locationType})</span>
+    </p>
+    <p class="job-desc">{summary}</p>
+    {
+      showDetails && (
+        <div class="job-tags">
+          {skills.map((skillId) => {
+            const skill = getSkillById(skillId);
+            return (
+              <span class="tag">
+                {skill?.icon && <Icon name={skill.icon} class="tag-icon" />}
+                {skill?.name || skillId}
+              </span>
+            );
+          })}
+        </div>
+      )
+    }
+  </div>
+</div>
+
+<style>
+  .timeline-item {
+    display: grid;
+    grid-template-columns: 200px auto 1fr;
+    gap: 0 2.5rem;
+    padding-bottom: 3.5rem;
+    position: relative;
+  }
+
+  .timeline-left {
+    text-align: right;
+    padding-top: 0.15rem;
+  }
+
+  .period {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+  }
+
+  .timeline-dot-wrapper {
+    width: 28px;
+    height: 28px;
+    border-radius: 4px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    position: relative;
+    left: -14px;
+    top: 0.15rem;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    transition: all 0.3s ease;
+  }
+
+  .timeline-item:hover .timeline-dot-wrapper {
+    background: var(--accent);
+    border-color: var(--accent);
+    transform: scale(1.1);
+  }
+
+  .timeline-role-icon {
+    width: 14px;
+    height: 14px;
+    color: var(--accent);
+    transition: color 0.3s ease;
+  }
+
+  .timeline-item:hover .timeline-role-icon {
+    color: white;
+  }
+
+  .timeline-right {
+    padding-top: 0;
+  }
+
+  .job-role {
+    font-family: var(--serif);
+    font-size: 1.3rem;
+    font-weight: 400;
+    color: var(--text);
+    margin-bottom: 0.2rem;
+  }
+
+  .job-company {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.9rem;
+  }
+
+  .job-desc {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    line-height: 1.8;
+    margin-bottom: 1rem;
+    max-width: 540px;
+  }
+
+  .job-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .tag {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    text-transform: none;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 0.25rem 0.65rem;
+    border-radius: 2px;
+    color: var(--text-muted);
+  }
+
+  .tag-icon {
+    width: 0.85rem;
+    height: 0.85rem;
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 768px) {
+    .timeline-item {
+      grid-template-columns: auto 1fr;
+      gap: 0 1.5rem;
+    }
+
+    .timeline-left {
+      display: none;
+    }
+
+    .timeline-dot-wrapper {
+      left: -14px;
+    }
+
+    .period {
+      display: block;
+      font-size: 0.65rem;
+      margin-bottom: 0.5rem;
+    }
+  }
+</style>

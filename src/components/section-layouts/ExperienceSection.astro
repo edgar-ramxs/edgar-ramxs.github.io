@@ -1,0 +1,68 @@
+---
+import { worksData, getSkillIcon } from "@cv";
+import { Icon } from "astro-icon/components";
+import ExperienceItem from "@components/composite/ExperienceItem.astro";
+
+interface Props {
+  id?: string;
+  title?: string;
+  label?: string;
+  showTitle?: boolean;
+  maxItems?: number;
+  showSkills?: boolean;
+}
+
+const {
+  id = "experiencia",
+  title = "Experiencia",
+  label = "Historial de trabajo",
+  showTitle = true,
+  maxItems,
+  showSkills = true,
+} = Astro.props;
+
+const experiences = maxItems ? worksData.slice(0, maxItems) : worksData;
+---
+
+<section class="section" id={id}>
+  <div class="container">
+    <p class="section-label">{label}</p>
+    {showTitle && <h2 class="section-title">{title}</h2>}
+
+    <div class="timeline">
+      {
+        experiences.map((job) => (
+          <ExperienceItem
+            position={job.position}
+            company={job.name}
+            companyUrl={job.url}
+            startDate={job.startDate}
+            endDate={job.endDate}
+            location={job.location}
+            locationType={job.location_type}
+            summary={job.summary}
+            skills={job.skills}
+            skillIcons={Object.fromEntries(job.skills.map((s) => [s, getSkillIcon(s) || ""]))}
+            href={`/experiences/${job.id}`}
+            showDetails={showSkills}
+          >
+            <Icon slot="icon" name={job.icon} class="timeline-role-icon" />
+          </ExperienceItem>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .timeline {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .timeline :global(.timeline-item) {
+    position: relative;
+  }
+</style>

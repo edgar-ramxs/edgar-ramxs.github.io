@@ -1,0 +1,109 @@
+---
+import educationData from "@data/education.json";
+---
+
+<section class="section" id="educacion">
+  <div class="container">
+    <p class="section-label">Educación</p>
+
+    <div class="education-list">
+      {
+        educationData.map((edu) => (
+          <div class="education-item">
+            <div class="education-left">
+              <span class="period">
+                {new Date(edu.startDate).toLocaleDateString("es-CL", {
+                  year: "numeric",
+                  month: "short",
+                })}{" "}
+                —{" "}
+                {edu.endDate
+                  ? new Date(edu.endDate).toLocaleDateString("es-CL", {
+                      year: "numeric",
+                      month: "short",
+                    })
+                  : "Presente"}
+              </span>
+            </div>
+            <div class="education-right">
+              <h3 class="degree">
+                <a href={edu.url} target="_blank" rel="noopener noreferrer">
+                  {edu.studyType} en {edu.area}
+                </a>
+              </h3>
+              <p class="institution">
+                {edu.institution}
+                <span class="location"> · {edu.location}</span>
+              </p>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .education-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .education-item {
+    display: grid;
+    grid-template-columns: 140px auto 1fr;
+    gap: 0 2rem;
+  }
+
+  .education-left {
+    text-align: right;
+    padding-top: 0.15rem;
+  }
+
+  .period {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+  }
+
+  .degree {
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: var(--text);
+    margin-bottom: 0.2rem;
+  }
+
+  .degree a {
+    color: inherit;
+  }
+
+  .institution {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .location {
+    color: var(--text-muted);
+  }
+
+  @media (max-width: 768px) {
+    .education-item {
+      grid-template-columns: auto 1fr;
+      gap: 0 1.5rem;
+    }
+    .education-left {
+      display: none;
+    }
+    .period {
+      display: block;
+      font-size: 0.65rem;
+      margin-bottom: 0.5rem;
+    }
+  }
+</style>
