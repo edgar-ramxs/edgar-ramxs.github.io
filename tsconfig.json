@@ -11,7 +11,7 @@
       "@images/*": ["src/images/*"],
       "@layouts/*": ["src/layouts/*"],
       "@pages/*": ["src/pages/*"],
-      "@scripts/*": ["src/scripts/*"],
+      "@utils/*": ["src/utils/*"],
       "@styles/*": ["src/styles/*"],
       "@types": ["src/types/types.d.ts"],
       "@cv": ["src/types/cv.ts"]
