@@ -7,6 +7,7 @@ labels: bug
 ## Descripción
 
 ## Pasos para reproducir
+
 1.
 2.
 3.
@@ -18,6 +19,7 @@ labels: bug
 ## Capturas
 
 ## Contexto
+
 - OS:
 - Navegador:
 - URL:
