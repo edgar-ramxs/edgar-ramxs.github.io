@@ -38,6 +38,7 @@ src/
 ### 1.2 Jerarquía de Archivos a Traducir
 
 **UI (Interfaz):**
+
 - Navbar (labels de navegación)
 - Hero (CTAs, tagline)
 - Footer (copyright, botón volver arriba)
@@ -49,6 +50,7 @@ src/
 - Pages (títulos, meta descriptions)
 
 **Contenido JSON:**
+
 - `profile.json` - Bio, ubicación, idiomas
 - `projects.json` - Nombres y descripciones
 - `experiences.json` - Posiciones, responsabilidades
@@ -63,18 +65,18 @@ src/
 ### 2.1 astro.config.mjs
 
 ```javascript
-import { defineConfig } from 'astro/config';
-import icon from 'astro-icon';
+import { defineConfig } from "astro/config";
+import icon from "astro-icon";
 
 export default defineConfig({
-  site: 'https://edgar-ramxs.github.io',
+  site: "https://edgar-ramxs.github.io",
   integrations: [icon()],
   i18n: {
     defaultLocale: "es",
     locales: ["es", "en", "pt", "fr"],
     routing: {
-      prefixDefaultLocale: false
-    }
+      prefixDefaultLocale: false,
+    },
   },
   vite: {},
 });
@@ -94,14 +96,14 @@ export const LOCALE_NAMES: Record<Locale, string> = {
   es: "Español",
   en: "English",
   pt: "Português",
-  fr: "Français"
+  fr: "Français",
 };
 
 export const LOCALE_FLAGS: Record<Locale, string> = {
   es: "🇨🇱",
   en: "🇺🇸",
   pt: "🇧🇷",
-  fr: "🇫🇷"
+  fr: "🇫🇷",
 };
 ```
 
@@ -118,17 +120,17 @@ const STORAGE_KEY = "portfolio-locale";
 
 export function getLocale(): Locale {
   if (typeof window === "undefined") return DEFAULT_LOCALE;
-  
+
   const stored = localStorage.getItem(STORAGE_KEY);
   if (stored && ["es", "en", "pt", "fr"].includes(stored)) {
     return stored as Locale;
   }
-  
+
   const browserLang = navigator.language.split("-")[0];
   if (["es", "en", "pt", "fr"].includes(browserLang)) {
     return browserLang as Locale;
   }
-  
+
   return DEFAULT_LOCALE;
 }
 
@@ -281,12 +283,14 @@ const profile = await import(`@i18n/data/${locale}/profile.json`);
 ## 7. Fases de Implementación
 
 ### Fase 1: Configuración Base
+
 - [ ] Crear estructura de carpetas (`src/i18n/`)
 - [ ] Configurar `astro.config.mjs` con i18n
 - [ ] Crear tipos en `src/i18n/types.ts`
 - [ ] Crear utils en `src/i18n/utils.ts`
 
 ### Fase 2: UI Strings
+
 - [ ] Crear `src/i18n/ui/es.json` con todas las traducciones españolas
 - [ ] Traducir a inglés (`en.json`)
 - [ ] Traducir a portugués (`pt.json`)
@@ -295,6 +299,7 @@ const profile = await import(`@i18n/data/${locale}/profile.json`);
 - [ ] Integrar en `Navbar.astro`
 
 ### Fase 3: Contenido JSON
+
 - [ ] Mover datos a `src/i18n/data/es/`
 - [ ] Crear versiones en inglés
 - [ ] Crear versiones en portugués
@@ -302,6 +307,7 @@ const profile = await import(`@i18n/data/${locale}/profile.json`);
 - [ ] Actualizar imports en `src/types/cv.ts`
 
 ### Fase 4: Integración en Componentes
+
 - [ ] Actualizar `Navbar.astro` con traducciones
 - [ ] Actualizar `Hero.astro` con traducciones
 - [ ] Actualizar `Footer.astro` con traducciones
@@ -313,11 +319,13 @@ const profile = await import(`@i18n/data/${locale}/profile.json`);
 - [ ] Actualizar todas las páginas (`index.astro`, `about.astro`, etc.)
 
 ### Fase 5: SEO y Meta
+
 - [ ] Actualizar `HeadBase.astro` para usar `lang` dinámico
 - [ ] Agregar meta descriptions por idioma
 - [ ] Actualizar Open Graph tags por idioma
 
 ### Fase 6: Testing
+
 - [ ] Verificar cambio de idioma sin recarga
 - [ ] Verificar persistencia en localStorage
 - [ ] Verificar todos los textos traducidos
@@ -339,6 +347,7 @@ Para acelerar el proceso, se pueden usar:
 ### 8.2 Recomendación
 
 Usar una combinación de:
+
 1. Traducción automática inicial (DeepL o ChatGPT)
 2. Revisión manual para ajustar tono y contexto
 3. Validación de consistencia entre archivos
@@ -350,12 +359,14 @@ Usar una combinación de:
 ### 9.1 SSR vs Static
 
 Este es un sitio **estático** (`output: "static"`). El idioma se determina en el cliente:
+
 - No hay servidor que renderice según Accept-Language
 - localStorage es la fuente de verdad para el idioma
 
 ### 9.2 Hydration
 
 Los componentes que muestran contenido traducible deben:
+
 - Escuchar el evento `locale-change`
 - Actualizar su contenido sin Full Page Reload
 
@@ -386,6 +397,7 @@ UI refleja el nuevo idioma instantáneamente
 ## 11. Checklist de Archivos a Modificar
 
 ### Archivos Existentes
+
 - `astro.config.mjs` - Agregar config i18n
 - `src/types/cv.ts` - Actualizar imports
 - `Navbar.astro` - Agregar LanguageSwitcher
@@ -399,6 +411,7 @@ UI refleja el nuevo idioma instantáneamente
 - Todas las páginas en `src/pages/`
 
 ### Archivos a Crear
+
 - `src/i18n/types.ts`
 - `src/i18n/utils.ts`
 - `src/i18n/ui/es.json`

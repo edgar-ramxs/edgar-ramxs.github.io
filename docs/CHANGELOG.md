@@ -8,10 +8,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+
 - Estandarización de documentación y guías del repositorio.
 
 ### Changed
+
 - README con estructura bilingüe y guía de instalación/estructura.
 
 ### Fixed
+
 - N/A

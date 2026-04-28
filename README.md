@@ -15,16 +15,20 @@
 
 ## 🚀 Instalación / Installation
 
-1) Instala dependencias:
+1. Instala dependencias:
+
 - `pnpm install` (recomendado) o `npm install`
 
-2) Desarrollo local:
+2. Desarrollo local:
+
 - `pnpm dev` o `npm run dev`
 
-3) Build producción:
+3. Build producción:
+
 - `pnpm build` o `npm run build`
 
-4) Preview:
+4. Preview:
+
 - `pnpm preview` o `npm run preview`
 
 ---
@@ -73,6 +77,7 @@ public/
 GitHub Pages ya está configurado en `.github/workflows/deploy.yml`.
 
 Para cambiar la URL del sitio:
+
 - actualiza `site` en `astro.config.mjs`.
 
 ---

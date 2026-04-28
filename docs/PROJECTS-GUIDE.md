@@ -24,6 +24,7 @@ Cada proyecto debe estar "encapsulado" para evitar conflictos de estilos o lógi
 ## Layout de Proyectos / Project layout
 
 Usa `src/layouts/ProjectLayout.astro` si existe. Si no, crea uno basado en `PortfolioLayout.astro` y añade:
+
 - Botón para volver al CV principal (`/`).
 - Configuración de SEO independiente.
 - Estilos base que no interfieran con el CV.
