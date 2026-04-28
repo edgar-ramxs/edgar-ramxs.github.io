@@ -1,15 +1,10 @@
 ---
 import Layout from "@layouts/PortfolioLayout.astro";
-import { worksData, skillsData } from "@cv";
+import { worksData, getSkillById } from "@cv";
 import { Icon } from "astro-icon/components";
-const { works, skills } = { works: worksData, skills: skillsData };
-
-// Mapeo de iconos para skills
-const skillIcons = Object.fromEntries(skills.Technicals.map((s) => [s.name, s.icon]));
 
 export async function getStaticPaths() {
-  const { works } = (await import("@cv")).default;
-  return works.map((exp) => ({
+  return worksData.map((exp) => ({
     params: { id: exp.id },
     props: { exp },
   }));
@@ -19,7 +14,10 @@ const { exp } = Astro.props;
 
 const formatDate = (dateStr: string | null) => {
   if (!dateStr) return "Presente";
-  return new Date(dateStr).toLocaleDateString("es-ES", { year: "numeric", month: "long" });
+  return new Date(dateStr).toLocaleDateString("es-ES", {
+    year: "numeric",
+    month: "long",
+  });
 };
 ---
 
@@ -29,7 +27,7 @@ const formatDate = (dateStr: string | null) => {
       <div class="experience-detail-header">
         <a href="/experiences" class="back-link">← Volver a Experiencia</a>
         <div class="header-main">
-          <div class="header-left">
+          <div class="header-left" data-exp-id={exp.id} data-exp-name={exp.position}>
             <div class="role-icon-container">
               <Icon name={exp.icon} class="role-icon" />
             </div>
@@ -80,12 +78,15 @@ const formatDate = (dateStr: string | null) => {
             <h3 class="sidebar-title">Tecnologías & Skills</h3>
             <div class="skills-cloud">
               {
-                exp.skills.map((skill) => (
-                  <span class="skill-pill">
-                    {skillIcons[skill] && <Icon name={skillIcons[skill]} class="pill-icon" />}
-                    {skill}
-                  </span>
-                ))
+                exp.skills.map((skillId) => {
+                  const skill = getSkillById(skillId);
+                  return (
+                    <span class="tag tag-default">
+                      {skill?.icon && <Icon name={skill.icon} class="tag-icon" />}
+                      {skill?.name || skillId}
+                    </span>
+                  );
+                })
               }
             </div>
           </div>
@@ -267,12 +268,13 @@ const formatDate = (dateStr: string | null) => {
     gap: 0.5rem;
   }
 
-  .skill-pill {
+  .tag {
     display: flex;
     align-items: center;
     gap: 0.5rem;
     font-family: var(--mono);
     font-size: 0.7rem;
+    text-transform: none;
     background: var(--surface);
     color: var(--text-muted);
     padding: 0.3rem 0.7rem;
@@ -280,10 +282,53 @@ const formatDate = (dateStr: string | null) => {
     border-radius: 2px;
   }
 
-  .pill-icon {
+  .tag-icon {
     width: 0.9rem;
     height: 0.9rem;
+    flex-shrink: 0;
   }
+
+  <script>
+  // Track experience view on page load
+  const expId = document.querySelector('[data-exp-id]')?.dataset.expId;
+  const expName = document.querySelector('[data-exp-name]')?.dataset.expName;
+
+  if (expId && window.dataLayer) {
+    window.dataLayer.push({
+      event: 'experience_view',
+      experience: {
+        id: expId,
+        name: expName
+      }
+    });
+  }
+
+  // Track experience action clicks
+  document.querySelectorAll('[data-exp-action]').forEach(link => {
+    link.addEventListener('click', () => {
+      const action = link.dataset.expAction;
+      
+      if (window.dataLayer) {
+        window.dataLayer.push({
+          event: 'experience_action',
+          experience: {
+            id: expId,
+            name: expName,
+            action: action
+          }
+        });
+      }
+      
+      if (window.gtag) {
+        window.gtag('event', 'experience_action', {
+          experience_id: expId,
+          experience_name: expName,
+          action: action
+        });
+      }
+    });
+  });
+</script>
 
   @media (max-width: 1000px) {
     .experience-content-grid {

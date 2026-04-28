@@ -1,0 +1,152 @@
+---
+import Layout from "@layouts/PortfolioLayout.astro";
+import { skillsData, skillsByType } from "@cv";
+import { Icon } from "astro-icon/components";
+---
+
+<Layout
+  title="Skills"
+  description="Mi stack técnico y capacidades"
+  keywords={["skills", "tecnologías", "stack", "habilidades"]}
+>
+  <section class="section">
+    <div class="container">
+      <p class="section-label">Capacidades</p>
+      <h2 class="section-title">Stack técnico</h2>
+
+      <div class="skills-layout">
+        <div class="skills-column soft-skills">
+          <h3 class="skills-category-title">
+            <Icon name="ph:heart-fill" class="category-icon" />
+            Soft Skills
+          </h3>
+          <div class="skills-tags">
+            {
+              skillsByType("soft").map((skill) => (
+                <span class="soft-skill-tag">
+                  {skill.icon && <Icon name={skill.icon} class="soft-skill-icon" />}
+                  {skill.name}
+                </span>
+              ))
+            }
+          </div>
+        </div>
+
+        <div class="skills-column technical-skills">
+          <h3 class="skills-category-title">
+            <Icon name="ph:code-fill" class="category-icon" />
+            Technical Skills
+          </h3>
+          <div class="skills-tags">
+            {
+              skillsByType("technical").map((skill) => (
+                <span class="skill-tag">
+                  {skill.icon && <Icon name={skill.icon} class="skill-icon" />}
+                  {skill.name}
+                </span>
+              ))
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .skills-layout {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 3rem;
+    margin-top: 2rem;
+  }
+
+  .skills-column {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 2rem;
+  }
+
+  .skills-category-title {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .category-icon {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  .skills-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .soft-skill-tag {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    padding: 0.4rem 0.8rem;
+    border-radius: 2px;
+    transition: all 0.2s;
+  }
+
+  .soft-skill-icon {
+    width: 0.85rem;
+    height: 0.85rem;
+    color: var(--accent);
+  }
+
+  .soft-skill-tag:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: var(--accent-soft);
+  }
+
+  .skill-tag {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background: var(--accent-soft);
+    color: var(--accent);
+    padding: 0.2rem 0.6rem;
+    border-radius: 2px;
+    border: 1px solid transparent;
+  }
+
+  .skill-icon {
+    width: 0.85rem;
+    height: 0.85rem;
+  }
+
+  @media (max-width: 900px) {
+    .skills-layout {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .skills-column {
+      padding: 1.5rem;
+    }
+  }
+</style>

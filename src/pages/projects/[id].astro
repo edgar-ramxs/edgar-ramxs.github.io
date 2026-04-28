@@ -1,45 +1,91 @@
 ---
 import Layout from "@layouts/PortfolioLayout.astro";
-import { projectsData, skillsData } from "@cv";
+import { getSkillById } from "@cv";
 import { Icon } from "astro-icon/components";
-const { projects, skills } = { projects: projectsData, skills: skillsData };
-
-// Mapeo de iconos para skills
-const skillIcons = Object.fromEntries(skills.Technicals.map((s) => [s.name, s.icon]));
+import { marked } from "marked";
+import matter from "gray-matter";
+import { readFile } from "fs/promises";
+import { join } from "path";
 
 export async function getStaticPaths() {
-  const { projects } = (await import("@cv")).default;
-  return projects.map((project) => ({
-    params: { id: project.id },
-    props: { project },
-  }));
+  const projectsDir = join(process.cwd(), "src/data/projects");
+  const { readdir } = await import("fs/promises");
+  const files = await readdir(projectsDir);
+
+  const results = await Promise.all(
+    files
+      .filter((f) => f.endsWith(".md"))
+      .map(async (fileName) => {
+        const filePath = join(projectsDir, fileName);
+        const raw = await readFile(filePath, "utf-8");
+        const { data, content } = matter(raw);
+        return {
+          params: { id: data.id },
+          props: { ...data, rawContent: content },
+        };
+      })
+  );
+
+  return results;
 }
 
-const { project } = Astro.props;
+const { id, name, github, url, isActive, stack, highlights, description, rawContent } = Astro.props;
+
+let readmeContent = "";
+const hasLocalContent = rawContent && rawContent.trim().length > 0;
+
+if (github) {
+  try {
+    const match = github.match(/github\.com\/([^/]+)\/([^/]+)/);
+    if (match) {
+      const [, owner, repo] = match;
+      const readmeUrl = `https://raw.githubusercontent.com/${owner}/${repo}/main/README.md`;
+      const response = await fetch(readmeUrl);
+      if (response.ok) {
+        const markdown = await response.text();
+        readmeContent = await marked(markdown);
+      }
+    }
+  } catch (e) {
+    console.log("Could not fetch README for", id);
+  }
+}
+
+const displayContent = hasLocalContent ? await marked(rawContent) : readmeContent;
+const projectDescription = description || (hasLocalContent ? "" : "Proyecto sin descripción");
 ---
 
-<Layout title={project.name} description={project.description} keywords={project.stack}>
+<Layout title={name} description={projectDescription} keywords={stack}>
   <article class="section fade-up">
     <div class="container">
       <div class="project-detail-header">
         <a href="/projects" class="back-link">← Volver a Proyectos</a>
         <div class="header-main">
-          <h1 class="project-full-title">{project.name}</h1>
+          <h1 class="project-full-title">{name}</h1>
           <div class="project-badge">
-            {project.isActive ? "Proyecto Activo" : "Proyecto Finalizado"}
+            {isActive ? "Proyecto Activo" : "Proyecto Finalizado"}
           </div>
         </div>
-        <p class="project-full-desc">{project.description}</p>
+        {projectDescription && <p class="project-full-desc">{projectDescription}</p>}
       </div>
 
       <div class="project-detail-grid">
         <div class="project-main-content">
           {
-            project.highlights && project.highlights.length > 0 && (
+            displayContent && (
+              <section class="detail-section readme-section">
+                <h2 class="detail-title">README</h2>
+                <div class="readme-content" set:html={displayContent} />
+              </section>
+            )
+          }
+
+          {
+            highlights && highlights.length > 0 && (
               <section class="detail-section">
                 <h2 class="detail-title">Características Destacadas</h2>
                 <ul class="highlights-list">
-                  {project.highlights.map((highlight) => (
+                  {highlights.map((highlight) => (
                     <li>{highlight}</li>
                   ))}
                 </ul>
@@ -49,12 +95,15 @@ const { project } = Astro.props;
 
           <div class="project-actions">
             {
-              project.url && (
+              url && (
                 <a
-                  href={project.url}
+                  href={url}
                   target="_blank"
                   rel="noopener noreferrer"
                   class="btn btn-primary"
+                  data-project-id={id}
+                  data-project-name={name}
+                  data-project-action="visit"
                 >
                   Visitar Sitio Web
                   <Icon name="ph:arrow-up-right" width="18" height="18" />
@@ -62,12 +111,15 @@ const { project } = Astro.props;
               )
             }
             {
-              project.github && (
+              github && (
                 <a
-                  href={project.github}
+                  href={github}
                   target="_blank"
                   rel="noopener noreferrer"
                   class="btn btn-secondary"
+                  data-project-id={id}
+                  data-project-name={name}
+                  data-project-action="github"
                 >
                   Ver Código Fuente
                   <Icon name="mdi:github" width="18" height="18" />
@@ -82,12 +134,16 @@ const { project } = Astro.props;
             <h3 class="sidebar-title">Tecnologías</h3>
             <div class="tech-cloud">
               {
-                project.stack.map((tech) => (
-                  <span class="tech-pill">
-                    {skillIcons[tech] && <Icon name={skillIcons[tech]} class="pill-icon" />}
-                    {tech}
-                  </span>
-                ))
+                stack &&
+                  stack.map((techId) => {
+                    const skill = getSkillById(techId);
+                    return (
+                      <span class="tag tag-default">
+                        {skill?.icon && <Icon name={skill.icon} class="tag-icon" />}
+                        {skill?.name || techId}
+                      </span>
+                    );
+                  })
               }
             </div>
           </div>
@@ -248,22 +304,142 @@ const { project } = Astro.props;
     gap: 0.5rem;
   }
 
-  .tech-pill {
+  .tag {
     display: flex;
     align-items: center;
     gap: 0.5rem;
     font-family: var(--mono);
     font-size: 0.7rem;
+    text-transform: none;
     background: var(--surface);
     color: var(--text-muted);
     padding: 0.3rem 0.7rem;
+    border: 1px solid var(--border);
     border-radius: 2px;
   }
 
-  .pill-icon {
+  .tag-icon {
     width: 0.9rem;
     height: 0.9rem;
+    flex-shrink: 0;
   }
+
+  .readme-section {
+    margin-bottom: 4rem;
+  }
+
+  .readme-content {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--text);
+  }
+
+  .readme-content :global(h1),
+  .readme-content :global(h2),
+  .readme-content :global(h3) {
+    font-family: var(--serif);
+    font-weight: 400;
+    margin: 1.5em 0 0.5em;
+  }
+
+  .readme-content :global(h1) {
+    font-size: 1.75rem;
+  }
+  .readme-content :global(h2) {
+    font-size: 1.5rem;
+  }
+  .readme-content :global(h3) {
+    font-size: 1.25rem;
+  }
+
+  .readme-content :global(p) {
+    margin-bottom: 1em;
+  }
+
+  .readme-content :global(code) {
+    font-family: var(--mono);
+    font-size: 0.85em;
+    background: var(--surface);
+    padding: 0.2em 0.4em;
+    border-radius: 2px;
+  }
+
+  .readme-content :global(pre) {
+    background: var(--surface);
+    padding: 1rem;
+    border-radius: 4px;
+    overflow-x: auto;
+    margin: 1em 0;
+  }
+
+  .readme-content :global(pre code) {
+    background: none;
+    padding: 0;
+  }
+
+  .readme-content :global(ul),
+  .readme-content :global(ol) {
+    margin: 1em 0;
+    padding-left: 1.5em;
+  }
+
+  .readme-content :global(li) {
+    margin-bottom: 0.5em;
+  }
+
+  .readme-content :global(a) {
+    color: var(--accent);
+    text-decoration: underline;
+  }
+
+  .readme-content :global(blockquote) {
+    border-left: 3px solid var(--accent);
+    margin: 1em 0;
+    padding-left: 1rem;
+    color: var(--text-muted);
+  }
+
+  <script>
+  // Track project view on page load
+  const projectId = document.querySelector('[data-project-id]')?.dataset.projectId;
+  const projectName = document.querySelector('[data-project-name]')?.dataset.projectName;
+
+  if (projectId && window.dataLayer) {
+    window.dataLayer.push({
+      event: 'project_view',
+      project: {
+        id: projectId,
+        name: projectName
+      }
+    });
+  }
+
+  // Track project action clicks
+  document.querySelectorAll('[data-project-action]').forEach(link => {
+    link.addEventListener('click', () => {
+      const action = link.dataset.projectAction;
+      
+      if (window.dataLayer) {
+        window.dataLayer.push({
+          event: 'project_action',
+          project: {
+            id: projectId,
+            name: projectName,
+            action: action
+          }
+        });
+      }
+      
+      if (window.gtag) {
+        window.gtag('event', 'project_action', {
+          project_id: projectId,
+          project_name: projectName,
+          action: action
+        });
+      }
+    });
+  });
+</script>
 
   @media (max-width: 1000px) {
     .project-detail-grid {

@@ -1,19 +1,26 @@
 ---
 import Layout from "@layouts/PortfolioLayout.astro";
 
+import { profileData } from "@cv";
+
 import Hero from "@components/portfolio/Hero.astro";
 import About from "@components/portfolio/About.astro";
 import Experience from "@components/portfolio/Experience.astro";
-import Projects from "@components/portfolio/Projects.astro";
 import Skills from "@components/portfolio/Skills.astro";
 import Contact from "@components/portfolio/Contact.astro";
 ---
 
 <Layout>
-  <Hero />
+  <Hero
+    name={profileData.name.split(" ")[0]}
+    nameItalic={profileData.name.split(" ")[1]}
+    role={profileData.occupation}
+    company={profileData.company}
+    companyUrl={profileData.companyUrl}
+    description={profileData.description}
+  />
   <About />
   <Experience />
-  <Projects />
   <Skills />
   <Contact />
 </Layout>

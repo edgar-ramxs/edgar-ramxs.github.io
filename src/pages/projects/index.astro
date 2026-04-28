@@ -1,11 +1,9 @@
 ---
 import Layout from "@layouts/PortfolioLayout.astro";
-import { projectsData, skillsData } from "@cv";
+import { getSkillById, getProjectsData } from "@cv";
 import { Icon } from "astro-icon/components";
-const { projects, skills } = { projects: projectsData, skills: skillsData };
 
-// Mapeo de iconos para el stack
-const skillIcons = Object.fromEntries(skills.Technicals.map((s) => [s.name, s.icon]));
+const projectsData = await getProjectsData();
 ---
 
 <Layout
@@ -20,22 +18,27 @@ const skillIcons = Object.fromEntries(skills.Technicals.map((s) => [s.name, s.ic
 
       <div class="projects-grid">
         {
-          projects.map((project, i) => (
+          projectsData.map((project, i) => (
             <a href={`/projects/${project.id}`} class="project-item group">
               <div class="project-header">
                 <span class="project-num">{(i + 1).toString().padStart(2, "0")}</span>
                 <h3 class="project-name">{project.name}</h3>
-                <span class="project-status">{project.isActive ? "Activo" : "Completado"}</span>
+                <span class={`project-status ${project.isActive ? "active" : ""}`}>
+                  {project.isActive ? "Activo" : "Completado"}
+                </span>
               </div>
               <p class="project-summary">{project.description}</p>
               <div class="project-footer">
                 <div class="project-tech">
-                  {project.stack.slice(0, 3).map((tech) => (
-                    <span class="tech-tag">
-                      {skillIcons[tech] && <Icon name={skillIcons[tech]} class="tag-icon" />}
-                      {tech}
-                    </span>
-                  ))}
+                  {project.stack.slice(0, 3).map((skillId) => {
+                    const skill = getSkillById(skillId);
+                    return (
+                      <span class="tag tag-accent">
+                        {skill?.icon && <Icon name={skill.icon} class="tag-icon" />}
+                        {skill?.name || skillId}
+                      </span>
+                    );
+                  })}
                 </div>
                 <span class="view-more">Ver detalles →</span>
               </div>
@@ -105,6 +108,12 @@ const skillIcons = Object.fromEntries(skills.Technicals.map((s) => [s.name, s.ic
     border-radius: 2px;
   }
 
+  .project-status.active {
+    background: var(--accent-soft);
+    color: var(--accent);
+    border-color: transparent;
+  }
+
   .project-summary {
     font-size: 0.95rem;
     color: var(--text-muted);
@@ -124,7 +133,7 @@ const skillIcons = Object.fromEntries(skills.Technicals.map((s) => [s.name, s.ic
     gap: 0.5rem;
   }
 
-  .tech-tag {
+  .tag {
     display: flex;
     align-items: center;
     gap: 0.4rem;
@@ -134,11 +143,14 @@ const skillIcons = Object.fromEntries(skills.Technicals.map((s) => [s.name, s.ic
     background: var(--accent-soft);
     padding: 0.2rem 0.6rem;
     border-radius: 2px;
+    text-transform: none;
+    border: 1px solid transparent;
   }
 
   .tag-icon {
     width: 0.8rem;
     height: 0.8rem;
+    flex-shrink: 0;
   }
 
   .view-more {
