@@ -1,37 +1,72 @@
 ---
 import { Icon } from "astro-icon/components";
 import { profileData } from "@cv";
-const profile = profileData;
+import SocialLink from "@components/composite/SocialLink.astro";
+
+interface Props {
+  id?: string;
+  title?: string;
+  titleItalic?: string;
+  label?: string;
+  showTitle?: boolean;
+  description?: string;
+  showEmail?: boolean;
+  showSocial?: boolean;
+}
+
+const {
+  id = "contacto",
+  title = "¿Tienes un proyecto",
+  titleItalic = "en mente?",
+  label = "Hablemos",
+  showTitle = true,
+  description = profileData.importantSkills || profileData.description,
+  showEmail = true,
+  showSocial = true,
+} = Astro.props;
 ---
 
-<section class="section" id="contacto">
+<section class="section" id={id}>
   <div class="container">
-    <p class="section-label">Hablemos</p>
+    <p class="section-label">{label}</p>
 
     <div class="contact-inner">
       <div class="contact-text">
-        <h2 class="section-title">¿Tienes un proyecto<br /><em>en mente?</em></h2>
-        <p>
-          {profile.description}
-        </p>
-
-        <a href={`mailto:${profile.email}`} class="email-link">
-          {profile.email}
-          <Icon name="ph:arrow-up-right" />
-        </a>
-      </div>
-
-      <div class="contact-links">
         {
-          profile.profiles.map((social) => (
-            <a href={social.url} target="_blank" rel="noopener" class="contact-social">
-              <Icon name={social.icon} class="social-icon" />
-              <span class="social-label">{social.network}</span>
-              <Icon name="ph:arrow-up-right" class="arrow-icon" />
+          showTitle && (
+            <h2 class="section-title">
+              {title}
+              <br />
+              <em>{titleItalic}</em>
+            </h2>
+          )
+        }
+        <p>{description}</p>
+
+        {
+          showEmail && (
+            <a href={`mailto:${profileData.email}`} class="email-link">
+              {profileData.email}
+              <Icon name="ph:arrow-up-right" />
             </a>
-          ))
+          )
         }
       </div>
+
+      {
+        showSocial && (
+          <div class="contact-links">
+            {profileData.profiles.map((social) => (
+              <SocialLink
+                label={social.network}
+                url={social.url}
+                icon={social.icon}
+                variant="button"
+              />
+            ))}
+          </div>
+        )
+      }
     </div>
   </div>
 </section>

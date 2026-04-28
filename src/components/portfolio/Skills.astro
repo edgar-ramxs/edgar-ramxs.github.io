@@ -1,27 +1,47 @@
 ---
 import { skillsData } from "@cv";
 import { Icon } from "astro-icon/components";
-const skills = skillsData;
 
-// Agrupar habilidades técnicas por keywords para mantener la estructura de 4 columnas
+const softSkills = skillsData.filter((s) => s.type === "soft");
+
 const technicalGroups = [
   {
-    category: "Frontend / Web",
-    items: skills.Technicals.filter((s) => s.keywords.includes("Frontend")),
+    category: "Languages",
+    items: skillsData.filter((s) => s.type === "technical" && s.keywords?.includes("Languages")),
   },
   {
-    category: "Backend / Logic",
-    items: skills.Technicals.filter((s) => s.keywords.includes("Backend")),
+    category: "Frontend",
+    items: skillsData.filter((s) => s.type === "technical" && s.keywords?.includes("Frontend")),
   },
   {
-    category: "Frameworks / Tools",
-    items: skills.Technicals.filter(
-      (s) => s.keywords.includes("CSS Framework") || s.keywords.includes("Static Generation")
+    category: "Backend",
+    items: skillsData.filter((s) => s.type === "technical" && s.keywords?.includes("Backend")),
+  },
+  {
+    category: "Databases",
+    items: skillsData.filter((s) => s.type === "technical" && s.keywords?.includes("Databases")),
+  },
+  {
+    category: "Data Science",
+    items: skillsData.filter((s) => s.type === "technical" && s.keywords?.includes("Data Science")),
+  },
+  {
+    category: "DevOps / Cloud",
+    items: skillsData.filter(
+      (s) =>
+        s.type === "technical" &&
+        (s.keywords?.includes("DevOps") ||
+          s.keywords?.includes("Cloud") ||
+          s.keywords?.includes("Infrastructure"))
     ),
   },
   {
-    category: "Soft Skills",
-    items: skills.Softs.map((s) => ({ name: s, icon: "ph:star-four-fill" })),
+    category: "Security",
+    items: skillsData.filter((s) => s.type === "technical" && s.keywords?.includes("Security")),
+  },
+  {
+    category: "Tools",
+    items: skillsData.filter((s) => s.type === "technical" && s.keywords?.includes("Tools")),
   },
 ];
 ---
@@ -29,6 +49,19 @@ const technicalGroups = [
 <section class="section" id="skills">
   <div class="container">
     <p class="section-label">Capacidades</p>
+    <h2 class="section-title">Habilidades blandas</h2>
+
+    <div class="soft-skills-grid">
+      {
+        softSkills.map((skill) => (
+          <div class="soft-skill-card">
+            <Icon name={skill.icon} class="soft-skill-icon" />
+            <span class="soft-skill-name">{skill.name}</span>
+          </div>
+        ))
+      }
+    </div>
+
     <h2 class="section-title">Stack técnico</h2>
 
     <div class="skills-grid">
@@ -52,6 +85,43 @@ const technicalGroups = [
 </section>
 
 <style>
+  .soft-skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 1rem;
+    margin-bottom: 4rem;
+  }
+
+  .soft-skill-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1.25rem 1rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+
+  .soft-skill-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+  }
+
+  .soft-skill-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    color: var(--accent);
+  }
+
+  .soft-skill-name {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    text-align: center;
+    color: var(--text);
+  }
+
   .skills-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);

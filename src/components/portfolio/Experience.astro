@@ -1,20 +1,16 @@
 ---
-import { worksData, skillsData } from "@cv";
+import { worksData, getSkillById } from "@cv";
 import { Icon } from "astro-icon/components";
-const { works, skills } = { works: worksData, skills: skillsData };
-
-// Mapeo de iconos para skills
-const skillIcons = Object.fromEntries(skills.Technicals.map((s) => [s.name, s.icon]));
 ---
 
 <section class="section" id="experiencia">
   <div class="container">
-    <p class="section-label">Historial de trabajo</p>
-    <h2 class="section-title">Experiencia</h2>
+    <p class="section-label">Employment</p>
+    <h2 class="section-title">Última Experiencia</h2>
 
     <div class="timeline">
       {
-        works.map((job, i) => (
+        worksData.slice(0, 1).map((job, i) => (
           <div class="timeline-item">
             <div class="timeline-left">
               <span class="period">
@@ -45,12 +41,15 @@ const skillIcons = Object.fromEntries(skills.Technicals.map((s) => [s.name, s.ic
                 ))}
               </ul>
               <div class="job-tags">
-                {job.skills.map((tag) => (
-                  <span class="tag">
-                    {skillIcons[tag] && <Icon name={skillIcons[tag]} class="tag-icon" />}
-                    {tag}
-                  </span>
-                ))}
+                {job.skills.map((skillId) => {
+                  const skill = getSkillById(skillId);
+                  return (
+                    <span class="tag">
+                      {skill?.icon && <Icon name={skill.icon} class="tag-icon" />}
+                      {skill?.name || skillId}
+                    </span>
+                  );
+                })}
               </div>
             </div>
           </div>
@@ -68,19 +67,9 @@ const skillIcons = Object.fromEntries(skills.Technicals.map((s) => [s.name, s.ic
     gap: 0;
   }
 
-  .timeline::before {
-    content: "";
-    position: absolute;
-    left: 200px;
-    top: 0;
-    bottom: 0;
-    width: 1px;
-    background: var(--border);
-  }
-
   .timeline-item {
     display: grid;
-    grid-template-columns: 200px 1px 1fr;
+    grid-template-columns: 200px auto 1fr;
     gap: 0 2.5rem;
     padding-bottom: 3.5rem;
     position: relative;
@@ -161,6 +150,10 @@ const skillIcons = Object.fromEntries(skills.Technicals.map((s) => [s.name, s.ic
     max-width: 540px;
   }
 
+  .job-responsibilities {
+    margin-bottom: 1.5rem;
+  }
+
   .job-tags {
     display: flex;
     flex-wrap: wrap;
@@ -188,11 +181,8 @@ const skillIcons = Object.fromEntries(skills.Technicals.map((s) => [s.name, s.ic
   }
 
   @media (max-width: 768px) {
-    .timeline::before {
-      left: 0;
-    }
     .timeline-item {
-      grid-template-columns: 1px 1fr;
+      grid-template-columns: auto 1fr;
       gap: 0 1.5rem;
     }
     .timeline-left {

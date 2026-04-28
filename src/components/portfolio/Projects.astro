@@ -1,10 +1,9 @@
 ---
-import { projectsData, skillsData } from "@cv";
+import CodeSnippet from "./CodeSnippet.astro";
+import { getProjectsData, getSkillById } from "@cv";
 import { Icon } from "astro-icon/components";
-const { projects, skills } = { projects: projectsData, skills: skillsData };
 
-// Mapeo de iconos para el stack
-const skillIcons = Object.fromEntries(skills.Technicals.map((s) => [s.name, s.icon]));
+const projectsData = await getProjectsData();
 ---
 
 <section class="section" id="proyectos">
@@ -14,7 +13,7 @@ const skillIcons = Object.fromEntries(skills.Technicals.map((s) => [s.name, s.ic
 
     <div class="projects-list">
       {
-        projects.map((project, i) => (
+        projectsData.map((project, i) => (
           <article class={`project-card ${project.isActive ? "featured" : ""}`}>
             <div class="project-number">{(i + 1).toString().padStart(2, "0")}</div>
 
@@ -26,12 +25,15 @@ const skillIcons = Object.fromEntries(skills.Technicals.map((s) => [s.name, s.ic
               </h3>
               <p class="project-desc">{project.description}</p>
               <div class="project-tags">
-                {project.stack.map((tag) => (
-                  <span class="tag">
-                    {skillIcons[tag] && <Icon name={skillIcons[tag]} class="tag-icon" />}
-                    {tag}
-                  </span>
-                ))}
+                {project.stack.map((skillId) => {
+                  const skill = getSkillById(skillId);
+                  return (
+                    <span class="tag">
+                      {skill?.icon && <Icon name={skill.icon} class="tag-icon" />}
+                      {skill?.name || skillId}
+                    </span>
+                  );
+                })}
               </div>
             </div>
 

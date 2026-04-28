@@ -1,65 +1,70 @@
 ---
 import { Icon } from "astro-icon/components";
+import { profileData } from "@cv";
+import StatCard from "@components/composite/StatCard.astro";
+
+const { hero } = profileData;
+const { importantStats } = hero || {};
+
+const id = "sobre-mi";
+const label = "Sobre mí";
+const title = "Datos que";
+const titleItalic = "cuentan historias";
+const showTitle = true;
+const showGitHubLink = true;
+const githubUrl = profileData.profiles.find((p) => p.network === "GitHub")?.url;
+const githubUsername = "github.com/edgar-ramxs";
+
+const paragraphs = hero?.heroDescription || [
+  "Soy Edgar Ramos, analista de datos con enfoque en transformar conjuntos de datos complejos en insights accionables. Me apasiona el proceso completo: desde la limpieza y exploración de datos hasta la comunicación de resultados de forma clara y visual.",
+  "Trabajo con Python y SQL como herramientas principales, y uso Power BI y Tableau para construir dashboards que cualquier equipo pueda interpretar. También disfruto optimizar mi entorno de trabajo — desde configs de terminal hasta entornos Linux personalizados.",
+  "Actualmente abierto a nuevos proyectos y oportunidades.",
+];
 ---
 
-<section class="section" id="sobre-mi">
+<section class="section" id={id}>
   <div class="container">
-    <p class="section-label">Sobre mí</p>
+    <p class="section-label">{label}</p>
 
     <div class="about-grid">
       <div class="about-text">
-        <h2 class="section-title">Datos que<br /><em>cuentan historias</em></h2>
-        <p>
-          Soy Edgar Ramos, analista de datos con enfoque en transformar conjuntos de datos complejos
-          en insights accionables. Me apasiona el proceso completo: desde la limpieza y exploración
-          de datos hasta la comunicación de resultados de forma clara y visual.
-        </p>
-        <p>
-          Trabajo con Python y SQL como herramientas principales, y uso Power BI y Tableau para
-          construir dashboards que cualquier equipo pueda interpretar. También disfruto optimizar mi
-          entorno de trabajo — desde configs de terminal hasta entornos Linux personalizados.
-        </p>
-        <p>Actualmente abierto a nuevos proyectos y oportunidades.</p>
+        {
+          showTitle && (
+            <h2 class="section-title">
+              {title}
+              <br />
+              <em>{titleItalic}</em>
+            </h2>
+          )
+        }
+        {paragraphs.map((p) => <p>{p}</p>)}
 
-        <div class="about-links">
-          <a
-            href="https://github.com/edgar-ramxs"
-            target="_blank"
-            rel="noopener"
-            class="about-link"
-          >
-            <Icon name="mdi:github" class="about-icon" />
-            github.com/edgar-ramxs
-          </a>
-        </div>
+        {
+          showGitHubLink && githubUrl && (
+            <div class="about-links">
+              <a href={githubUrl} target="_blank" rel="noopener" class="about-link">
+                <Icon name="mdi:github" class="about-icon" />
+                {githubUsername}
+              </a>
+            </div>
+          )
+        }
       </div>
 
       <div class="about-stats">
-        <div class="stat-card">
-          <Icon name="ph:briefcase" class="stat-icon" />
-          <span class="stat-number">2+</span>
-          <span class="stat-label">Años de experiencia</span>
-        </div>
-        <div class="stat-card">
-          <Icon name="ph:magnifying-glass" class="stat-icon" />
-          <span class="stat-number">∞</span>
-          <span class="stat-label">Curiosidad por los datos</span>
-        </div>
-        <div class="stat-card accent">
-          <Icon name="ph:chart-bar" class="stat-icon" />
-          <span class="stat-number">100%</span>
-          <span class="stat-label">Orientado a resultados</span>
-        </div>
-        <div class="stat-card">
-          <Icon name="ph:rocket-launch" class="stat-icon" />
-          <span class="stat-number">Open</span>
-          <span class="stat-label">Disponible para proyectos</span>
-        </div>
+        {
+          importantStats?.map((stat) => (
+            <StatCard
+              number={stat.number}
+              label={stat.label}
+              icon={stat.icon}
+              variant={stat.variant || "default"}
+            />
+          ))
+        }
       </div>
-    
     </div>
   </div>
-
 </section>
 
 <style>
@@ -80,6 +85,7 @@ import { Icon } from "astro-icon/components";
     margin-bottom: 1.25rem;
     font-size: 1rem;
     line-height: 1.85;
+    text-align: justify;
   }
 
   .about-links {

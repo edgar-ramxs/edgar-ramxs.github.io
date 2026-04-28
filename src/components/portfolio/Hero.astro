@@ -1,80 +1,52 @@
 ---
+import { profileData } from "@cv";
+import CodeSnippet from "./CodeSnippet.astro";
 
+const { hero } = profileData;
+
+const nameParts = profileData.name.split(" ");
+const name = nameParts[0];
+const nameItalic = nameParts.length > 1 ? nameParts.slice(1).join(" ") : "";
+const role = profileData.occupation;
+const company = profileData.company;
+const companyUrl = profileData.companyUrl;
+const lema = hero?.lema || "";
+const eyebrow = "Disponible para proyectos";
+const showAvailability = true;
 ---
 
 <section class="hero" id="inicio">
   <div class="hero-inner container">
-    <div class="hero-content">
-      <p class="hero-eyebrow fade-up delay-1">
-        <span class="dot"></span> Disponible para proyectos
-      </p>
+    <div class="hero-content-centered">
+      {
+        showAvailability && (
+          <p class="hero-eyebrow fade-up delay-1">
+            <span class="dot" /> {eyebrow}
+          </p>
+        )
+      }
       <h1 class="hero-name fade-up delay-2">
-        Edgar<br /><em>Ramos</em>
+        {name}
+        <span class="name-italic">{nameItalic}</span>
       </h1>
-      <p class="hero-role fade-up delay-3">Analista de Datos</p>
-      <p class="hero-desc fade-up delay-4">
-        Transformo datos en decisiones. Trabajo con Python, SQL y herramientas de visualización para
-        encontrar patrones que generan valor real.
-      </p>
+      <p class="hero-role fade-up delay-3">{role}</p>
+      {
+        company && (
+          <p class="hero-company fade-up delay-3">
+            {companyUrl ? (
+              <a href={companyUrl} target="_blank" rel="noopener">
+                en {company}
+              </a>
+            ) : (
+              <>en {company}</>
+            )}
+          </p>
+        )
+      }
+      {lema && <p class="hero-desc fade-up delay-4">{lema}</p>}
       <div class="hero-cta fade-up delay-5">
-        <a href="#proyectos" class="btn-primary">Ver proyectos</a>
-        <a href="#contacto" class="btn-ghost">Contacto</a>
-      </div>
-    </div>
-
-    <div class="hero-visual fade-up delay-3">
-      <div class="visual-box">
-        <div class="code-snippet">
-          <span class="cs-kw">class</span>
-          <span class="cs-fn">ComputerScientist</span>:<br />
-          &nbsp;&nbsp;<span class="cs-kw">def</span>
-          <span class="cs-fn">__init__</span>(<span class="cs-kw">self</span>):<br />
-          &nbsp;&nbsp;&nbsp;&nbsp;<span class="cs-kw">self</span>.degree = <span class="cs-str"
-            >"Ingeniería Civil Informática"</span
-          ><br />
-          &nbsp;&nbsp;&nbsp;&nbsp;<span class="cs-kw">self</span>.langs &nbsp;= [<span
-            class="cs-str">"Python"</span
-          >, <span class="cs-str">"C"</span>, <span class="cs-str">"Java"</span>, <span
-            class="cs-str">"Bash"</span
-          >]<br />
-          <br />
-          &nbsp;&nbsp;<span class="cs-kw">def</span>
-          <span class="cs-fn">debug</span>(<span class="cs-kw">self</span>, error):<br />
-          &nbsp;&nbsp;&nbsp;&nbsp;<span class="cs-kw">return</span>
-          <span class="cs-str">"Root cause found"</span><br />
-          <br />
-          <span class="cs-kw">class</span>
-          <span class="cs-fn">DataAnalyst</span>(<span class="cs-fn">ComputerScientist</span>):<br
-          />
-          &nbsp;&nbsp;<span class="cs-kw">def</span>
-          <span class="cs-fn">__init__</span>(<span class="cs-kw">self</span>):<br />
-          &nbsp;&nbsp;&nbsp;&nbsp;<span class="cs-fn">super</span>().<span class="cs-fn"
-            >__init__</span
-          >()<br />
-          &nbsp;&nbsp;&nbsp;&nbsp;<span class="cs-kw">self</span>.name &nbsp;= <span class="cs-str"
-            >"Edgar Ramos"</span
-          ><br />
-          &nbsp;&nbsp;&nbsp;&nbsp;<span class="cs-kw">self</span>.role &nbsp;= <span class="cs-str"
-            >"Data Analyst @ Havas Chile"</span
-          ><br />
-          &nbsp;&nbsp;&nbsp;&nbsp;<span class="cs-kw">self</span>.stack = [<span class="cs-str"
-            >"Python"</span
-          >, <span class="cs-str">"Power BI"</span>, <span class="cs-str">"Pandas"</span>]<br />
-          <br />
-          &nbsp;&nbsp;<span class="cs-kw">@property</span><br />
-          &nbsp;&nbsp;<span class="cs-kw">def</span>
-          <span class="cs-fn">experience</span>(<span class="cs-kw">self</span>):<br />
-          &nbsp;&nbsp;&nbsp;&nbsp;<span class="cs-kw">return</span>
-          <span class="cs-str">"1+ year turning data into decisions"</span><br />
-          <br />
-          &nbsp;&nbsp;<span class="cs-kw">def</span>
-          <span class="cs-fn">analyze</span>(<span class="cs-kw">self</span>, data):<br />
-          &nbsp;&nbsp;&nbsp;&nbsp;<span class="cs-kw">return</span> data.<span class="cs-fn"
-            >transform_to_value</span
-          >()<br />
-          <br />
-          edgar = <span class="cs-fn">DataAnalyst</span>()<br />
-        </div>
+        <a href="/projects" class="btn-primary">Ver proyectos</a>
+        <a href="/contact" class="btn-ghost">Contacto</a>
       </div>
     </div>
   </div>
@@ -103,12 +75,19 @@
   }
 
   .hero-inner {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
+    display: flex;
+    justify-content: center;
     align-items: center;
     padding-top: 4rem;
     padding-bottom: 4rem;
+  }
+
+  .hero-content-centered {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    max-width: 700px;
   }
 
   .hero-eyebrow {
@@ -151,7 +130,7 @@
     color: var(--text);
   }
 
-  .hero-name em {
+  .name-italic {
     font-style: italic;
     color: var(--accent);
   }
@@ -162,7 +141,24 @@
     letter-spacing: 0.2em;
     text-transform: uppercase;
     color: var(--text-muted);
-    margin-bottom: 1.75rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .hero-company {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-company a {
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .hero-company a:hover {
+    color: var(--accent);
   }
 
   .hero-desc {
@@ -177,6 +173,7 @@
     display: flex;
     gap: 1rem;
     flex-wrap: wrap;
+    justify-content: center;
   }
 
   .btn-primary {
@@ -213,101 +210,9 @@
     color: var(--accent);
   }
 
-  /* Code visual */
-  .visual-box {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: 2rem;
-    position: relative;
-  }
-
-  .visual-box::before {
-    content: "● ● ●";
-    position: absolute;
-    top: 0.75rem;
-    left: 1rem;
-    font-size: 0.6rem;
-    color: var(--border);
-    letter-spacing: 0.2em;
-  }
-
-  .code-snippet {
-    font-family: var(--mono);
-    font-size: 0.82rem;
-    line-height: 2;
-    margin-top: 1rem;
-  }
-
-  .cs-comment {
-    color: var(--text-muted);
-  }
-  .cs-kw {
-    color: var(--accent);
-  }
-  .cs-fn {
-    color: #2563eb;
-  }
-  .cs-str {
-    color: #16a34a;
-  }
-
-  /* Scroll indicator */
-  .hero-scroll {
-    position: absolute;
-    bottom: 2rem;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
-  }
-
-  .hero-scroll span {
-    font-family: var(--mono);
-    font-size: 0.6rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--text-muted);
-  }
-
-  .scroll-line {
-    width: 1px;
-    height: 40px;
-    background: linear-gradient(to bottom, var(--border), transparent);
-    animation: scrollAnim 2s ease-in-out infinite;
-  }
-
-  @keyframes scrollAnim {
-    0% {
-      transform: scaleY(0);
-      transform-origin: top;
-    }
-    50% {
-      transform: scaleY(1);
-      transform-origin: top;
-    }
-    51% {
-      transform: scaleY(1);
-      transform-origin: bottom;
-    }
-    100% {
-      transform: scaleY(0);
-      transform-origin: bottom;
-    }
-  }
-
   @media (max-width: 768px) {
-    .hero-inner {
-      grid-template-columns: 1fr;
-      gap: 2.5rem;
-    }
-    .hero-visual {
-      order: -1;
-    }
-    .hero-scroll {
-      display: none;
+    .hero-content-centered {
+      padding: 0 1rem;
     }
   }
 </style>
