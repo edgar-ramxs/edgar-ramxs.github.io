@@ -1,8 +1,6 @@
 ---
-export type SiteVerificationName = "google-site-verification" | "yandex-verification" | "bing-site-verification" | "pinterest-site-verification" | "facebook-domain-verification" | "baidu-site-verification" | "apple-site-verification" | "alexaVerifyID" | "norton-safeweb-site-verification" | "twitter-site-verification" | "linkedin-site-verification" | "adobe-site-verification" | "mail.ru-verification" | "myspace-site-verification" | "tumblr-site-verification" | "shopify-site-verification" | "weebly-site-verification" | "webmaster-site-verification" | "whatsapp-site-verification" | "stripe-site-verification";
-
 export interface Props {
-  name: SiteVerificationName;
+  name: string;
   content?: string;
 }
 const { name, content } = Astro.props;

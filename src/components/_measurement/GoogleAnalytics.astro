@@ -16,5 +16,82 @@ const { idAnalytics, domain = "https://www.googletagmanager.com" } = Astro.props
   }
   gtag("js", new Date());
   gtag("config", idAnalytics);
+
+  // Track page view with module and submodule
+  function trackPageView(module, submodule = null) {
+    const path = window.location.pathname;
+    dataLayer.push({
+      event: "page_view",
+      page: {
+        path: path,
+        module: module,
+        submodule: submodule,
+      },
+    });
+    gtag("event", "page_view", {
+      module: module,
+      submodule: submodule,
+    });
+  }
+
+  // Track navigation click
+  function trackNavigation(moduleName, moduleLabel) {
+    dataLayer.push({
+      event: "navigation",
+      navigation: {
+        module: moduleName,
+        label: moduleLabel,
+      },
+    });
+    gtag("event", "navigation", {
+      module: moduleName,
+      label: moduleLabel,
+    });
+  }
+
+  // Track project click
+  function trackProjectClick(projectId, projectName) {
+    dataLayer.push({
+      event: "project_click",
+      project: {
+        id: projectId,
+        name: projectName,
+      },
+    });
+    gtag("event", "project_click", {
+      project_id: projectId,
+      project_name: projectName,
+    });
+  }
+
+  // Track certification click
+  function trackCertificationClick(certId, certName) {
+    dataLayer.push({
+      event: "certification_click",
+      certification: {
+        id: certId,
+        name: certName,
+      },
+    });
+    gtag("event", "certification_click", {
+      certification_id: certId,
+      certification_name: certName,
+    });
+  }
+
+  // Track experience click
+  function trackExperienceClick(expId, expName) {
+    dataLayer.push({
+      event: "experience_click",
+      experience: {
+        id: expId,
+        name: expName,
+      },
+    });
+    gtag("event", "experience_click", {
+      experience_id: expId,
+      experience_name: expName,
+    });
+  }
 </script>
 <!-- End Google Analytics -->
