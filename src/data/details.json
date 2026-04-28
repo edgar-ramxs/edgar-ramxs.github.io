@@ -1,0 +1,22 @@
+{
+  "name": "Edgar Ramos",
+  "occupation": "Ingeniero Civil Informático | Data Analyst",
+  "company": "Havas Chile",
+  "companyUrl": "https://havas.com",
+  "image": "assets/images/pfp.jpg",
+  "email": "edgar.ramos.av@gmail.com",
+  "website": "https://edgar-ramxs.github.io",
+  "phone": "",
+  "importantSkills": "Ingeniería informática • Análisis de datos • Ciencia de datos • Ciberseguridad • Desarrollo de software",
+  "lema": "Transformo datos en decisiones. Trabajo con Python, SQL y herramientas de visualización para encontrar patrones que generan valor real.",
+  "description": [
+    "Ingeniero Civil Informático egresado de la Universidad Andrés Bello con formación en ciencia de datos, optimización e inteligencia artificial.",
+    "Me apasiona transformar conjuntos de datos complejos en insights accionables desde la limpieza y exploración hasta la comunicación de resultados de forma clara y visual.",
+    "Trabajo con Python y SQL como herramientas principales, y utilizo Power BI y Tableau para construir dashboards que cualquier equipo pueda interpretar. Enfocado en ciencia de datos, ciberseguridad y desarrollo de software, con capacidad para optimizar procesos y resolver problemas complejos mediante soluciones innovadoras. Actualmente abierto a nuevos proyectos y oportunidades."
+  ],
+  "currentLocation": {
+    "country": "Chile",
+    "state": "Región Metropolitana",
+    "city": "Santiago"
+  }
+}

@@ -5,9 +5,9 @@
     "date": "2025-05-01",
     "issuer": "Google",
     "icon": "simple-icons:google",
-    "url": "https://aws.amazon.com/verification",
+    "url": "https://skillshop.google.com/",
     "description": "Certificación que valida conocimientos en análisis web y métricas digitales.",
-    "skills": ["Google Analytics", "Data Analysis", "Digital Marketing", "Web Analytics"]
+    "skills": ["google-analytics", "data-analysis"]
   },
   {
     "id": "ibm-data-science-practitioners",
@@ -15,18 +15,18 @@
     "date": "2024-06-01",
     "issuer": "IBM Skills Academy",
     "icon": "simple-icons:ibm",
-    "url": "https://coursera.org/verify/meta-frontend",
-    "description": "Programa de certificación en práticas de ciencia de datos.",
-    "skills": ["Python", "Data Science", "Machine Learning", "Data Analysis"]
+    "url": "https://www.credly.com/earner/earned",
+    "description": "Programa de certificación en prácticas de ciencia de datos.",
+    "skills": ["python", "data-science", "machine-learning", "data-analysis"]
   },
   {
     "id": "eccouncil-nde",
     "name": "Network Defense Essentials (NDE)",
     "date": "2023-10-01",
     "issuer": "EC-Council",
-    "icon": "simple-icons:linux",
-    "url": "https://google.com/cloud/certification",
+    "icon": "mdi:shield-check",
+    "url": "https://www.eccouncil.org/",
     "description": "Certificación en fundamentos de defensa de redes.",
-    "skills": ["Network Security", "Cybersecurity", "Defensive Security", "Threat Prevention"]
+    "skills": ["network-security", "cybersecurity"]
   }
 ]

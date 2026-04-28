@@ -1,39 +1,40 @@
 [
   {
-    "id": "advika-innovate",
-    "name": "Advika Innovate",
+    "id": "havas-chile-data-analyst",
+    "name": "Havas Chile",
     "icon": "ph:briefcase-fill",
-    "position": "Frontend Developer",
-    "url": "https://advikainnovate.com/",
-    "startDate": "2025-07-01",
+    "position": "Data Analyst",
+    "url": "https://havas.com",
+    "startDate": "2024-11-01",
     "endDate": null,
-    "summary": "Contributing to a centralized ecommerce platform to manage multiple ecommerce stores from a single interface, including order and inventory management.",
-    "location": "India",
-    "location_type": "Remote",
+    "summary": "Analista de datos en Havas Chile, focusing on digital analytics and data-driven insights for clients.",
+    "location": "Santiago, Chile",
+    "location_type": "Jornada completa",
     "responsibilities": [
-      "Developing and maintaining the frontend of a centralized ecommerce platform.",
-      "Implementing features for order management, inventory control, and other ecommerce functionalities.",
-      "Collaborating with the team to create a scalable and user-friendly platform."
+      "Desarrollo de dashboards y reportes de analytics",
+      "Análisis de datos para campañas digitales",
+      "Implementación de Google Analytics y Tag Manager",
+      "Limpieza y procesamiento de grandes volúmenes de datos",
+      "Colaboración con equipos de planificación y creatividad"
     ],
-    "skills": ["React", "TypeScript", "MUI", "React Query", "Zod"]
+    "skills": ["google-analytics", "data-analysis", "python", "sql", "excel", "tableau"]
   },
   {
-    "id": "pixelsaffron",
-    "name": "PixelSaffron",
-    "icon": "ph:code-fill",
-    "position": "Full-Stack Developer",
-    "url": "https://pixelsaffron.in/",
-    "startDate": "2024-10-03",
-    "endDate": "2025-06-30",
-    "summary": "Led front-end development for a full-stack eCommerce platform built for a Mumbai-based clothing brand. Implemented core features like order management, secure payment integration, and responsive UI for seamless user experience.",
-    "location": "India",
-    "location_type": "Remote",
+    "id": "havas-chile-practicante",
+    "name": "Havas Chile",
+    "icon": "ph:briefcase-fill",
+    "position": "Practicante Data Analyst",
+    "url": "https://havas.com",
+    "startDate": "2024-08-01",
+    "endDate": "2024-10-31",
+    "summary": "Practicante en el área de datos, apoyando en análisis y reportes para distintos clientes.",
+    "location": "Santiago, Chile",
+    "location_type": "Practicaje",
     "responsibilities": [
-      "Built and maintained both front-end and back-end components of a production-ready eCommerce web app.",
-      "Focused on building scalable, responsive, and maintainable front-end features.",
-      "Integrated payment gateways and developed order management features.",
-      "Developed and connected RESTful APIs to handle key business logic."
+      "Apoyo en la elaboración de reportes de analytics",
+      "Asistencia en configuración de herramientas de tracking",
+      "Análisis preliminar de datos para reportes semanales"
     ],
-    "skills": ["React", "Next-Js", "Go-lang", "TypeScript", "Tailwind", "PostgreSQL"]
+    "skills": ["excel", "google-analytics", "data-analysis"]
   }
 ]

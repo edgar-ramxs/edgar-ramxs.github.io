@@ -1,20 +1,11 @@
 [
   {
     "institution": "Universidad Andrés Bello",
-    "url": "https://www.unab.cl/",
-    "area": "Ingeniería",
-    "studyType": "Ingeniero Civil Informático",
-    "startDate": "2020-03-15",
-    "endDate": "2024-12-15",
+    "url": "https://www.unab.cl",
+    "area": "Ingeniería Civil Informática",
+    "studyType": "Ingeniería",
+    "startDate": "2020-03-01",
+    "endDate": "2024-12-01",
     "location": "Santiago, Chile"
-  },
-  {
-    "institution": "Liceo Madre Teresa de Calcuta",
-    "url": "https://www.unab.cl/",
-    "area": "Bachillerato",
-    "studyType": "Bachiller en Ciencias",
-    "startDate": "2013-10-15",
-    "endDate": "2018-07-15",
-    "location": "Maturín, Venezuela"
   }
 ]
